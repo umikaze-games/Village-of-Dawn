@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: 77b9f780b48fb424d8c5b9a6c01783ce
+timeCreated: 1565972045
+licenseType: Store
+AudioImporter:
+  serializedVersion: 6
+  defaultSettings:
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 44100
+    compressionFormat: 0
+    quality: 1
+    conversionMode: 0
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 0
+  preloadAudioData: 1
+  loadInBackground: 0
+  ambisonic: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 152789
+  packageName: Town Music Free
+  packageVersion: 1.0
+  assetPath: Assets/Town Music 1.0/03TownBGM-gypsy.wav
+  uploadId: 326692
