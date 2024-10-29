@@ -235,7 +235,7 @@ MonoBehaviour:
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 1, y: 1, z: 1}
+  Damping: {x: 0, y: 0, z: 0}
   Lookahead:
     Enabled: 0
     Time: 0
@@ -354,7 +354,8 @@ PrefabInstance:
       propertyPath: playerMoveSpeed
       value: 50
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6205487570673050305, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4739132500059549543, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
     m_AddedGameObjects: []
@@ -589,7 +590,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 0
-  orthographic size: 5.6749997
+  orthographic size: 5.4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
