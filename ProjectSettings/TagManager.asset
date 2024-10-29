@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - BoundConfiner
   layers:
   - Default
   - TransparentFX
@@ -41,14 +42,38 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Button
+  - name: GroundBottom
     uniqueID: 2323317453
+    locked: 0
+  - name: GroundMiddle
+    uniqueID: 3536571755
+    locked: 0
+  - name: GroundTop
+    uniqueID: 405771347
+    locked: 0
+  - name: Stuff1
+    uniqueID: 559443699
+    locked: 0
+  - name: Stuff2
+    uniqueID: 321570131
+    locked: 0
+  - name: Dig
+    uniqueID: 1948819551
+    locked: 0
+  - name: Water
+    uniqueID: 2150505673
     locked: 0
   - name: Instance
     uniqueID: 88074909
     locked: 0
-  - name: New Layer 3
-    uniqueID: 3536571755
+  - name: Front1
+    uniqueID: 4424917
+    locked: 0
+  - name: Front2
+    uniqueID: 345150719
+    locked: 0
+  - name: Collision
+    uniqueID: 3962514827
     locked: 0
   m_RenderingLayers:
   - Default
