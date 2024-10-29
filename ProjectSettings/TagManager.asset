@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Instance
   - 
   - 
   - 
@@ -43,6 +43,12 @@ TagManager:
     locked: 0
   - name: Button
     uniqueID: 2323317453
+    locked: 0
+  - name: Instance
+    uniqueID: 88074909
+    locked: 0
+  - name: New Layer 3
+    uniqueID: 3536571755
     locked: 0
   m_RenderingLayers:
   - Default
