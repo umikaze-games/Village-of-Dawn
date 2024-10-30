@@ -1,11 +1,17 @@
+using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class SwitchBounds : MonoBehaviour
 {
-
+	private void Start()
+	{
+		SwitchConfinerShape();
+	}
 	private void SwitchConfinerShape()
 	{
-		Collider2D BoundingShape2D = GameObject.FindGameObjectWithTag("	").GetComponent<Collider2D>();
+		PolygonCollider2D ConfinerShape2D = GameObject.FindGameObjectWithTag("BoundConfiner").GetComponent<PolygonCollider2D>();
+		CinemachineConfiner2D confiner2D = GetComponent<CinemachineConfiner2D>();
+		confiner2D.BoundingShape2D = ConfinerShape2D;
 	}
 }
