@@ -133,27 +133,3 @@ MonoBehaviour:
     canCarried: 1
     itemPrice: 0
     sellPercentage: 0
-  - itemID: 1008
-    itemName: Turnip
-    itemType: 1
-    itemDescription: Turnip
-    itemUseRadius: 1
-    itemIcon: {fileID: 21300000, guid: ead453a0ee8ee49329522ee30394ee3a, type: 3}
-    itemOnWorldSprite: {fileID: 21300000, guid: ead453a0ee8ee49329522ee30394ee3a, type: 3}
-    canPickedup: 1
-    canDropped: 0
-    canCarried: 1
-    itemPrice: 0
-    sellPercentage: 0
-  - itemID: 1008
-    itemName: Turnip
-    itemType: 1
-    itemDescription: Turnip
-    itemUseRadius: 1
-    itemIcon: {fileID: 21300000, guid: ead453a0ee8ee49329522ee30394ee3a, type: 3}
-    itemOnWorldSprite: {fileID: 21300000, guid: ead453a0ee8ee49329522ee30394ee3a, type: 3}
-    canPickedup: 1
-    canDropped: 0
-    canCarried: 1
-    itemPrice: 0
-    sellPercentage: 0
