@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 154382946865794439}
   - component: {fileID: 7602832650822183998}
   - component: {fileID: 1128490508423035940}
+  - component: {fileID: -5132411734610741847}
   m_Layer: 5
   m_Name: BagItem
   m_TagString: Untagged
@@ -303,7 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -315,7 +316,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -334,6 +335,38 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-5132411734610741847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3979795244626573961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2603d5298c7e2894fa2af2b4050ff09c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemIconImage: {fileID: 4601852936925736676}
+  amountText: {fileID: 9013104594783608932}
+  highlightImage: {fileID: 7929311823066311262}
+  button: {fileID: 1128490508423035940}
+  inventoryType: 0
+  isSelected: 0
+  itemDetails:
+    itemID: 0
+    itemName: 
+    itemType: 0
+    itemDescription: 
+    itemUseRadius: 0
+    itemIcon: {fileID: 0}
+    itemOnWorldSprite: {fileID: 0}
+    canPickedup: 0
+    canDropped: 0
+    canCarried: 0
+    itemPrice: 0
+    sellPercentage: 0
+  itemAmout: 0
 --- !u!1 &6916830447612641509
 GameObject:
   m_ObjectHideFlags: 0

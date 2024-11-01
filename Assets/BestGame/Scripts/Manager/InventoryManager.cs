@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 {
@@ -7,6 +8,11 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 	public ItemDataList_SO itemDataList_SO;
 	[Header("inventory data")]
 	public InventoryBag_SO playerBag;
+
+	private void Start()
+	{
+		EventHandler.OnUpdateInventoryUI(InventoryType.player, playerBag.inventoryItems);
+	}
 
 	public ItemDetails GetItemDetails(int ID)
 	{
@@ -30,6 +36,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 		{
 			Destroy(item.gameObject);
 		}
+		EventHandler.OnUpdateInventoryUI(InventoryType.player, playerBag.inventoryItems);
 	}
 
 	private int GetItemIdexInBag(int itemID)

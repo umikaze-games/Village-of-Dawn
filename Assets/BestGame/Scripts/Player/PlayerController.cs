@@ -17,7 +17,10 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 		playerInputAction = new PlayerInputActions();
 		rb=GetComponent<Rigidbody2D>();
 	}
+	private void Start()
+	{
 	
+	}
 	void Update()
 	{
 	
@@ -34,6 +37,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 	private void OnEnable()
 	{
 		playerInputAction.Enable();
+
 	}
 
 	private void OnDisable()
