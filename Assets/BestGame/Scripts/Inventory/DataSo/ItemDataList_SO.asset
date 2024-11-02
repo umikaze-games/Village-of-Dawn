@@ -23,8 +23,8 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 0
     canCarried: 0
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 100
+    sellPercentage: 0.5
   - itemID: 1002
     itemName: Potato Seed
     itemType: 0
@@ -35,8 +35,8 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 0
     canCarried: 1
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 100
+    sellPercentage: 0.5
   - itemID: 1003
     itemName: Turnip Seed
     itemType: 0
@@ -47,8 +47,8 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 0
     canCarried: 1
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 100
+    sellPercentage: 0.5
   - itemID: 1004
     itemName: Pink Radish Seed
     itemType: 0
@@ -59,8 +59,8 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 0
     canCarried: 1
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 100
+    sellPercentage: 0.5
   - itemID: 1005
     itemName: Grape Seed
     itemType: 0
@@ -71,8 +71,8 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 0
     canCarried: 1
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 100
+    sellPercentage: 0.5
   - itemID: 1006
     itemName: Potato
     itemType: 0
@@ -83,8 +83,8 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 0
     canCarried: 1
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 100
+    sellPercentage: 0.5
   - itemID: 1007
     itemName: Neediewood
     itemType: 1
@@ -95,8 +95,8 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 1
     canCarried: 1
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 100
+    sellPercentage: 0.5
   - itemID: 1008
     itemName: Turnip
     itemType: 1
@@ -107,8 +107,8 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 0
     canCarried: 1
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 100
+    sellPercentage: 0.5
   - itemID: 1009
     itemName: Pink Radish
     itemType: 1
@@ -119,8 +119,8 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 0
     canCarried: 1
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 100
+    sellPercentage: 0.5
   - itemID: 1010
     itemName: Grape
     itemType: 1
@@ -131,5 +131,5 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 0
     canCarried: 1
-    itemPrice: 0
-    sellPercentage: 0
+    itemPrice: 100
+    sellPercentage: 0.5

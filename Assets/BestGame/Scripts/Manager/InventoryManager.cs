@@ -89,4 +89,23 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 		}
 	}
 
+	public void SwapItem(int fromIndex,int targetIndex)
+	{ 
+		InventoryItem currentItem=playerBag.inventoryItems[fromIndex];
+		InventoryItem targetItem=playerBag.inventoryItems[targetIndex];
+
+		if (targetItem.itemID!=0)
+		{
+			playerBag.inventoryItems[fromIndex] = targetItem;
+			playerBag.inventoryItems[targetIndex]=currentItem;
+		}
+
+		else
+		{
+			playerBag.inventoryItems[targetIndex] =currentItem;
+			playerBag.inventoryItems[fromIndex]=new InventoryItem();
+		}
+		EventHandler.OnUpdateInventoryUI(InventoryType.player, playerBag.inventoryItems);
+	}
+
 }

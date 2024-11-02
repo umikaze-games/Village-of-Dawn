@@ -1,20 +1,28 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
+	public ItemToolTip itemToolTip;
+
+	[Header("DragImage")]
+	public Image dragImage;
+
 	[Header("PlayerBugUI")]
 	[SerializeField]
 	private GameObject bagUI;
 	private bool bagOpened;
 	
 	[SerializeField]
-	private SlotUI[] playerSlots;
+	private SlotUI[]playerSlots;
+
 
 
 	private void Start()
 	{
+		HightlightSlot(-1);
 		for (int i = 0; i < playerSlots.Length; i++)
 		{ 
 			playerSlots[i].slotIndex = i;
@@ -70,5 +78,25 @@ public class InventoryUI : MonoBehaviour
 	{
 		bagOpened = !bagOpened;
 		bagUI.SetActive(bagOpened);
+	}
+
+	public void HightlightSlot(int slotIndex)
+	{
+		for (int i = 0; i < playerSlots.Length; i++)
+		{
+			if (playerSlots[i].isSelected && i == slotIndex)
+			{
+				playerSlots[i].highlightImage.gameObject.SetActive(true);
+			}
+			else
+			{
+				playerSlots[i].isSelected = false;
+				playerSlots[i].highlightImage.gameObject.SetActive(false);
+			}
+
+
+		}
+
+
 	}
 }
