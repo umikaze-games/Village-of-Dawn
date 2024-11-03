@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5308373031468850227}
   - component: {fileID: -2033466026571714398}
   - component: {fileID: 7237726572836588259}
+  - component: {fileID: 9099021149687743910}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -164,6 +165,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cba9e14975df3a47bf3c2058f17ea81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9099021149687743910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662784293118690828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7d8a550f459df0458d734d0d0016777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdItem: {fileID: 2821329526175061525}
+  animatorTypes:
+  - partType: 0
+    partName: 2
+    overrideController: {fileID: 22100000, guid: 7f0dc2a6205b9924782dd52211b0d3dc, type: 2}
+  - partType: 1
+    partName: 2
+    overrideController: {fileID: 22100000, guid: 7f26fb7539352dc4db2108d16cb7ce62, type: 2}
 --- !u!1 &1196373847042718887
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +197,7 @@ GameObject:
   - component: {fileID: 3766147576507507902}
   - component: {fileID: 4337644221412825603}
   m_Layer: 0
-  m_Name: Arm
+  m_Name: arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -286,7 +307,7 @@ GameObject:
   - component: {fileID: 2237747091887441075}
   - component: {fileID: 4781854671865937949}
   m_Layer: 0
-  m_Name: Hair
+  m_Name: hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -395,7 +416,7 @@ GameObject:
   - component: {fileID: 5417986648415400886}
   - component: {fileID: 9031913216769820091}
   m_Layer: 0
-  m_Name: Shadow
+  m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -482,7 +503,7 @@ GameObject:
   - component: {fileID: 8053869567266219095}
   - component: {fileID: 2821329526175061525}
   m_Layer: 0
-  m_Name: Tool
+  m_Name: holdItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -497,7 +518,7 @@ Transform:
   m_GameObject: {fileID: 4739132500059549543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -547,7 +568,7 @@ SpriteRenderer:
   m_SortingLayerID: 88074909
   m_SortingLayer: 8
   m_SortingOrder: 2
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 712efb3c5425e4d62aa03accb5b7a498, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -555,7 +576,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
 --- !u!1 &8174465260099495172
@@ -570,7 +591,7 @@ GameObject:
   - component: {fileID: 7226684123386488611}
   - component: {fileID: 7657594440675781360}
   m_Layer: 0
-  m_Name: Body
+  m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

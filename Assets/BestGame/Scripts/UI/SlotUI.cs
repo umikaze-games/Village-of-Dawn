@@ -74,6 +74,10 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 		if (itemAmout == 0) return;
 		isSelected = !isSelected;
 		inventoryUI.HightlightSlot(slotIndex);
+		if (slotType == SlotType.bag)
+		{
+			EventHandler.CallItemSelectedEvent(itemDetails, isSelected);
+		}
 	}
 
 	public void OnBeginDrag(PointerEventData eventData)
@@ -100,12 +104,10 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 			var targeSlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>();
 			int targetSlotIndex = targeSlot.slotIndex;
 
-			//player自身背包交换
 			if (slotType == SlotType.bag && targeSlot.slotType == SlotType.bag)
 			{
 				InventoryManager.Instance.SwapItem(slotIndex, targetSlotIndex);
 			}
-			//清空高亮
 			inventoryUI.HightlightSlot(-1);
 		}
 		else 
@@ -113,7 +115,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 			if (itemDetails.canDropped)
 			{
 				var pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
-				EventHandler.OninstantiateItemInScene(itemDetails.itemID, pos);
+				EventHandler.CallInstantiateItemInScene(itemDetails.itemID, pos);
 			}
 		
 		}
