@@ -460,6 +460,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1196373847042718887, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
+      propertyPath: m_Name
+      value: Arm
+      objectReference: {fileID: 0}
     - target: {fileID: 1793148163471522440, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.15
@@ -500,6 +504,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2034506044123737706, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
+      propertyPath: m_Name
+      value: Hair
+      objectReference: {fileID: 0}
     - target: {fileID: 2282585784913577241, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_Controller
       value: 
@@ -508,13 +516,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3293091055394022050, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
+      propertyPath: m_Name
+      value: Shadow
+      objectReference: {fileID: 0}
     - target: {fileID: 4739132500059549543, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_Name
-      value: holdItem
+      value: HoldItem
       objectReference: {fileID: 0}
     - target: {fileID: 4739132500059549543, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8174465260099495172, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
+      propertyPath: m_Name
+      value: Body
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2282585784913577241, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
@@ -630,7 +646,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 0
-  orthographic size: 5.4
+  orthographic size: 4.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
