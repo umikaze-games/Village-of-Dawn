@@ -34,17 +34,17 @@ public class AnimatorOverride : MonoBehaviour
 	{
 		PartType currentType = itemDetails.itemType switch
 		{
-			ItemType.seed => PartType.carry,
-			ItemType.product => PartType.carry,
-			_ => PartType.none
+			ItemType.Seed => PartType.Carry,
+			ItemType.Product => PartType.Carry,
+			_ => PartType.None
 		};
 
 		if (isSelected == false)
 		{
-			currentType = PartType.none;
+			currentType = PartType.None;
 			holdItem.enabled = false;
 		}
-		if (currentType==PartType.carry)
+		if (currentType==PartType.Carry)
 		{
 			holdItem.sprite = itemDetails.itemOnWorldSprite;
 			holdItem.enabled = true;

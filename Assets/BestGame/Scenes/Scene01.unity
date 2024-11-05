@@ -71032,6 +71032,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8251361067370756688, guid: 986e1f96ec3ff2a4b8d1801acde2bee1, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8275855208638746784, guid: 986e1f96ec3ff2a4b8d1801acde2bee1, type: 3}
       propertyPath: m_Name
       value: Tree01_canBreak

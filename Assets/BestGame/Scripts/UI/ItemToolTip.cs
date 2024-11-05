@@ -16,12 +16,12 @@ public class ItemToolTip : MonoBehaviour
 		typeText.text = itemDetails.itemType.ToString();
 		descriptionText.text = itemDetails.itemDescription;
 
-		if (itemDetails.itemType == ItemType.seed || itemDetails.itemType == ItemType.product || itemDetails.itemType == ItemType.furniture)
+		if (itemDetails.itemType == ItemType.Seed || itemDetails.itemType == ItemType.Product || itemDetails.itemType == ItemType.Furniture)
 		{
 			bottom.SetActive(true);
 
 			var price = itemDetails.itemPrice;
-			if (slotType == SlotType.bag)
+			if (slotType == SlotType.Bag)
 			{
 				price = (int)(price * itemDetails.sellPercentage);
 			}

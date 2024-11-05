@@ -52,7 +52,7 @@ public class InventoryUI : MonoBehaviour
 	{
 		switch (inventorytype)
 		{
-			case InventoryType.player:
+			case InventoryType.Player:
 				for (int i = 0; i < playerSlots.Length; i++)
 				{
 					if (list[i].itemAmount>0)
@@ -67,7 +67,7 @@ public class InventoryUI : MonoBehaviour
 				}
 
 				break;
-			case InventoryType.box:
+			case InventoryType.Box:
 				break;
 			default:
 				break;

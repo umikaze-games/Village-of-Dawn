@@ -74,7 +74,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 		if (itemAmout == 0) return;
 		isSelected = !isSelected;
 		inventoryUI.HightlightSlot(slotIndex);
-		if (slotType == SlotType.bag)
+		if (slotType == SlotType.Bag)
 		{
 			EventHandler.CallItemSelectedEvent(itemDetails, isSelected);
 		}
@@ -104,7 +104,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 			var targeSlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>();
 			int targetSlotIndex = targeSlot.slotIndex;
 
-			if (slotType == SlotType.bag && targeSlot.slotType == SlotType.bag)
+			if (slotType == SlotType.Bag && targeSlot.slotType == SlotType.Bag)
 			{
 				InventoryManager.Instance.SwapItem(slotIndex, targetSlotIndex);
 			}

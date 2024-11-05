@@ -2,38 +2,38 @@ using UnityEngine;
 
 public enum ItemType 
 {
-	seed,
-	product,
-	furniture,
+	Seed,
+	Product,
+	Furniture,
 	HoeTool, ChopTool, BreakTool, ReapTool, WaterTool, CollectTool,
 	ReapableScenery
 }
 
 public enum SlotType
 {
-	bag,
-	box,
-	shop
+	Bag,
+	Box,
+	Shop
 }
 
 public enum InventoryType
 { 
-	player,
-	box
+	Player,
+	Box
 }
 
 public enum PartType
 { 
-	none,
-	carry,
-	hoe,
-	broken
+	None,
+	Carry,
+	Hoe,
+	Broken
 }
 
 public enum PartName
 { 
-	body,
-	hair,
-	arm,
-	tool
+	Body,
+	Hair,
+	Arm,
+	Tool
 }
