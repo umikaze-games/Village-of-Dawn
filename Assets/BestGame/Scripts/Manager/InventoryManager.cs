@@ -6,6 +6,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 {
 	[Header("item data")]
 	public ItemDataList_SO itemDataList_SO;
+
 	[Header("inventory data")]
 	public InventoryBag_SO playerBag;
 
@@ -31,7 +32,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 		var index = GetItemIdexInBag(item.itemID);
 		AddItemAtIndex(item.itemID, index, 1);
 
-		Debug.Log(GetItemDetails(item.itemID).itemID + " Name: " + GetItemDetails(item.itemID).itemName);
+		//Debug.Log(GetItemDetails(item.itemID).itemID + " Name: " + GetItemDetails(item.itemID).itemName);
 		if (toDestroy)
 		{
 			Destroy(item.gameObject);

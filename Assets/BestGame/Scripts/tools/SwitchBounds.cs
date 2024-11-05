@@ -1,5 +1,4 @@
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SwitchBounds : MonoBehaviour
