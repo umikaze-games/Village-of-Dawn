@@ -653,7 +653,6 @@ GameObject:
   m_Component:
   - component: {fileID: 192179074}
   - component: {fileID: 192179076}
-  - component: {fileID: 192179075}
   - component: {fileID: 192179077}
   m_Layer: 5
   m_Name: TimeManager
@@ -681,36 +680,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &192179075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 192179073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &192179076
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -732,7 +701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamePause: 0
-  tikTime: 0
+  timeUI: {fileID: 288880773}
 --- !u!1 &262683726
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,6 +1113,7 @@ GameObject:
   - component: {fileID: 288880770}
   - component: {fileID: 288880772}
   - component: {fileID: 288880771}
+  - component: {fileID: 288880773}
   m_Layer: 5
   m_Name: GameTime
   m_TagString: Untagged
@@ -1213,6 +1183,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288880769}
   m_CullTransparentMesh: 1
+--- !u!114 &288880773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288880769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 531cbad976fc84e43a720616ecd3b78a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dayNightImage: {fileID: 1617924075}
+  clockParent: {fileID: 1907197552}
+  seasonImage: {fileID: 1900222657}
+  dateText: {fileID: 13788095}
+  timeText: {fileID: 267530697}
+  seasonSprites:
+  - {fileID: 21300000, guid: 8b9910d91179b4a099ab476320fa5ae7, type: 3}
+  - {fileID: 21300000, guid: 9a3bd1653028b428e882fa7ea297e736, type: 3}
+  - {fileID: 21300000, guid: a94f97806ef1a4a20ad529791fc938a5, type: 3}
+  - {fileID: 21300000, guid: cf64f70ccd4ea4cb3948f885a2e21562, type: 3}
+  clockGameObject:
+  - {fileID: 1265963080}
+  - {fileID: 1920443303}
+  - {fileID: 2092837102}
+  - {fileID: 119187292}
+  - {fileID: 359101534}
+  - {fileID: 428988843}
 --- !u!1001 &304655513
 PrefabInstance:
   m_ObjectHideFlags: 0
