@@ -36,9 +36,10 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 	}
 	private void Start()
 	{
-	
-		itemToolTip.gameObject.SetActive(false);
-
+		if (itemToolTip != null)
+		{
+			itemToolTip.gameObject.SetActive(false);
+		}
 		isSelected = false;
 		if (itemDetails.itemID==0)
 		{
