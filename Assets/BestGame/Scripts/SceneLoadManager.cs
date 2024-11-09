@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.SceneManagement;
 public class SceneLoadManager : MonoBehaviour
 {
 	[SerializeField] private GameObject loadingPanel;
@@ -26,7 +26,7 @@ public class SceneLoadManager : MonoBehaviour
 	}
 	public IEnumerator LoadSceneAsync(string sceneName)
 	{
-		AsyncOperation asyncLoad= SceneManager.LoadSceneAsync(sceneName);
+		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 		asyncLoad.allowSceneActivation = false;
 		yield return new WaitForSeconds(0.5f);
 		while (!asyncLoad.isDone)

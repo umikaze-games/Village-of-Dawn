@@ -37,3 +37,12 @@ public enum PartName
 	Arm,
 	Tool
 }
+
+public enum GridType
+{ 
+	Driggable,
+	DropItem,
+	PlaceFurniture,
+	NpcObstacle
+
+}

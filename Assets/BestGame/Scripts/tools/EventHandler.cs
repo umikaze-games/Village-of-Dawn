@@ -24,4 +24,10 @@ public static class EventHandler
 		ItemSelectedEvent?.Invoke(itemDetails, isSelected);
 	}
 
+	public static event Action<string,string,Vector3>transitionEvent;
+	public static void CalltransitionEvent(string fromsceneName, string tosceneName, Vector3 transitionPosition)
+	{
+		transitionEvent?.Invoke(fromsceneName, tosceneName, transitionPosition);
+	}
+
 }

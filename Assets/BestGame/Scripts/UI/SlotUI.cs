@@ -126,7 +126,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		if (itemAmout == 0) return;
-		itemToolTip.gameObject.transform.position = transform.position + new Vector3(0, 70, 0);
+		itemToolTip.gameObject.transform.position = transform.position + new Vector3(0,100, 0);
 		itemToolTip.SetupTooltip(itemDetails, slotType);
 		itemToolTip.gameObject.SetActive(true);
 	}

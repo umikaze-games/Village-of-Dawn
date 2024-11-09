@@ -5,12 +5,21 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/BestGame/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/BestGame/Scenes/PersistentScene.unity
     guid: 35a32edb823930f4097c45948362672e
+  - enabled: 1
+    path: Assets/BestGame/Scenes/Scene01.unity
+    guid: 38b4209989864fd499ebae9994480064
+  - enabled: 1
+    path: Assets/BestGame/Scenes/Scene02.unity
+    guid: c3feeb49176bb9b4e9f50b4c24b79e64
+  - enabled: 1
+    path: Assets/BestGame/Scenes/UI.unity
+    guid: 22698bad163aa984f954438bd0207ef3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: b74ba516d13cc98438dd4f5c8cd35e75, type: 3}
   m_UseUCBPForAssetBundles: 0

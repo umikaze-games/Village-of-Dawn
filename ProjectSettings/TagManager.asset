@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BoundConfiner
   - ItemParent
+  - LoadingPannel
   layers:
   - Default
   - TransparentFX
