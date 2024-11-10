@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.FilePathAttribute;
 
 public class ItemManager : MonoBehaviour
 {
@@ -19,21 +20,45 @@ public class ItemManager : MonoBehaviour
 	}
 	private void OnEnable()
 	{
-		EventHandler.instantiateItemInScene += OnInstantiateItemInScene;
+		EventHandler.InstantiateItemInScene += OnInstantiateItemInScene;
+		EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
+		EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
+		EventHandler.DropItemInScene += OnDropItemInScene;
 	}
+
+	
 
 	private void OnDisable()
 	{
-		EventHandler.instantiateItemInScene -= OnInstantiateItemInScene;
+		EventHandler.InstantiateItemInScene -= OnInstantiateItemInScene;
+		EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
+		EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
+		EventHandler.DropItemInScene -= OnDropItemInScene;
 	}
-
+	private void OnDropItemInScene(int itemID, Vector3 location)
+	{
+		//TODO
+		var item = Instantiate(itemPrefab, location, Quaternion.identity, itemParent);
+		item.itemID = itemID;
+	}
 
 	private void OnInstantiateItemInScene(int itemID, Vector3 location)
 	{
 		var item = Instantiate(itemPrefab,location,Quaternion.identity,itemParent);
 		item.itemID = itemID;
 	}
+	private void OnBeforeSceneUnloadEvent()
+	{
+		//GetAllSceneItems();
+		//GetAllSceneFurniture();
+	}
 
+	private void OnAfterSceneLoadEvent()
+	{
+		itemParent = GameObject.FindWithTag("ItemParent").transform;
+		//RecreateAllItems();
+		//RebuildFurniture();
+	}
 	public void SaveItemInLoadScene()
 	{
 		sceneItemDatas.Clear();

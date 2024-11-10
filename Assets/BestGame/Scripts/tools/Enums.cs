@@ -40,7 +40,7 @@ public enum PartName
 
 public enum GridType
 { 
-	Driggable,
+	Diggable,
 	DropItem,
 	PlaceFurniture,
 	NpcObstacle

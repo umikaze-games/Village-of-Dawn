@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e9ae6cc4d0385c40979a803336b0ba5, type: 3}
   m_Name: MapData_Scene01
   m_EditorClassIdentifier: 
-  SceneName: Scene01
+  sceneName: Scene01
   tileProperties: []

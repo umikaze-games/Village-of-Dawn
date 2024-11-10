@@ -45,11 +45,11 @@ public class SceneTransition : MonoBehaviour
 
 	private void OnEnable()
 	{
-		EventHandler.transitionEvent += OnSceneTransition;
+		EventHandler.TransitionEvent += OnSceneTransition;
 	}
 	private void OnDisable()
 	{
-		EventHandler.transitionEvent -= OnSceneTransition;
+		EventHandler.TransitionEvent -= OnSceneTransition;
 	}
 
 }

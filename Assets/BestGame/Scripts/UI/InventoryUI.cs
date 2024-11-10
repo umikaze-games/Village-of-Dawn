@@ -38,13 +38,13 @@ public class InventoryUI : MonoBehaviour
 	}
 	private void OnEnable()
 	{
-		EventHandler.updateInventoryUI += OnUpdateInventoryUI;
+		EventHandler.UpdateInventoryUI += OnUpdateInventoryUI;
 	}
 
 
 	private void OnDisable()
 	{
-		EventHandler.updateInventoryUI -= OnUpdateInventoryUI;
+		EventHandler.UpdateInventoryUI -= OnUpdateInventoryUI;
 	}
 
 

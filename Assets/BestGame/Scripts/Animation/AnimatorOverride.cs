@@ -17,7 +17,6 @@ public class AnimatorOverride : MonoBehaviour
 		foreach (Animator animator in animators)
 		{
 			animatorNameDict.Add(animator.name, animator);
-			Debug.Log("Adding animator: " + animator.name);
 		}
 	}
 

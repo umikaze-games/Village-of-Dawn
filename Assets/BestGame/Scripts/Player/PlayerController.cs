@@ -54,12 +54,13 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 	private void OnEnable()
 	{
 		playerInputAction.Enable();
-
+		EventHandler.MouseClickedEvent += OnMouseClickEvent;
 	}
 
 	private void OnDisable()
 	{
 		playerInputAction.Disable();
+		EventHandler.MouseClickedEvent += OnMouseClickEvent;
 	}
 
 	public void SwitchAnimation()
@@ -79,5 +80,11 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 		}
 		
 	}
+	private void OnMouseClickEvent(Vector3 pos, ItemDetails itemdetails)
+	{
+		//TODO animation
+		EventHandler.CallExecuteActionAfterAnimation(pos, itemdetails);
+	}
+
 
 }

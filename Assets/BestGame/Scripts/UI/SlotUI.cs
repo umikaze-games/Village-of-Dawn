@@ -52,7 +52,10 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 		if (isSelected)
 		{
 			isSelected = false;
+			inventoryUI.HightlightSlot(-1);
+			EventHandler.CallItemSelectedEvent(itemDetails,isSelected);
 		}
+		itemDetails = null;
 		itemIconImage.enabled = false;
 		amountText.text=string.Empty;
 		button.interactable = false;
@@ -72,7 +75,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 	public void OnPointerClick(PointerEventData eventData)
 	{
 
-		if (itemAmout == 0) return;
+		if (itemDetails == null) return;
 		isSelected = !isSelected;
 		inventoryUI.HightlightSlot(slotIndex);
 		if (slotType == SlotType.Bag)
@@ -93,6 +96,10 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 
 	public void OnDrag(PointerEventData eventData)
 	{
+		CursorManager.Instance.currentItem = itemDetails;
+
+		CursorManager.Instance.UseXCursor(!CursorManager.Instance.CheckCanUseCursor());
+	
 		inventoryUI.dragImage.gameObject.transform.position=Input.mousePosition;
 	}
 
@@ -113,10 +120,17 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 		}
 		else 
 		{
-			if (itemDetails.canDropped)
+			CursorManager.Instance.currentItem = itemDetails;
+			Debug.Log($"{CursorManager.Instance.CheckCanUseCursor()}");
+			if (itemDetails.canDropped&& CursorManager.Instance.CheckCanUseCursor() )
 			{
 				var pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
 				EventHandler.CallInstantiateItemInScene(itemDetails.itemID, pos);
+				CursorManager.Instance.UseXCursor(false);
+			}
+			else
+			{
+				CursorManager.Instance.UseXCursor(false);
 			}
 		
 		}
@@ -125,7 +139,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
-		if (itemAmout == 0) return;
+		if (itemDetails==null) return;
 		itemToolTip.gameObject.transform.position = transform.position + new Vector3(0,100, 0);
 		itemToolTip.SetupTooltip(itemDetails, slotType);
 		itemToolTip.gameObject.SetActive(true);

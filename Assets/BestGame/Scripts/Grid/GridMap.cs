@@ -43,7 +43,7 @@ public class GridMap : MonoBehaviour
 	private void UpdateTileProperties()
 	{
 		currentTilemap.CompressBounds();
-		
+
 		if (!Application.IsPlaying(this))
 		{
 			if (mapData != null)
@@ -75,4 +75,7 @@ public class GridMap : MonoBehaviour
 			}
 		}
 	}
+
+
+
 }

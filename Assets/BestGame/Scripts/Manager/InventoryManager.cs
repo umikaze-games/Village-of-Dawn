@@ -14,6 +14,20 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 	{
 		EventHandler.CallUpdateInventoryUI(InventoryType.Player, playerBag.inventoryItems);
 	}
+	private void OnEnable()
+	{
+		EventHandler.DropItemInScene += OnDropItemInScene;
+	}
+
+	private void OnDisable()
+	{
+		EventHandler.DropItemInScene -= OnDropItemInScene;
+	}
+
+	private void OnDropItemInScene(int ID, Vector3 pos)
+	{
+		RemoveItem(ID, 1);
+	}
 
 	public ItemDetails GetItemDetails(int ID)
 	{
@@ -32,7 +46,6 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 		var index = GetItemIdexInBag(item.itemID);
 		AddItemAtIndex(item.itemID, index, 1);
 
-		//Debug.Log(GetItemDetails(item.itemID).itemID + " Name: " + GetItemDetails(item.itemID).itemName);
 		if (toDestroy)
 		{
 			Destroy(item.gameObject);
@@ -69,7 +82,6 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 	{
 		if (index == -1&& CheckInventoryCapacity())
 		{
-			// 背包里没有这个物品
 			var item = new InventoryItem { itemID = ID, itemAmount = amount };
 			for (int i = 0; i < playerBag.inventoryItems.Count; i++)
 			{
@@ -82,7 +94,6 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 		}
 		else
 		{
-			// 背包有这个物品
 			int currentAmount = playerBag.inventoryItems[index].itemAmount + amount;
 			var item = new InventoryItem { itemID = ID, itemAmount = currentAmount };
 
@@ -107,6 +118,23 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 			playerBag.inventoryItems[fromIndex]=new InventoryItem();
 		}
 		EventHandler.CallUpdateInventoryUI(InventoryType.Player, playerBag.inventoryItems);
+	}
+
+	private void RemoveItem(int itemID, int removeAmount)
+	{ 
+		var index =GetItemIdexInBag(itemID);
+		if (playerBag.inventoryItems[index].itemAmount>removeAmount)
+		{
+			var amount = playerBag.inventoryItems[index].itemAmount;
+			var item = new InventoryItem { itemID = itemID, itemAmount = amount };
+			playerBag.inventoryItems[index]=item;
+		}
+		else if (true)
+		{
+			var item = new InventoryItem {  };
+			playerBag.inventoryItems[index]=item;
+		}
+		EventHandler.CallUpdateInventoryUI(InventoryType.Player,playerBag.inventoryItems);
 	}
 
 }
