@@ -15,7 +15,7 @@ public class TransionArea : MonoBehaviour
 	{
 		if (collision.CompareTag("Player"))
 		{
-			EventHandler.CalltransitionEvent(fromSceneName,toSceneName, loadScenePosition);		
+			EventHandler.CallTransitionEvent(fromSceneName,toSceneName, loadScenePosition);		
 		}
 	}
 }

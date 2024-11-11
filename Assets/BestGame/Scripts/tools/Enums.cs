@@ -16,8 +16,8 @@ public enum SlotType
 	Shop
 }
 
-public enum InventoryType
-{ 
+public enum InventoryLocation
+{
 	Player,
 	Box
 }
@@ -46,3 +46,4 @@ public enum GridType
 	NpcObstacle
 
 }
+

@@ -1,11 +1,10 @@
-﻿using System.ComponentModel.Design;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class CursorManager : SingletonMonoBehaviour<CursorManager>
 {
 	private Image cannotUseCursorImage;
+	[SerializeField]
 	private Grid currentGrid;
 
 	private Vector3 mouseWorldPosition;
@@ -52,13 +51,13 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 
 	public bool CheckCanUseCursor()
 	{
-		mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Camera.main.transform.position.z)));
+		mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
 		mouseGridPosition = currentGrid.WorldToCell(mouseWorldPosition);
-
 		var playerGridPosition = currentGrid.WorldToCell(playerTransform.position);
 
 		if (currentItem == null || Mathf.Abs(playerGridPosition.x - mouseGridPosition.x) > currentItem.itemUseRadius || Mathf.Abs(playerGridPosition.y - mouseGridPosition.y) > currentItem.itemUseRadius)
 		{
+			Debug.Log($"{playerGridPosition}{mouseGridPosition}");
 			return false;
 		}
 
@@ -71,7 +70,6 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 				case ItemType.Product:
 					return currentItem.canDropped;
 				default:
-					Debug.Log("Default case, cannot use cursor.");
 					return false;
 			}
 		}

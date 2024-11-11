@@ -35,7 +35,7 @@ public class SceneTransition : MonoBehaviour
 				asyncOperation.allowSceneActivation=true;
 			}
 		}
-
+		EventHandler.CallAfterSceneLoadEvent();
 		player.position = transitionPosition;
 		loadingPannel.SetActive(false);
 
@@ -45,7 +45,7 @@ public class SceneTransition : MonoBehaviour
 
 	private void OnEnable()
 	{
-		EventHandler.TransitionEvent += OnSceneTransition;
+		EventHandler.TransitionEvent+= OnSceneTransition;
 	}
 	private void OnDisable()
 	{

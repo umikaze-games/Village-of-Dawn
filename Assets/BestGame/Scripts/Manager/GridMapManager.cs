@@ -97,17 +97,19 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 		currentGrid = FindAnyObjectByType<Grid>();
 	}
 
-	private void OnExcuteActionAfterAnimation(Vector3 mousePos, ItemDetails itemdetails)
+	private void OnExcuteActionAfterAnimation(Vector3 mouseWorldPos, ItemDetails itemDetails)
 	{
-		var mouseGridPos=currentGrid.WorldToCell(mousePos);
+		var mouseGridPos=currentGrid.WorldToCell(mouseWorldPos);
 		var currentTile = GetTileDetailsOnMousePosition(mouseGridPos);
         if (currentTile!=null)
         {
-			switch (itemdetails.itemType)
+			switch (itemDetails.itemType)
 			{
-				case ItemType.Product:
-					EventHandler.CallDropItemInScene(itemdetails.itemID, mouseGridPos);
-				break;
+
+				case ItemType.Product:      
+					EventHandler.CallDropItemEvent(itemDetails.itemID, mouseWorldPos, itemDetails.itemType);
+					break;
+
 			}
 		}
     }

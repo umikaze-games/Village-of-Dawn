@@ -48,11 +48,11 @@ public class InventoryUI : MonoBehaviour
 	}
 
 
-	private void OnUpdateInventoryUI(InventoryType inventorytype, List<InventoryItem> list)
+	private void OnUpdateInventoryUI(InventoryLocation inventorytype, List<InventoryItem> list)
 	{
 		switch (inventorytype)
 		{
-			case InventoryType.Player:
+			case InventoryLocation.Player:
 				for (int i = 0; i < playerSlots.Length; i++)
 				{
 					if (list[i].itemAmount>0)
@@ -67,7 +67,7 @@ public class InventoryUI : MonoBehaviour
 				}
 
 				break;
-			case InventoryType.Box:
+			case InventoryLocation.Box:
 				break;
 			default:
 				break;

@@ -24,6 +24,29 @@ public class TimeManager : MonoBehaviour
 		initialTime();
 		timeUI.UpdateClockUI(gameHour);
 	}
+
+	private void OnEnable()
+	{
+		EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
+		EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
+
+	}
+
+	private void OnDisable()
+	{
+		EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
+		EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
+
+	}
+	private void OnBeforeSceneUnloadEvent()
+	{
+		gamePause = true;
+	}
+
+	private void OnAfterSceneLoadEvent()
+	{
+		gamePause = false;
+	}
 	private void Update()
 	{
 		if (!gamePause)

@@ -12,19 +12,21 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 
 	private void Start()
 	{
-		EventHandler.CallUpdateInventoryUI(InventoryType.Player, playerBag.inventoryItems);
+		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.inventoryItems);
 	}
 	private void OnEnable()
 	{
-		EventHandler.DropItemInScene += OnDropItemInScene;
+		EventHandler.DropItemEvent += OnDropItemEvent;
 	}
+
+	
 
 	private void OnDisable()
 	{
-		EventHandler.DropItemInScene -= OnDropItemInScene;
+		EventHandler.DropItemEvent -= OnDropItemEvent;
 	}
 
-	private void OnDropItemInScene(int ID, Vector3 pos)
+	private void OnDropItemEvent(int ID, Vector3 pos, ItemType itemType)
 	{
 		RemoveItem(ID, 1);
 	}
@@ -50,7 +52,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 		{
 			Destroy(item.gameObject);
 		}
-		EventHandler.CallUpdateInventoryUI(InventoryType.Player, playerBag.inventoryItems);
+		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.inventoryItems);
 	}
 
 	private int GetItemIdexInBag(int itemID)
@@ -117,7 +119,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 			playerBag.inventoryItems[targetIndex] =currentItem;
 			playerBag.inventoryItems[fromIndex]=new InventoryItem();
 		}
-		EventHandler.CallUpdateInventoryUI(InventoryType.Player, playerBag.inventoryItems);
+		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.inventoryItems);
 	}
 
 	private void RemoveItem(int itemID, int removeAmount)
@@ -134,7 +136,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 			var item = new InventoryItem {  };
 			playerBag.inventoryItems[index]=item;
 		}
-		EventHandler.CallUpdateInventoryUI(InventoryType.Player,playerBag.inventoryItems);
+		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag.inventoryItems);
 	}
 
 }
