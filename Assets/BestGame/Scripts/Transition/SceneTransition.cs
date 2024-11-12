@@ -35,6 +35,8 @@ public class SceneTransition : MonoBehaviour
 				asyncOperation.allowSceneActivation=true;
 			}
 		}
+		Scene scene=SceneManager.GetSceneByName(tosceneName);
+		SceneManager.SetActiveScene(scene);
 		EventHandler.CallAfterSceneLoadEvent();
 		player.position = transitionPosition;
 		loadingPannel.SetActive(false);

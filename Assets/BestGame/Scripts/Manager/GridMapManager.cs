@@ -7,6 +7,7 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 {
 	public List<MapData_SO> mapDatalist;
 
+	[SerializeField]
 	private Grid currentGrid;
 	
 	private Dictionary<string, TileDetails> tileDetailsDict = new Dictionary<string, TileDetails>();
@@ -88,13 +89,14 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 	public TileDetails GetTileDetailsOnMousePosition(Vector3Int mouseGridPosition)
 	{
 		string key = mouseGridPosition.x + "x" + mouseGridPosition.y + "y" + SceneManager.GetActiveScene().name;
+		Debug.Log($"{key}");
 
 		return GetTileDetails(key);
 	}
 
 	private void OnAfterSceneLoadEvent()
 	{
-		currentGrid = FindAnyObjectByType<Grid>();
+		currentGrid =GameObject.Find("GridProperties").GetComponent<Grid>();
 	}
 
 	private void OnExcuteActionAfterAnimation(Vector3 mouseWorldPos, ItemDetails itemDetails)

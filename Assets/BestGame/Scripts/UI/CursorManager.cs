@@ -16,11 +16,10 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 	private bool cursorEnable;
 	private bool cursorPositionValid;
 
-	protected override void Awake()
+	private void Start()
 	{
-		base.Awake();
 		cannotUseCursorImage = GetComponentInChildren<Image>();
-		currentGrid = FindAnyObjectByType<Grid>();
+		currentGrid = FindFirstObjectByType<Grid>();
 	}
 	private void OnEnable()
 	{
@@ -57,13 +56,13 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 
 		if (currentItem == null || Mathf.Abs(playerGridPosition.x - mouseGridPosition.x) > currentItem.itemUseRadius || Mathf.Abs(playerGridPosition.y - mouseGridPosition.y) > currentItem.itemUseRadius)
 		{
-			Debug.Log($"{playerGridPosition}{mouseGridPosition}");
+			//Debug.Log($"{playerGridPosition}{mouseGridPosition}");
 			return false;
 		}
 
-		TileDetails tileDetails = GridMapManager.Instance.GetTileDetailsOnMousePosition(mouseGridPosition);
+		TileDetails currentTile = GridMapManager.Instance.GetTileDetailsOnMousePosition(mouseGridPosition);
 	
-		if (tileDetails != null)
+		if (currentTile != null)
 		{
 			switch (currentItem.itemType)
 			{
