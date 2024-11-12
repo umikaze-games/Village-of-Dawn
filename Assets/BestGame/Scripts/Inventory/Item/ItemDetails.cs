@@ -66,7 +66,7 @@ public class TileDetails
 	public bool canPlaceFurniture;
 	public bool isNPCObstacle;
 
-	public int daysSinceDug = -1;
+	public int daySinceDug = -1;
 	public int daysSinceWatered = -1;
 	public int seedItemID = -1;
 	public int growthDays = -1;

@@ -3,8 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.FilePathAttribute;
 
-public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDragHandler,IEndDragHandler,IPointerEnterHandler,IPointerExitHandler
+public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDragHandler,IEndDragHandler
 {
 	[SerializeField]
 	private Image itemIconImage;
@@ -17,6 +18,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 
 	private InventoryUI inventoryUI;
 
+	[SerializeField]
 	private ItemToolTip itemToolTip;
 
 	public SlotType slotType;
@@ -29,21 +31,25 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 
 	public int slotIndex;
 
+	public InventoryLocation Location;
+
 	private void Awake()
 	{
-		inventoryUI= FindFirstObjectByType<InventoryUI>();
+		inventoryUI = FindFirstObjectByType<InventoryUI>();
 		itemToolTip = FindFirstObjectByType<ItemToolTip>();
 	}
 	private void Start()
 	{
+
 		if (itemToolTip != null)
 		{
 			itemToolTip.gameObject.SetActive(false);
 		}
 		isSelected = false;
-		if (itemDetails.itemID==0)
+		if (itemDetails==null)
 		{
 			UpdateSlotEmpty();
+			itemToolTip.gameObject.SetActive(false);
 		}
 	}
 
@@ -86,69 +92,56 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 
 	public void OnBeginDrag(PointerEventData eventData)
 	{
-		if (itemAmout==0)return;
-		inventoryUI.dragImage.enabled = true;
-		inventoryUI.dragImage.sprite = itemIconImage.sprite;
-		inventoryUI.dragImage.SetNativeSize();
-		isSelected = true;
-		inventoryUI.HightlightSlot(slotIndex);
+		if (itemAmout != 0)
+		{
+			inventoryUI.dragImage.enabled = true;
+			inventoryUI.dragImage.sprite = itemIconImage.sprite;
+			inventoryUI.dragImage.SetNativeSize();
+
+			isSelected = true;
+			inventoryUI.HightlightSlot(slotIndex);
+		}
 	}
 
 	public void OnDrag(PointerEventData eventData)
 	{
-		CursorManager.Instance.currentItem = itemDetails;
-
-		CursorManager.Instance.SetMouseUI(CursorManager.Instance.CheckCanUseCursor());
-	
-		inventoryUI.dragImage.gameObject.transform.position=Input.mousePosition;
+		inventoryUI.dragImage.transform.position = Input.mousePosition;
 	}
 
 	public void OnEndDrag(PointerEventData eventData)
 	{
-		inventoryUI.dragImage.enabled = false;
+			inventoryUI.dragImage.enabled = false;
+		//Debug.Log(eventData.pointerCurrentRaycast);
 
 		if (eventData.pointerCurrentRaycast.gameObject != null)
 		{
-			if (eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>() == null) return;
-			var targeSlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>();
-			int targetSlotIndex = targeSlot.slotIndex;
+			if (eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>() == null)
+				return;
 
-			if (slotType == SlotType.Bag && targeSlot.slotType == SlotType.Bag)
+			var targetSlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>();
+			int targeIndex = targetSlot.slotIndex;
+
+			if (slotType == SlotType.Bag && targetSlot.slotType == SlotType.Bag)
 			{
-				InventoryManager.Instance.SwapItem(slotIndex, targetSlotIndex);
+				InventoryManager.Instance.SwapItem(slotIndex, targeIndex);
 			}
+			//else if (slotType == SlotType.Shop && targetSlot.slotType == SlotType.Bag) 
+			//{
+			//	EventHandler.CallShowTradeUI(itemDetails, false);
+			//}
+			//else if (slotType == SlotType.Bag && targetSlot.slotType == SlotType.Shop) 
+			////{
+			////	EventHandler.CallShowTradeUI(itemDetails, true);
+			//}
+			else if (slotType != SlotType.Shop && targetSlot.slotType != SlotType.Shop && slotType != targetSlot.slotType)
+			{
+				InventoryManager.Instance.SwapItem(Location, slotIndex, targetSlot.Location, targetSlot.slotIndex);
+			}
+
 			inventoryUI.HightlightSlot(-1);
-			CursorManager.Instance.SetMouseUI(true);
-		}
-		else 
-		{
-			CursorManager.Instance.currentItem = itemDetails;
-			//Debug.Log($"{CursorManager.Instance.CheckCanUseCursor()}");
-			if (itemDetails.canDropped&& CursorManager.Instance.CheckCanUseCursor() )
-			{
-				var pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
-				EventHandler.CallInstantiateItemInScene(itemDetails.itemID, pos);
-				CursorManager.Instance.SetMouseUI(true);
-			}
-			else
-			{
-				CursorManager.Instance.SetMouseUI(true);
-			}
-		
 		}
 	}
 
-	public void OnPointerEnter(PointerEventData eventData)
-	{
-		if (itemDetails==null) return;
-		itemToolTip.gameObject.transform.position = transform.position + new Vector3(0,100, 0);
-		itemToolTip.SetupTooltip(itemDetails, slotType);
-		itemToolTip.gameObject.SetActive(true);
-	}
 
-	public void OnPointerExit(PointerEventData eventData)
-	{
-		itemToolTip.gameObject.SetActive(false);
-	}
 }
  

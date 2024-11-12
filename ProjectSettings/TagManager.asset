@@ -9,6 +9,7 @@ TagManager:
   - CursorCavans
   - Dig
   - Water
+  - CanUseMouse
   layers:
   - Default
   - TransparentFX

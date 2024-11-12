@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class CursorManager : SingletonMonoBehaviour<CursorManager>
 {
-	private Image cannotUseCursorImage;
+	public Image cannotUseCursorImage;
 	[SerializeField]
 	private Grid currentGrid;
 
@@ -19,8 +20,7 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 
 	private void Start()
 	{
-		cannotUseCursorImage = GetComponentInChildren<Image>();
-		currentGrid = FindFirstObjectByType<Grid>();
+		currentGrid = FindAnyObjectByType<Grid>();
 	}
 	private void OnEnable()
 	{
@@ -38,60 +38,93 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 	}
 	private void Update()
 	{
-	
-		cannotUseCursorImage.transform.position = Input.mousePosition;
+		CheckCursorValid();
 		CheckPlayerInput();
 	}
 
 	public void SetMouseUI(bool boolValue)
 	{
 		cursorEnable=boolValue;
-		cannotUseCursorImage.enabled=!cursorEnable;
 	}
 
-	public bool CheckCanUseCursor()
+	private void CheckCursorValid()
 	{
-		mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+		mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
 		mouseGridPosition = currentGrid.WorldToCell(mouseWorldPosition);
-		var playerGridPosition = currentGrid.WorldToCell(playerTransform.position);
 
-		if (currentItem == null || Mathf.Abs(playerGridPosition.x - mouseGridPosition.x) > currentItem.itemUseRadius || Mathf.Abs(playerGridPosition.y - mouseGridPosition.y) > currentItem.itemUseRadius)
+		//Debug.Log("WorldPos:" + mouseWorldPos + "  GridPos:" + mouseGridPos);
+
+		var playerGridPos = currentGrid.WorldToCell(playerTransform.position);
+
+		if (Mathf.Abs(mouseGridPosition.x - playerGridPos.x) > currentItem.itemUseRadius || Mathf.Abs(mouseGridPosition.y - playerGridPos.y) > currentItem.itemUseRadius)
 		{
-			return false;
+			SetCursorInValid();
+			return;
 		}
 
 		TileDetails currentTile = GridMapManager.Instance.GetTileDetailsOnMousePosition(mouseGridPosition);
-	
+
 		if (currentTile != null)
 		{
+			//CropDetails currentCrop = CropManager.Instance.GetCropDetails(currentTile.seedItemID);
+			//Crop crop = GridMapManager.Instance.GetCropObject(mouseWorldPos);
+
 			switch (currentItem.itemType)
 			{
-				case ItemType.Product:
-					return currentItem.canDropped;
-				case ItemType.HoeTool:
-					if (currentTile.canDig)
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
+				case ItemType.Seed: 
+					if (currentTile.daySinceDug > -1 && currentTile.seedItemID == -1) SetCursorValid(); 
+					else SetCursorInValid();
+					break;
+				case ItemType.Product: 
+					if (currentTile.canDropItem && currentItem.canDropped) SetCursorValid();
+					else SetCursorInValid();
+					break;
+				case ItemType.HoeTool: 
+					if (currentTile.canDig) SetCursorValid(); else SetCursorInValid();
+					break;
+				case ItemType.WaterTool:
+					if (currentTile.daySinceDug > -1 && currentTile.daysSinceWatered == -1) SetCursorValid(); 
+					else SetCursorInValid();
+					break;
+				//case ItemType.BreakTool: 
+				//case ItemType.ChopTool: 
+				//	if (crop != null)
+				//	{
+				//		if (crop.CanHarvest && crop.cropDetails.CheckToolAvailable(currentItem.itemID)) SetCursorValid(); else SetCursorInValid();
+				//	}
+				//	else SetCursorInValid();
+				//	break;
+				//case ItemType.CollectTool:
+				//	if (currentCrop != null)
+				//	{
+				//		if (currentCrop.CheckToolAvailable(currentItem.itemID))
+				//			if (currentTile.growthDays >= currentCrop.TotalGrowthDays) SetCursorValid(); else SetCursorInValid();
+				//	}
+				//	else
+				//		SetCursorInValid();
+				//	break;
+				//case ItemType.ReapTool:
+				//	if (GridMapManager.Instance.HaveReapableItemsInRadius(mouseWorldPos, currentItem)) SetCursorValid(); else SetCursorInValid();
+				//	break;
+				//case ItemType.Furniture:
+				//	buildImage.gameObject.SetActive(true);
+				//	var bluePrintDetails = InventoryManager.Instance.bluePrintData.GetBluePrintDetails(currentItem.itemID);
 
-				default:
-					return false;
+				//	if (currentTile.canPlaceFurniture && InventoryManager.Instance.CheckStock(currentItem.itemID) && !HaveFurnitureInRaduis(bluePrintDetails))
+				//		SetCursorValid();
+				//	else SetCursorInValid();
+				//	break;
 			}
 		}
 		else
 		{
-			//Debug.Log("No tile details, cannot use cursor.");
-			return false;
+			SetCursorInValid();
 		}
 	}
 
 	private void CheckPlayerInput()
 	{
-		if (Input.GetMouseButtonDown(0)&& cursorEnable)
+		if (Input.GetMouseButtonDown(0)&& cursorPositionValid)
 		{
 			EventHandler.CallMouseClickedEvent(mouseWorldPosition, currentItem);
 		}	
@@ -104,13 +137,12 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 		if (!isSelected)
 		{
 			currentItem = null;
-			//cursorEnable = false;
+			cursorEnable = false;
 		}
 		else
 		{
 			currentItem = itemDetails;
-			//cursorEnable = true;
-
+			cursorEnable = true;
 		}
 	}
 
@@ -122,6 +154,16 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 	private void OnAfterSceneLoadEvent()
 	{
 		currentGrid = FindAnyObjectByType<Grid>();
+	}
+
+	private void SetCursorValid()
+	{
+		cursorPositionValid = true;
+	}
+
+	private void SetCursorInValid()
+	{
+		cursorPositionValid = false;
 	}
 
 }

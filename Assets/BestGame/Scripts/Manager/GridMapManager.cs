@@ -16,6 +16,8 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 
 	public RuleTile digTile;
 	public RuleTile waterTile;
+
+	[SerializeField]
 	private Tilemap digTilemap;
 	private Tilemap waterTilemap;
 	private void Start()
@@ -25,6 +27,17 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 		{
 			firstLoadDict.Add(mapData.sceneName, true);
 			InitTileDetailsDict(mapData);
+		}
+		GameObject digObject = GameObject.FindGameObjectWithTag("Dig");
+		if (digObject != null)
+		{
+			digTilemap = digObject.GetComponent<Tilemap>();
+		}
+
+		GameObject waterObject = GameObject.FindGameObjectWithTag("Water");
+		if (waterObject != null)
+		{
+			waterTilemap = waterObject.GetComponent<Tilemap>();
 		}
 	}
 
@@ -126,14 +139,14 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 			{
 				case ItemType.Product:
 					EventHandler.CallDropItemEvent(itemDetails.itemID, mouseWorldPos, itemDetails.itemType);
-					Debug.Log($"{itemDetails}");
 					break;
 
 				case ItemType.HoeTool:
 					SetDigTilemap(currentTile);
-					currentTile.daysSinceDug = 0;
+					currentTile.daySinceDug = 0;
 					currentTile.canDig = false;
 					currentTile.canDropItem = false;
+
 					//sfx
 					break;
 				case ItemType.WaterTool:

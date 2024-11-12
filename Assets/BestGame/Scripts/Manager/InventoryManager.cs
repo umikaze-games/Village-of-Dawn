@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,8 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 
 	[Header("inventory data")]
 	public InventoryBag_SO playerBag;
+
+	private InventoryBag_SO currentBoxBag;
 
 	private void Start()
 	{
@@ -26,9 +29,8 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 		EventHandler.DropItemEvent -= OnDropItemEvent;
 	}
 
-	private void OnDropItemEvent(int ID, Vector3 pos, ItemType itemType)
+	public void OnDropItemEvent(int ID, Vector3 pos, ItemType itemType)
 	{
-		Debug.Log(ID);
 		RemoveItem(ID, 1);
 	}
 
@@ -121,6 +123,47 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 			playerBag.inventoryItems[fromIndex]=new InventoryItem();
 		}
 		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.inventoryItems);
+	}
+
+	public void SwapItem(InventoryLocation locationFrom, int fromIndex, InventoryLocation locationTarget, int targetIndex)
+	{
+		var currentList = GetItemList(locationFrom);
+		var targetList = GetItemList(locationTarget);
+
+		InventoryItem currentItem = currentList[fromIndex];
+
+		if (targetIndex < targetList.Count)
+		{
+			InventoryItem targetItem = targetList[targetIndex];
+
+			if (targetItem.itemID != 0 && currentItem.itemID != targetItem.itemID)
+			{
+				currentList[fromIndex] = targetItem;
+				targetList[targetIndex] = currentItem;
+			}
+			else if (currentItem.itemID == targetItem.itemID)
+			{
+				targetItem.itemAmount += currentItem.itemAmount;
+				targetList[targetIndex] = targetItem;
+				currentList[fromIndex] = new InventoryItem();
+			}
+			else
+			{
+				targetList[targetIndex] = currentItem;
+				currentList[fromIndex] = new InventoryItem();
+			}
+			EventHandler.CallUpdateInventoryUI(locationFrom, currentList);
+			EventHandler.CallUpdateInventoryUI(locationTarget, targetList);
+		}
+	}
+	private List<InventoryItem> GetItemList(InventoryLocation location)
+	{
+		return location switch
+		{
+			InventoryLocation.Player => playerBag.inventoryItems,
+			InventoryLocation.Box => currentBoxBag.inventoryItems,
+			_ => null,
+		};
 	}
 
 	private void RemoveItem(int itemID, int removeAmount)

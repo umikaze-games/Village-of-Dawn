@@ -133,3 +133,27 @@ MonoBehaviour:
     canCarried: 1
     itemPrice: 100
     sellPercentage: 0.5
+  - itemID: 1011
+    itemName: Hoe Tool
+    itemType: 3
+    itemDescription: Hoe Tool
+    itemUseRadius: 1
+    itemIcon: {fileID: 21300000, guid: 71ca9227166f34790bb8b1c7948d491f, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 71ca9227166f34790bb8b1c7948d491f, type: 3}
+    canPickedup: 1
+    canDropped: 0
+    canCarried: 0
+    itemPrice: 100
+    sellPercentage: 0.5
+  - itemID: 1012
+    itemName: Water Tool
+    itemType: 7
+    itemDescription: Water Tool
+    itemUseRadius: 1
+    itemIcon: {fileID: 21300000, guid: 5b98b5b289f8549f9bbd017e5f0aa5c7, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 5b98b5b289f8549f9bbd017e5f0aa5c7, type: 3}
+    canPickedup: 1
+    canDropped: 0
+    canCarried: 0
+    itemPrice: 100
+    sellPercentage: 0.5

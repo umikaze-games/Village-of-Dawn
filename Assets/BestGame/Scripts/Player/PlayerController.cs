@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.InputSystem;
 
 public class PlayerController : SingletonMonoBehaviour<PlayerController>
 {
@@ -16,6 +17,12 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 	private float inputY;
 	private bool isRunning;
 	private Animator[] animators;
+
+	private float mouseX;
+	private float mouseY;
+	private bool useTool;
+	private bool inputDisable;
+
 	protected override void Awake()
 	{
 		base.Awake();
@@ -28,10 +35,13 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 	{
 
 	}
+	private void FixedUpdate()
+	{
+		PlayerMove();
+	}
 	void Update()
 	{
 
-		PlayerMove();
 		SwitchAnimation();
 
 	}
@@ -67,6 +77,8 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 	{
 		foreach (var animator in animators)
 		{
+			animator.SetFloat("MouseX", mouseX);
+			animator.SetFloat("MouseY", mouseY);
 			if (isRunning)
 			{
 				animator.SetBool("isRunning", true);
@@ -80,11 +92,45 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 		}
 
 	}
-	private void OnMouseClickEvent(Vector3 mouseWorldPos, ItemDetails itemdetails)
+	private void OnMouseClickEvent(Vector3 mouseWorldPos, ItemDetails itemDetails)
 	{
-		//TODO animation
-		Debug.Log("OnMouseClickEvent");
-		EventHandler.CallExecuteActionAfterAnimation(mouseWorldPos, itemdetails);
+		if (itemDetails.itemType != ItemType.Seed && itemDetails.itemType != ItemType.Product && itemDetails.itemType != ItemType.Furniture)
+		{
+			mouseX = mouseWorldPos.x - transform.position.x;
+			mouseY = mouseWorldPos.y - (transform.position.y + 0.85f);
+
+			if (Mathf.Abs(mouseX) > Mathf.Abs(mouseY))
+				mouseY = 0;
+			else
+				mouseX = 0;
+
+			StartCoroutine(UseToolRoutine(mouseWorldPos, itemDetails));
+
+		}
+		else
+		{
+			EventHandler.CallExecuteActionAfterAnimation(mouseWorldPos, itemDetails);
+
+		}
+	}
+
+	private IEnumerator UseToolRoutine(Vector3 mouseWorldPos, ItemDetails itemDetails)
+	{
+		useTool = true;
+		inputDisable = true;
+		yield return null;
+		foreach (var anim in animators)
+		{
+			anim.SetTrigger("UseTool");
+			anim.SetFloat("InputX", mouseX);
+			anim.SetFloat("InputY", mouseY);
+		}
+		yield return new WaitForSeconds(0.45f);
+		EventHandler.CallExecuteActionAfterAnimation(mouseWorldPos, itemDetails);
+		yield return new WaitForSeconds(0.25f);
+	
+		useTool = false;
+		inputDisable = false;
 	}
 
 

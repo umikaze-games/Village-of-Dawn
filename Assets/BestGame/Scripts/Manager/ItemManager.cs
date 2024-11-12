@@ -52,10 +52,9 @@ public class ItemManager : MonoBehaviour
 	{
 		if (itemType == ItemType.Seed) return;
 
-		//var item = Instantiate(bounceItemPrefab, PlayerTransform.position, Quaternion.identity, itemParent);
-		//item.itemID = ID;
-		var dir = (mousePos - PlayerTransform.position).normalized;
-		//item.GetComponent<ItemBounce>().InitBounceItem(mousePos, dir);
+		var item = Instantiate(itemPrefab, mousePos, Quaternion.identity, itemParent);
+		item.itemID = ID;
+	
 	}
 
 	private void OnInstantiateItemInScene(int itemID, Vector3 location)
