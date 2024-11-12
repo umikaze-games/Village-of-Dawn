@@ -42,10 +42,10 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 		CheckPlayerInput();
 	}
 
-	public void UseXCursor(bool boolValue)
+	public void SetMouseUI(bool boolValue)
 	{
-		cannotUseCursorImage.enabled = boolValue;
-
+		cursorEnable=boolValue;
+		cannotUseCursorImage.enabled=boolValue;
 	}
 
 	public bool CheckCanUseCursor()
@@ -56,7 +56,6 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 
 		if (currentItem == null || Mathf.Abs(playerGridPosition.x - mouseGridPosition.x) > currentItem.itemUseRadius || Mathf.Abs(playerGridPosition.y - mouseGridPosition.y) > currentItem.itemUseRadius)
 		{
-			//Debug.Log($"{playerGridPosition}{mouseGridPosition}");
 			return false;
 		}
 
@@ -74,14 +73,14 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 		}
 		else
 		{
-			Debug.Log("No tile details, cannot use cursor.");
+			//Debug.Log("No tile details, cannot use cursor.");
 			return false;
 		}
 	}
 
 	private void CheckPlayerInput()
 	{
-		if (Input.GetMouseButtonDown(0)&&cursorPositionValid)
+		if (Input.GetMouseButtonDown(0)&& cursorEnable)
 		{
 			EventHandler.CallMouseClickedEvent(mouseWorldPosition, currentItem);
 		}	

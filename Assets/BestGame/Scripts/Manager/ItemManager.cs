@@ -7,7 +7,7 @@ using static UnityEditor.FilePathAttribute;
 public class ItemManager : MonoBehaviour
 {
 	public Item itemPrefab;
-	public Item bounceItemPrefab;
+	//public Item bounceItemPrefab;
 	private Transform itemParent;
 
 	private Transform PlayerTransform => FindAnyObjectByType<PlayerController>().transform;
@@ -52,8 +52,8 @@ public class ItemManager : MonoBehaviour
 	{
 		if (itemType == ItemType.Seed) return;
 
-		var item = Instantiate(bounceItemPrefab, PlayerTransform.position, Quaternion.identity, itemParent);
-		item.itemID = ID;
+		//var item = Instantiate(bounceItemPrefab, PlayerTransform.position, Quaternion.identity, itemParent);
+		//item.itemID = ID;
 		var dir = (mousePos - PlayerTransform.position).normalized;
 		//item.GetComponent<ItemBounce>().InitBounceItem(mousePos, dir);
 	}
@@ -141,7 +141,7 @@ public class ItemManager : MonoBehaviour
 		{
 			if (currentSceneItems != null)
 			{
-				foreach (var item in FindObjectsOfType<Item>())
+				foreach (var item in FindObjectsByType<Item>(FindObjectsSortMode.None))
 				{
 					Destroy(item.gameObject);
 				}

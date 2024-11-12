@@ -7,7 +7,7 @@ using System;
 public class PlayerController : SingletonMonoBehaviour<PlayerController>
 {
 	[SerializeField]
-	private float playerMoveSpeed=50;
+	private float playerMoveSpeed = 50;
 
 	private PlayerInputActions playerInputAction;
 	private Rigidbody2D rb;
@@ -22,15 +22,15 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 		playerInputAction = new PlayerInputActions();
 
 		animators = GetComponentsInChildren<Animator>();
-		rb=GetComponent<Rigidbody2D>();
+		rb = GetComponent<Rigidbody2D>();
 	}
 	private void Start()
 	{
-	
+
 	}
 	void Update()
 	{
-	
+
 		PlayerMove();
 		SwitchAnimation();
 
@@ -38,15 +38,15 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 	private void PlayerMove()
 	{
 		Vector2 readValue = playerInputAction.PlayerControls.Move.ReadValue<Vector2>();
-		inputX=readValue.normalized.x;
+		inputX = readValue.normalized.x;
 		inputY = readValue.normalized.y;
 		Vector2 moveDir = new Vector2(inputX, inputY);
 		if (readValue == Vector2.zero)
-		{ 
+		{
 			isRunning = false;
 			return;
-		} 
-		Vector2 newPosition = rb.position + moveDir* playerMoveSpeed * Time.deltaTime;
+		}
+		Vector2 newPosition = rb.position + moveDir * playerMoveSpeed * Time.deltaTime;
 		rb.MovePosition(newPosition);
 		isRunning = true;
 	}
@@ -69,21 +69,22 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 		{
 			if (isRunning)
 			{
-				animator.SetBool("isRunning",true);
+				animator.SetBool("isRunning", true);
 				animator.SetFloat("InputX", inputX);
 				animator.SetFloat("InputY", inputY);
 			}
 			else
 			{
 				animator.SetBool("isRunning", false);
-			} 
+			}
 		}
-		
+
 	}
-	private void OnMouseClickEvent(Vector3 pos, ItemDetails itemdetails)
+	private void OnMouseClickEvent(Vector3 mouseWorldPos, ItemDetails itemdetails)
 	{
 		//TODO animation
-		EventHandler.CallExecuteActionAfterAnimation(pos, itemdetails);
+		Debug.Log("OnMouseClickEvent");
+		EventHandler.CallExecuteActionAfterAnimation(mouseWorldPos, itemdetails);
 	}
 
 

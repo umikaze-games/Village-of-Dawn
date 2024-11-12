@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryItems:
   - itemID: 1007
-    itemAmount: 1
+    itemAmount: 10
   - itemID: 0
     itemAmount: 0
   - itemID: 0

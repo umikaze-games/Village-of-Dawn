@@ -98,7 +98,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 	{
 		CursorManager.Instance.currentItem = itemDetails;
 
-		CursorManager.Instance.UseXCursor(!CursorManager.Instance.CheckCanUseCursor());
+		CursorManager.Instance.SetMouseUI(!CursorManager.Instance.CheckCanUseCursor());
 	
 		inventoryUI.dragImage.gameObject.transform.position=Input.mousePosition;
 	}
@@ -121,16 +121,16 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 		else 
 		{
 			CursorManager.Instance.currentItem = itemDetails;
-			Debug.Log($"{CursorManager.Instance.CheckCanUseCursor()}");
+			//Debug.Log($"{CursorManager.Instance.CheckCanUseCursor()}");
 			if (itemDetails.canDropped&& CursorManager.Instance.CheckCanUseCursor() )
 			{
 				var pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
 				EventHandler.CallInstantiateItemInScene(itemDetails.itemID, pos);
-				CursorManager.Instance.UseXCursor(false);
+				CursorManager.Instance.SetMouseUI(false);
 			}
 			else
 			{
-				CursorManager.Instance.UseXCursor(false);
+				CursorManager.Instance.SetMouseUI(false);
 			}
 		
 		}

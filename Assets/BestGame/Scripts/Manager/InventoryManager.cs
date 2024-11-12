@@ -19,7 +19,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 		EventHandler.DropItemEvent += OnDropItemEvent;
 	}
 
-	
+
 
 	private void OnDisable()
 	{
@@ -127,7 +127,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 		var index =GetItemIdexInBag(itemID);
 		if (playerBag.inventoryItems[index].itemAmount>removeAmount)
 		{
-			var amount = playerBag.inventoryItems[index].itemAmount;
+			var amount = playerBag.inventoryItems[index].itemAmount-removeAmount;
 			var item = new InventoryItem { itemID = itemID, itemAmount = amount };
 			playerBag.inventoryItems[index]=item;
 		}

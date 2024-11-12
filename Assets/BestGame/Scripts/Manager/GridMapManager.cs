@@ -15,6 +15,7 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 	private Dictionary<string, bool> firstLoadDict = new Dictionary<string, bool>();
 	private void Start()
 	{
+		currentGrid=FindAnyObjectByType<Grid>();
 		foreach (var mapData in mapDatalist)
 		{
 			firstLoadDict.Add(mapData.sceneName, true);
@@ -89,7 +90,7 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 	public TileDetails GetTileDetailsOnMousePosition(Vector3Int mouseGridPosition)
 	{
 		string key = mouseGridPosition.x + "x" + mouseGridPosition.y + "y" + SceneManager.GetActiveScene().name;
-		Debug.Log($"{key}");
+		//Debug.Log($"{key}");
 
 		return GetTileDetails(key);
 	}
@@ -107,8 +108,7 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
         {
 			switch (itemDetails.itemType)
 			{
-
-				case ItemType.Product:      
+				case ItemType.Product:
 					EventHandler.CallDropItemEvent(itemDetails.itemID, mouseWorldPos, itemDetails.itemType);
 					break;
 
