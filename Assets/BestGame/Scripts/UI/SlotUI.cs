@@ -98,7 +98,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 	{
 		CursorManager.Instance.currentItem = itemDetails;
 
-		CursorManager.Instance.SetMouseUI(!CursorManager.Instance.CheckCanUseCursor());
+		CursorManager.Instance.SetMouseUI(CursorManager.Instance.CheckCanUseCursor());
 	
 		inventoryUI.dragImage.gameObject.transform.position=Input.mousePosition;
 	}
@@ -106,6 +106,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 	public void OnEndDrag(PointerEventData eventData)
 	{
 		inventoryUI.dragImage.enabled = false;
+
 		if (eventData.pointerCurrentRaycast.gameObject != null)
 		{
 			if (eventData.pointerCurrentRaycast.gameObject.GetComponent<SlotUI>() == null) return;
@@ -117,6 +118,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 				InventoryManager.Instance.SwapItem(slotIndex, targetSlotIndex);
 			}
 			inventoryUI.HightlightSlot(-1);
+			CursorManager.Instance.SetMouseUI(true);
 		}
 		else 
 		{
@@ -126,15 +128,14 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 			{
 				var pos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
 				EventHandler.CallInstantiateItemInScene(itemDetails.itemID, pos);
-				CursorManager.Instance.SetMouseUI(false);
+				CursorManager.Instance.SetMouseUI(true);
 			}
 			else
 			{
-				CursorManager.Instance.SetMouseUI(false);
+				CursorManager.Instance.SetMouseUI(true);
 			}
 		
 		}
-
 	}
 
 	public void OnPointerEnter(PointerEventData eventData)

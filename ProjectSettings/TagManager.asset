@@ -6,7 +6,9 @@ TagManager:
   tags:
   - BoundConfiner
   - ItemParent
-  - LoadingPannel
+  - CursorCavans
+  - Dig
+  - Water
   layers:
   - Default
   - TransparentFX

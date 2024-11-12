@@ -28,6 +28,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 
 	private void OnDropItemEvent(int ID, Vector3 pos, ItemType itemType)
 	{
+		Debug.Log(ID);
 		RemoveItem(ID, 1);
 	}
 

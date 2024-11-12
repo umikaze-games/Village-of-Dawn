@@ -2801,7 +2801,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 35, y: -18}
+  m_AnchoredPosition: {x: 35, y: -36.155}
   m_SizeDelta: {x: 64, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &570795661
@@ -5803,7 +5803,8 @@ MonoBehaviour:
   mapDatalist:
   - {fileID: 11400000, guid: 0a76deceaa9ece04a9414f8e56abaaff, type: 2}
   - {fileID: 11400000, guid: 23bc6b6d1ea1e8c48ba8647de79ccb97, type: 2}
-  currentGrid: {fileID: 0}
+  digTile: {fileID: 11400000, guid: daebeed5162526a488d0ae0958964f61, type: 2}
+  waterTile: {fileID: 11400000, guid: ef27a0ebbe32410418be794fe6d7957c, type: 2}
 --- !u!4 &1412945055
 Transform:
   m_ObjectHideFlags: 0
@@ -6239,6 +6240,7 @@ MonoBehaviour:
     itemPrice: 0
     sellPercentage: 0
   playerTransform: {fileID: 66004543}
+  cursorEnable: 0
 --- !u!4 &1544249742
 Transform:
   m_ObjectHideFlags: 0

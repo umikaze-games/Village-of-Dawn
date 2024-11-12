@@ -13,7 +13,8 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 
 	public Transform playerTransform;
 
-	private bool cursorEnable;
+	[SerializeField]
+	private bool cursorEnable=true;
 	private bool cursorPositionValid;
 
 	private void Start()
@@ -45,7 +46,7 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 	public void SetMouseUI(bool boolValue)
 	{
 		cursorEnable=boolValue;
-		cannotUseCursorImage.enabled=boolValue;
+		cannotUseCursorImage.enabled=!cursorEnable;
 	}
 
 	public bool CheckCanUseCursor()
@@ -67,6 +68,16 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 			{
 				case ItemType.Product:
 					return currentItem.canDropped;
+				case ItemType.HoeTool:
+					if (currentTile.canDig)
+					{
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+
 				default:
 					return false;
 			}
@@ -93,12 +104,12 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 		if (!isSelected)
 		{
 			currentItem = null;
-			cursorEnable = false;
+			//cursorEnable = false;
 		}
 		else
 		{
 			currentItem = itemDetails;
-			cursorEnable = true;
+			//cursorEnable = true;
 
 		}
 	}
