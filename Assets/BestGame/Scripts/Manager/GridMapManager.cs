@@ -21,6 +21,8 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 	[SerializeField]
 	private Tilemap digTilemap;
 	private Tilemap waterTilemap;
+
+	private int currentSeason;
 	private void Start()
 	{
 		currentGrid=FindAnyObjectByType<Grid>();
@@ -46,12 +48,14 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 	{
 		EventHandler.ExecuteActionAfterAnimation += OnExcuteActionAfterAnimation;
 		EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
+		EventHandler.GameDayEvent += OnGameDayEvent;
 	}
 
 	private void OnDisable()
 	{
 		EventHandler.ExecuteActionAfterAnimation -= OnExcuteActionAfterAnimation;
 		EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
+		EventHandler.GameDayEvent -= OnGameDayEvent;
 	}
 
 	private void InitTileDetailsDict(MapData_SO mapData)
@@ -212,5 +216,44 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 			}
 		}
 	
+	}
+
+	private void RefreshTilemap()
+	{
+
+		if (digTilemap!=null)
+		{
+			digTilemap.ClearAllTiles();
+		}
+		if (waterTilemap != null)
+		{
+			waterTilemap.ClearAllTiles();
+		}
+		DisplayTilemap(SceneManager.GetActiveScene().name);
+	}
+
+	private void OnGameDayEvent(int day, int season)
+	{
+		currentSeason = season;
+		foreach (var tile in tileDetailsDict)
+		{
+			if (tile.Value.daysSinceWatered > -1)
+			{
+				tile.Value.daysSinceWatered = -1;
+			}
+
+			if (tile.Value.daySinceDug > -1)
+			{
+				tile.Value.daySinceDug++;
+			}
+
+			if (tile.Value.daySinceDug>=5&&tile.Value.seedItemID==-1)
+			{
+				tile.Value.daySinceDug = -1;
+				tile.Value.canDig = true;
+			}
+
+		}
+		RefreshTilemap();
 	}
 }

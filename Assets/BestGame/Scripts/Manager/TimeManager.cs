@@ -107,6 +107,8 @@ public class TimeManager : MonoBehaviour
 					timeUI.UpdateDayMonthYearUI(gameYear, gameMonth, gameDay);
 					timeUI.initialClockUI();
 
+					EventHandler.CallGameDayEvent(gameDay, gameSeason);
+
 					if (gameDay > Settings.dayHold)
 					{
 						gameDay = 1;

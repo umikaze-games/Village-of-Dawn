@@ -34,19 +34,13 @@ public static class EventHandler
 		GameMinuteEvent?.Invoke(minute, hour, day);
 	}
 
-	public static event Action<int> GameDayEvent;
-	public static void CallGameDayEvent(int day)
-	{
-		GameDayEvent?.Invoke(day);
-	}
-
 	public static event Action<int, int, int, int> GameDataEvent;
 	public static void CallGameDataEvent(int hour, int day, int month, int year)
 	{
 		GameDataEvent?.Invoke(hour, day, month, year);
 	}
 
-	public static event Action<string, string,Vector3> TransitionEvent;
+	public static event Action<string, string, Vector3> TransitionEvent;
 	public static void CallTransitionEvent(string fromsceneName, string tosceneName, Vector3 transitionPosition)
 	{
 		TransitionEvent?.Invoke(fromsceneName, tosceneName, transitionPosition);
@@ -82,4 +76,11 @@ public static class EventHandler
 	{
 		ExecuteActionAfterAnimation?.Invoke(pos, itemDetails);
 	}
+
+	public static event Action<int, int> GameDayEvent;
+	public static void CallGameDayEvent(int day, int season)
+	{
+		GameDayEvent?.Invoke(day, season);
+	}
 }
+
