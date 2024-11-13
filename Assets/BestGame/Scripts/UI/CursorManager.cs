@@ -38,8 +38,12 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 	}
 	private void Update()
 	{
-		CheckCursorValid();
-		CheckPlayerInput();
+		if (currentGrid!=null)
+		{
+			CheckCursorValid();
+			CheckPlayerInput();
+		}
+		
 	}
 
 	public void SetMouseUI(bool boolValue)
@@ -55,7 +59,8 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 		//Debug.Log("WorldPos:" + mouseWorldPos + "  GridPos:" + mouseGridPos);
 
 		var playerGridPos = currentGrid.WorldToCell(playerTransform.position);
-
+		if (currentItem == null) return;
+	
 		if (Mathf.Abs(mouseGridPosition.x - playerGridPos.x) > currentItem.itemUseRadius || Mathf.Abs(mouseGridPosition.y - playerGridPos.y) > currentItem.itemUseRadius)
 		{
 			SetCursorInValid();

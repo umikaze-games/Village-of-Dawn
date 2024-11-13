@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
@@ -115,7 +116,7 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 
 	private void OnAfterSceneLoadEvent()
 	{
-		currentGrid =GameObject.Find("GridProperties").GetComponent<Grid>();
+		currentGrid = FindAnyObjectByType<Grid>();
 		GameObject digObject = GameObject.FindGameObjectWithTag("Dig");
 		if (digObject!=null)
 		{
@@ -127,6 +128,7 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 		{
 			waterTilemap = waterObject.GetComponent<Tilemap>();
 		}
+		DisplayTilemap(SceneManager.GetActiveScene().name);
 	}
 
 	private void OnExcuteActionAfterAnimation(Vector3 mouseWorldPos, ItemDetails itemDetails)
@@ -151,9 +153,13 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 					break;
 				case ItemType.WaterTool:
 					SetWaterTilemap(currentTile);
+					currentTile.daysSinceWatered = 0;
+					currentTile.canDig = false;
+					currentTile.canDropItem = false;
 					break;
 
 			}
+			UpdateTileDetails(currentTile);
 		}
     }
 
@@ -175,5 +181,36 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 			waterTilemap.SetTile(position, waterTile);
 		}
 
+	}
+
+	private void UpdateTileDetails(TileDetails tileDetails)
+	{
+		string key = tileDetails.gridX + "x" + tileDetails.gridY + "y" + SceneManager.GetActiveScene().name;
+		if (tileDetailsDict.ContainsKey(key))
+		{
+			tileDetailsDict[key] = tileDetails;
+		}
+	
+	}
+
+	private void DisplayTilemap(string sceneName)
+	{
+		foreach (var tile in tileDetailsDict)
+		{
+			var key=tile.Key;
+			var tileDetails=tile.Value;
+			if (key.Contains(sceneName))
+			{
+				if (tileDetails.daySinceDug>-1)
+				{
+					SetDigTilemap(tileDetails);
+				}
+				if (tileDetails.daysSinceWatered > -1)
+				{
+					SetWaterTilemap(tileDetails);
+				}
+			}
+		}
+	
 	}
 }
