@@ -162,6 +162,11 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 					currentTile.canDropItem = false;
 					break;
 
+				case ItemType.Seed:
+					EventHandler.CallPlantSeedEvent(itemDetails.itemID, currentTile);
+					//Debug.Log("CallPlantSeedEvent");
+					break;
+
 			}
 			UpdateTileDetails(currentTile);
 		}
@@ -213,6 +218,10 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 				{
 					SetWaterTilemap(tileDetails);
 				}
+				if (tileDetails.seedItemID>-1)
+				{
+					EventHandler.CallPlantSeedEvent(tileDetails.seedItemID, tileDetails);
+				}
 			}
 		}
 	
@@ -229,7 +238,13 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 		{
 			waterTilemap.ClearAllTiles();
 		}
+		foreach (var crop in FindObjectsByType<Crop>(FindObjectsSortMode.None))
+		{
+			Destroy(crop.gameObject);
+		
+		}
 		DisplayTilemap(SceneManager.GetActiveScene().name);
+
 	}
 
 	private void OnGameDayEvent(int day, int season)
@@ -251,6 +266,11 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 			{
 				tile.Value.daySinceDug = -1;
 				tile.Value.canDig = true;
+				tile.Value.growthDays = -1;
+			}
+			if (tile.Value.seedItemID!=-1)
+			{
+				tile.Value.growthDays++;
 			}
 
 		}

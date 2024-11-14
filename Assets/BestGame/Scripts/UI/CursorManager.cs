@@ -8,6 +8,7 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 	[SerializeField]
 	private Grid currentGrid;
 
+	private CropDetails currentCrop;
 	private Vector3 mouseWorldPosition;
 	private Vector3Int mouseGridPosition;
 	public ItemDetails currentItem;
@@ -56,8 +57,6 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 		mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
 		mouseGridPosition = currentGrid.WorldToCell(mouseWorldPosition);
 
-		//Debug.Log("WorldPos:" + mouseWorldPos + "  GridPos:" + mouseGridPos);
-
 		var playerGridPos = currentGrid.WorldToCell(playerTransform.position);
 		if (currentItem == null) return;
 	
@@ -71,7 +70,7 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 
 		if (currentTile != null)
 		{
-			//CropDetails currentCrop = CropManager.Instance.GetCropDetails(currentTile.seedItemID);
+			CropDetails currentCrop = CropManager.Instance.GetCropDetails(currentTile.seedItemID);
 			//Crop crop = GridMapManager.Instance.GetCropObject(mouseWorldPos);
 
 			switch (currentItem.itemType)
@@ -99,26 +98,26 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 				//	}
 				//	else SetCursorInValid();
 				//	break;
-				//case ItemType.CollectTool:
-				//	if (currentCrop != null)
-				//	{
-				//		if (currentCrop.CheckToolAvailable(currentItem.itemID))
-				//			if (currentTile.growthDays >= currentCrop.TotalGrowthDays) SetCursorValid(); else SetCursorInValid();
-				//	}
-				//	else
-				//		SetCursorInValid();
-				//	break;
-				//case ItemType.ReapTool:
-				//	if (GridMapManager.Instance.HaveReapableItemsInRadius(mouseWorldPos, currentItem)) SetCursorValid(); else SetCursorInValid();
-				//	break;
-				//case ItemType.Furniture:
-				//	buildImage.gameObject.SetActive(true);
-				//	var bluePrintDetails = InventoryManager.Instance.bluePrintData.GetBluePrintDetails(currentItem.itemID);
+				case ItemType.CollectTool:
+					if (currentCrop != null)
+					{
+						//if (currentCrop.CheckToolAvailable(currentItem.itemID))
+							if (currentTile.growthDays >= currentCrop.TotalGrowthDays) SetCursorValid(); else SetCursorInValid();
+					}
+					else
+						SetCursorInValid();
+					break;
+					//case ItemType.ReapTool:
+					//	if (GridMapManager.Instance.HaveReapableItemsInRadius(mouseWorldPos, currentItem)) SetCursorValid(); else SetCursorInValid();
+					//	break;
+					//case ItemType.Furniture:
+					//	buildImage.gameObject.SetActive(true);
+					//	var bluePrintDetails = InventoryManager.Instance.bluePrintData.GetBluePrintDetails(currentItem.itemID);
 
-				//	if (currentTile.canPlaceFurniture && InventoryManager.Instance.CheckStock(currentItem.itemID) && !HaveFurnitureInRaduis(bluePrintDetails))
-				//		SetCursorValid();
-				//	else SetCursorInValid();
-				//	break;
+					//	if (currentTile.canPlaceFurniture && InventoryManager.Instance.CheckStock(currentItem.itemID) && !HaveFurnitureInRaduis(bluePrintDetails))
+					//		SetCursorValid();
+					//	else SetCursorInValid();
+					//	break;
 			}
 		}
 		else

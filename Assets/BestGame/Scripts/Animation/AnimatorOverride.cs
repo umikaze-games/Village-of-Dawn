@@ -44,12 +44,19 @@ public class AnimatorOverride : MonoBehaviour
 			currentType = PartType.None;
 			holdItem.enabled = false;
 		}
-		if (currentType==PartType.Carry)
+		else 
 		{
-			holdItem.sprite = itemDetails.itemOnWorldSprite;
-			holdItem.enabled = true;
-		}
+			if (currentType == PartType.Carry)
+			{
+				holdItem.sprite = itemDetails.itemOnWorldSprite;
+				holdItem.enabled = true;
+			}
+			else
+			{
+				holdItem.enabled = false;
+			}
 
+		}
 		SwitchAnimator(currentType);
 	}
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TimeManager : MonoBehaviour
+public class TimeManager : SingletonMonoBehaviour<TimeManager>
 {
 	private int gameSecond;
 	private int gameMinute;
@@ -15,9 +15,10 @@ public class TimeManager : MonoBehaviour
 
 	public bool gamePause;
 	public TimeUI timeUI;
-	private void Awake()
-	{
 
+	public int GameSeason
+	{
+		get { return gameSeason; }
 	}
 	private void Start()
 	{

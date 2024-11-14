@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryItems:
   - itemID: 1007
-    itemAmount: 100
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
+    itemAmount: 103
+  - itemID: 1011
+    itemAmount: 3
+  - itemID: 1012
+    itemAmount: 3
+  - itemID: 1002
+    itemAmount: 10
   - itemID: 0
     itemAmount: 0
   - itemID: 1006
