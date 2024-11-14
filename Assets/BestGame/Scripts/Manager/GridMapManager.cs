@@ -167,11 +167,29 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 					//Debug.Log("CallPlantSeedEvent");
 					break;
 
+				case ItemType.CollectTool:
+					Crop currentCrop = GetCrop(mouseWorldPos);
+					
+					break;
+
 			}
 			UpdateTileDetails(currentTile);
 		}
     }
 
+	private Crop GetCrop(Vector3 mouseWorldPosition)
+	{
+		Collider2D[] colliders = Physics2D.OverlapPointAll(mouseWorldPosition);
+		Crop currentCrop = null;
+		for (int i = 0; i < colliders.Length; i++)
+		{
+			if (colliders[i].GetComponent<Crop>())
+			{
+				currentCrop = colliders[i].GetComponent<Crop>();
+			}
+		}
+		return currentCrop;
+	}
 	private void SetDigTilemap(TileDetails tile)
 	{
 		Vector3Int position = new Vector3Int(tile.gridX,tile.gridY,0);

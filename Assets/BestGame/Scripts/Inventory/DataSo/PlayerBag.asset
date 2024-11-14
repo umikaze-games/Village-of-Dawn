@@ -21,8 +21,8 @@ MonoBehaviour:
     itemAmount: 3
   - itemID: 1002
     itemAmount: 10
-  - itemID: 0
-    itemAmount: 0
+  - itemID: 1013
+    itemAmount: 1
   - itemID: 1006
     itemAmount: 10
   - itemID: 0

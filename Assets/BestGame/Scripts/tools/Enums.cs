@@ -27,6 +27,8 @@ public enum PartType
 	None,
 	Carry,
 	Hoe,
+	Collect,
+	Water,
 	Broken
 }
 

@@ -26,7 +26,7 @@ MonoBehaviour:
     - {fileID: 1098745238, guid: bd1655396b777431e85369611fc36aed, type: 3}
     - {fileID: -1012976577, guid: bd1655396b777431e85369611fc36aed, type: 3}
     - {fileID: -1730499155, guid: bd1655396b777431e85369611fc36aed, type: 3}
-    - {fileID: -1730499155, guid: bd1655396b777431e85369611fc36aed, type: 3}
+    - {fileID: -1080373613, guid: bd1655396b777431e85369611fc36aed, type: 3}
     seasons: 0
     harvestToolItemID: 0
     requireActionCount: 01000000
