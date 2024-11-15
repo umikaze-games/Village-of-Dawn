@@ -92,12 +92,12 @@ public class CropManager : SingletonMonoBehaviour<CropManager>
 			}
 			dayCount -= cropDetails.growthDays[i];
 		}
-		Debug.Log(currentStage);
 		GameObject cropPrefab=cropDetails.growthPrefabs[currentStage];
 		Sprite cropSprite=cropDetails.growthSprites[currentStage];
 		Vector3 position = new Vector3(tileDetails.gridX + 0.5f, tileDetails.gridY + 0.5f, 0);
 		GameObject cropInstantiate=Instantiate(cropPrefab, position,Quaternion.identity,cropParent);
 		cropInstantiate.GetComponentInChildren<SpriteRenderer>().sprite=cropSprite;
-		Debug.Log("instantiate");
+		cropInstantiate.GetComponent<Crop>().cropDetails = cropDetails;
+		cropInstantiate.GetComponent<Crop>().tileDetails = tileDetails;
 	}
 }

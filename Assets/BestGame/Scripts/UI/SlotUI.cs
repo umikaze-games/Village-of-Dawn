@@ -67,12 +67,12 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 		button.interactable = false;
 	}
 
-	public void UpdateSlot(ItemDetails item, int amout)
+	public void UpdateSlot(ItemDetails item, int amount)
 	{
 		itemDetails = item;
 		itemIconImage.sprite = item.itemIcon;
-		itemAmout = amout;
-		amountText.text = amout.ToString();
+		itemAmout = amount;
+		amountText.text = amount.ToString();
 		itemIconImage.enabled = true;
 		button.interactable = true;
 

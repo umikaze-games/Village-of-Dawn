@@ -28,12 +28,11 @@ MonoBehaviour:
     - {fileID: -1730499155, guid: bd1655396b777431e85369611fc36aed, type: 3}
     - {fileID: -1080373613, guid: bd1655396b777431e85369611fc36aed, type: 3}
     seasons: 0
-    harvestToolItemID: 0
-    requireActionCount: 01000000
+    harvestToolItemID: 1013
+    requireActionCount: 1
     transferItemID: 0
-    producedItemID: ee030000
-    producedMinAmount: 01000000
-    producedMaxAmount: 01000000
+    producedItemID: 1006
+    producedAmount: 5
     spawnRadius: {x: 0, y: 0}
     generateAtPlayerPosition: 1
     hasAnimation: 0

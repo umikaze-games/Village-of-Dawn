@@ -169,7 +169,7 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 
 				case ItemType.CollectTool:
 					Crop currentCrop = GetCrop(mouseWorldPos);
-					
+					currentCrop.ProcessToolItem(itemDetails);
 					break;
 
 			}

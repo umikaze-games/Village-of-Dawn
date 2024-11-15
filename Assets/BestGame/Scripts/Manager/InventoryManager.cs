@@ -20,13 +20,21 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 	private void OnEnable()
 	{
 		EventHandler.DropItemEvent += OnDropItemEvent;
+		EventHandler.HarvestAtPlayerPosition += OnHarvestAtPlayerPosition;
 	}
-
 
 
 	private void OnDisable()
 	{
 		EventHandler.DropItemEvent -= OnDropItemEvent;
+		EventHandler.HarvestAtPlayerPosition -= OnHarvestAtPlayerPosition;
+	}
+
+	private void OnHarvestAtPlayerPosition(int ID)
+	{
+		var index = GetItemIdexInBag(ID);
+		AddItemAtIndex(ID, index, 1);
+		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.inventoryItems);
 	}
 
 	public void OnDropItemEvent(int ID, Vector3 pos, ItemType itemType)

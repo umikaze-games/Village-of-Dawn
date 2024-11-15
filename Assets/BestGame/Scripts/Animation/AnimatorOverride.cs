@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimatorOverride : MonoBehaviour
@@ -23,10 +24,29 @@ public class AnimatorOverride : MonoBehaviour
 	private void OnEnable()
 	{
 		EventHandler.ItemSelectedEvent += OnItemSelectedEvent;
+		EventHandler.HarvestAtPlayerPosition += OnHarvestAtPlayerPosition;
 	}
 	private void OnDisable()
 	{
 		EventHandler.ItemSelectedEvent -= OnItemSelectedEvent;
+		EventHandler.HarvestAtPlayerPosition -= OnHarvestAtPlayerPosition;
+	}
+
+	private void OnHarvestAtPlayerPosition(int ID)
+	{
+		Sprite itemSprite=InventoryManager.Instance.GetItemDetails(ID).itemOnWorldSprite;
+		if (holdItem.enabled==false)
+		{
+			StartCoroutine(ShowItem(itemSprite));
+		}
+	}
+
+	private IEnumerator ShowItem(Sprite itemSprite)
+	{
+		holdItem.enabled = true;
+		holdItem.sprite = itemSprite;
+		yield return new WaitForSeconds(1);
+		holdItem.enabled = false;
 	}
 
 	private void OnItemSelectedEvent(ItemDetails itemDetails, bool isSelected)

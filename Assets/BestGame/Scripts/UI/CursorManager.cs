@@ -101,7 +101,7 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 				case ItemType.CollectTool:
 					if (currentCrop != null)
 					{
-						//if (currentCrop.CheckToolAvailable(currentItem.itemID))
+						if (currentCrop.CheckToolAvaliable(currentItem.itemID))
 							if (currentTile.growthDays >= currentCrop.TotalGrowthDays) SetCursorValid(); else SetCursorInValid();
 					}
 					else

@@ -37,15 +37,14 @@ public class CropDetails
 	public int harvestToolItemID;
 
 	[Header("Number of uses for each tool")]
-	public int[] requireActionCount;
+	public int requireActionCount;
 
 	[Header("Item to be transformed")]
 	public int transferItemID;
 
 	[Header("Harvest Information")]
-	public int[] producedItemID;
-	public int[] producedMinAmount;
-	public int[] producedMaxAmount;
+	public int producedItemID;
+	public int producedAmount;
 	public Vector2 spawnRadius;
 
 	[Header("Options")]
@@ -53,5 +52,20 @@ public class CropDetails
 	public bool hasAnimation;
 	public bool hasParticleEffect;
 
+	public bool CheckToolAvaliable(int toolID)
+	{
+		if (toolID == harvestToolItemID)
+		{ 
+		return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
+	public int GetTotalRequiredCount()
+	{
+		return requireActionCount;
+	}
 }
