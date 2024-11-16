@@ -42,7 +42,7 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 		{
 			waterTilemap = waterObject.GetComponent<Tilemap>();
 		}
-		EventHandler.CallGenerateCropEvent();
+	
 	}
 
 	private void OnEnable()
