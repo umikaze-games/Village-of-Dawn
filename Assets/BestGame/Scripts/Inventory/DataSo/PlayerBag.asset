@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryItems:
   - itemID: 1007
-    itemAmount: 103
+    itemAmount: 543
   - itemID: 1011
     itemAmount: 3
   - itemID: 1012
@@ -24,13 +24,13 @@ MonoBehaviour:
   - itemID: 1013
     itemAmount: 1
   - itemID: 1006
-    itemAmount: 35
+    itemAmount: 45
   - itemID: 1014
-    itemAmount: 5
+    itemAmount: 40
   - itemID: 1001
     itemAmount: 1
-  - itemID: 0
-    itemAmount: 0
+  - itemID: 1018
+    itemAmount: 1
   - itemID: 0
     itemAmount: 0
   - itemID: 0

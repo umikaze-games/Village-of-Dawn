@@ -186,6 +186,9 @@ MonoBehaviour:
   - partType: 1
     partName: 2
     overrideController: {fileID: 22100000, guid: 7f26fb7539352dc4db2108d16cb7ce62, type: 2}
+  - partType: 3
+    partName: 2
+    overrideController: {fileID: 22100000, guid: 7368b6812b0325d41a60a11b87a3e26c, type: 2}
   - partType: 4
     partName: 2
     overrideController: {fileID: 22100000, guid: 1b3c8bb67fd03ad4e9518b7a01510cc0, type: 2}
@@ -198,30 +201,30 @@ MonoBehaviour:
   - partType: 4
     partName: 3
     overrideController: {fileID: 22100000, guid: abf8e349e0646c040a9df05e5f4dc963, type: 2}
+  - partType: 6
+    partName: 3
+    overrideController: {fileID: 22100000, guid: c0fe39c4984955b4589435aaaf8a063d, type: 2}
   - partType: 5
     partName: 3
     overrideController: {fileID: 22100000, guid: 9d28ee7b272c39f438b3058595dab119, type: 2}
   - partType: 0
     partName: 1
     overrideController: {fileID: 22100000, guid: cc565e3a5b2f2f749a3acd7f86a7909c, type: 2}
+  - partType: 3
+    partName: 1
+    overrideController: {fileID: 22100000, guid: d1e339355f2e0544797da6dc7742d734, type: 2}
   - partType: 4
     partName: 1
     overrideController: {fileID: 22100000, guid: 8a0a87bab6ceeec44940612a76a67ad1, type: 2}
   - partType: 0
     partName: 0
     overrideController: {fileID: 22100000, guid: bd86f446a64bea84f980981df8b54a26, type: 2}
-  - partType: 4
-    partName: 0
-    overrideController: {fileID: 22100000, guid: 92a4605352d586a4bafa00c2f782cd8c, type: 2}
-  - partType: 3
-    partName: 1
-    overrideController: {fileID: 22100000, guid: d1e339355f2e0544797da6dc7742d734, type: 2}
   - partType: 3
     partName: 0
     overrideController: {fileID: 22100000, guid: 80a5ee8467ec39d4981dac11526ad678, type: 2}
-  - partType: 3
-    partName: 2
-    overrideController: {fileID: 22100000, guid: 7368b6812b0325d41a60a11b87a3e26c, type: 2}
+  - partType: 4
+    partName: 0
+    overrideController: {fileID: 22100000, guid: 92a4605352d586a4bafa00c2f782cd8c, type: 2}
 --- !u!1 &1196373847042718887
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +301,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 88074909
   m_SortingLayer: 8
-  m_SortingOrder: 3
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2005211193, guid: 73a809d2a24874634b94654bad003ca0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

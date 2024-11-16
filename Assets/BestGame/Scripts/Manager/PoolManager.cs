@@ -9,7 +9,6 @@ public class PoolManager : MonoBehaviour
 	public List<GameObject> poolPrefabs;
 	public List<ObjectPool<GameObject>> poolEffectList = new List<ObjectPool<GameObject>>();
 
-
 	private Queue<GameObject> soundQueue = new Queue<GameObject>();
 
 	private void OnEnable()

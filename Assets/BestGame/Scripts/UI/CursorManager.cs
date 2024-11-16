@@ -90,14 +90,7 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 					if (currentTile.daySinceDug > -1 && currentTile.daysSinceWatered == -1) SetCursorValid(); 
 					else SetCursorInValid();
 					break;
-				//case ItemType.BreakTool: 
-			
-					//if (crop != null)
-					//{
-					//	if (crop.canharvest && crop.cropdetails.checktoolavailable(currentitem.itemid)) setcursorvalid(); else setcursorinvalid();
-					////}
-					////else setcursorinvalid();
-					//break;
+				case ItemType.BreakTool:
 				case ItemType.ChopTool:
 				
 					if (crop != null && crop.CanHarvest && crop.cropDetails.CheckToolAvaliable(currentItem.itemID))

@@ -42,6 +42,7 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 		{
 			waterTilemap = waterObject.GetComponent<Tilemap>();
 		}
+		EventHandler.CallGenerateCropEvent();
 	}
 
 	private void OnEnable()
@@ -136,7 +137,14 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 		{
 			waterTilemap = waterObject.GetComponent<Tilemap>();
 		}
-		DisplayTilemap(SceneManager.GetActiveScene().name);
+		if (firstLoadDict[SceneManager.GetActiveScene().name]==true)
+		{
+			EventHandler.CallGenerateCropEvent();
+			firstLoadDict[SceneManager.GetActiveScene().name]=false;
+		}
+		
+		RefreshTilemap();
+		//DisplayTilemap(SceneManager.GetActiveScene().name);
 	}
 
 	private void OnExcuteActionAfterAnimation(Vector3 mouseWorldPos, ItemDetails itemDetails)
@@ -176,9 +184,11 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 					
 					currentCrop.ProcessToolItem(itemDetails,currentTile);
 					break;
+
+				case ItemType.BreakTool:
 				case ItemType.ChopTool:
 
-					currentCrop.ProcessToolItem(itemDetails, currentCrop.tileDetails);
+					currentCrop?.ProcessToolItem(itemDetails, currentCrop.tileDetails);
 					break;
 
 			}
@@ -219,14 +229,17 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 
 	}
 
-	private void UpdateTileDetails(TileDetails tileDetails)
+	public void UpdateTileDetails(TileDetails tileDetails)
 	{
 		string key = tileDetails.gridX + "x" + tileDetails.gridY + "y" + SceneManager.GetActiveScene().name;
 		if (tileDetailsDict.ContainsKey(key))
 		{
 			tileDetailsDict[key] = tileDetails;
 		}
-	
+		else
+		{
+			tileDetailsDict.Add(key, tileDetails);
+		}
 	}
 
 	private void DisplayTilemap(string sceneName)

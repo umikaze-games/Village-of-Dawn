@@ -140,15 +140,30 @@ MonoBehaviour:
     growthSprites: []
     seasons: 0
     harvestToolItemID: 0
-    requireActionCount: 
+    requireActionCount: 0
     transferItemID: 0
-    producedItemID: 
-    producedMinAmount: 
-    producedMaxAmount: 
+    producedItemID: 0
+    producedAmount: 0
     spawnRadius: {x: 0, y: 0}
     generateAtPlayerPosition: 0
     hasAnimation: 0
     hasParticleEffect: 0
+    hasParticaleEffect: 0
+    effectType: 0
+    effectPosition: {x: 0, y: 0, z: 0}
+  harvestActionCount: 0
+  tileDetails:
+    gridX: 0
+    gridY: 0
+    canDig: 0
+    canDropItem: 0
+    canPlaceFurniture: 0
+    isNPCObstacle: 0
+    daySinceDug: -1
+    daysSinceWatered: -1
+    seedItemID: -1
+    growthDays: -1
+    daysSinceLastHarvest: -1
 --- !u!61 &2406091427907610653
 BoxCollider2D:
   m_ObjectHideFlags: 0
