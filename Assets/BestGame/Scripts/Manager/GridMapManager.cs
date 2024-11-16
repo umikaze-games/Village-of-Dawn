@@ -49,6 +49,7 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 		EventHandler.ExecuteActionAfterAnimation += OnExcuteActionAfterAnimation;
 		EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
 		EventHandler.GameDayEvent += OnGameDayEvent;
+		EventHandler.RefreshCurrentMap += RefreshTilemap;
 	}
 
 	private void OnDisable()
@@ -56,7 +57,10 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 		EventHandler.ExecuteActionAfterAnimation -= OnExcuteActionAfterAnimation;
 		EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
 		EventHandler.GameDayEvent -= OnGameDayEvent;
+		EventHandler.RefreshCurrentMap += RefreshTilemap;
 	}
+
+
 
 	private void InitTileDetailsDict(MapData_SO mapData)
 	{
@@ -141,6 +145,7 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 		var currentTile = GetTileDetailsOnMousePosition(mouseGridPos);
 		if (currentTile != null)
 		{
+			Crop currentCrop = GetCrop(mouseWorldPos);
 			switch (itemDetails.itemType)
 			{
 				case ItemType.Product:
@@ -168,8 +173,12 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 					break;
 
 				case ItemType.CollectTool:
-					Crop currentCrop = GetCrop(mouseWorldPos);
-					currentCrop.ProcessToolItem(itemDetails);
+					
+					currentCrop.ProcessToolItem(itemDetails,currentTile);
+					break;
+				case ItemType.ChopTool:
+
+					currentCrop.ProcessToolItem(itemDetails, currentCrop.tileDetails);
 					break;
 
 			}
@@ -177,7 +186,7 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 		}
     }
 
-	private Crop GetCrop(Vector3 mouseWorldPosition)
+	public Crop GetCrop(Vector3 mouseWorldPosition)
 	{
 		Collider2D[] colliders = Physics2D.OverlapPointAll(mouseWorldPosition);
 		Crop currentCrop = null;
@@ -264,7 +273,6 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 		DisplayTilemap(SceneManager.GetActiveScene().name);
 
 	}
-
 	private void OnGameDayEvent(int day, int season)
 	{
 		currentSeason = season;
@@ -280,7 +288,7 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 				tile.Value.daySinceDug++;
 			}
 
-			if (tile.Value.daySinceDug>=5&&tile.Value.seedItemID==-1)
+			if (tile.Value.daySinceDug>5&&tile.Value.seedItemID==-1)
 			{
 				tile.Value.daySinceDug = -1;
 				tile.Value.canDig = true;

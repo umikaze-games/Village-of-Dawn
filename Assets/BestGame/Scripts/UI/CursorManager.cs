@@ -71,7 +71,7 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 		if (currentTile != null)
 		{
 			CropDetails currentCrop = CropManager.Instance.GetCropDetails(currentTile.seedItemID);
-			//Crop crop = GridMapManager.Instance.GetCropObject(mouseWorldPos);
+			Crop crop = GridMapManager.Instance.GetCrop(mouseWorldPosition);
 
 			switch (currentItem.itemType)
 			{
@@ -91,13 +91,26 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 					else SetCursorInValid();
 					break;
 				//case ItemType.BreakTool: 
-				//case ItemType.ChopTool: 
-				//	if (crop != null)
-				//	{
-				//		if (crop.CanHarvest && crop.cropDetails.CheckToolAvailable(currentItem.itemID)) SetCursorValid(); else SetCursorInValid();
-				//	}
-				//	else SetCursorInValid();
-				//	break;
+			
+					//if (crop != null)
+					//{
+					//	if (crop.canharvest && crop.cropdetails.checktoolavailable(currentitem.itemid)) setcursorvalid(); else setcursorinvalid();
+					////}
+					////else setcursorinvalid();
+					//break;
+				case ItemType.ChopTool:
+				
+					if (crop != null && crop.CanHarvest && crop.cropDetails.CheckToolAvaliable(currentItem.itemID))
+					{
+						SetCursorValid();
+						//Debug.Log($"{currentTile.growthDays}?{crop.cropDetails.TotalGrowthDays}");
+					}
+					else
+					{
+						//Debug.Log($"{currentTile.growthDays}?{crop.cropDetails.TotalGrowthDays}");
+						SetCursorInValid();
+					}
+					break;
 				case ItemType.CollectTool:
 					if (currentCrop != null)
 					{

@@ -37,3 +37,52 @@ MonoBehaviour:
     generateAtPlayerPosition: 1
     hasAnimation: 0
     hasParticleEffect: 0
+    hasParticaleEffect: 0
+    effectType: 0
+    effectPosition: {x: 0, y: 0, z: 0}
+  - seedItemID: 1014
+    growthDays: 0100000001000000010000000100000001000000
+    growthPrefabs:
+    - {fileID: 8140090911735540747, guid: 22307e2287185644d8d4933be764dfb7, type: 3}
+    - {fileID: 8140090911735540747, guid: 22307e2287185644d8d4933be764dfb7, type: 3}
+    - {fileID: 8140090911735540747, guid: 22307e2287185644d8d4933be764dfb7, type: 3}
+    - {fileID: 8140090911735540747, guid: 22307e2287185644d8d4933be764dfb7, type: 3}
+    - {fileID: 8275855208638746784, guid: 986e1f96ec3ff2a4b8d1801acde2bee1, type: 3}
+    growthSprites:
+    - {fileID: 21300000, guid: 3979be82862ab4b42be8e0b3222694bc, type: 3}
+    - {fileID: 21300000, guid: b344f2cee7ac54d7ab52e493a1bb4ee7, type: 3}
+    - {fileID: 21300000, guid: c54002cd9727a43329d7f75c50778b57, type: 3}
+    - {fileID: 21300000, guid: 4590cd3fefdd74b22ae749a122189ece, type: 3}
+    - {fileID: 21300000, guid: e12c6f18fb50544fea7f5245a9a2aeff, type: 3}
+    seasons: 0
+    harvestToolItemID: 1001
+    requireActionCount: 5
+    transferItemID: 1015
+    producedItemID: 1014
+    producedAmount: 5
+    spawnRadius: {x: 3.5, y: 1.2}
+    generateAtPlayerPosition: 0
+    hasAnimation: 1
+    hasParticleEffect: 0
+    hasParticaleEffect: 1
+    effectType: 1
+    effectPosition: {x: 0, y: 2.5, z: 0}
+  - seedItemID: 1015
+    growthDays: 00000000
+    growthPrefabs:
+    - {fileID: 6093470667878123242, guid: 32d55d39d39f88043a906ea09d2a55f9, type: 3}
+    growthSprites:
+    - {fileID: 21300000, guid: f92caccf9fb8e45bcb3b3b1116dcbf48, type: 3}
+    seasons: 0
+    harvestToolItemID: 1001
+    requireActionCount: 5
+    transferItemID: 0
+    producedItemID: 1007
+    producedAmount: 20
+    spawnRadius: {x: 0.5, y: 0.5}
+    generateAtPlayerPosition: 0
+    hasAnimation: 0
+    hasParticleEffect: 0
+    hasParticaleEffect: 0
+    effectType: 0
+    effectPosition: {x: 0, y: 0, z: 0}

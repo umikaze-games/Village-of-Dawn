@@ -16,7 +16,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 
 	public Image highlightImage;
 
-	private InventoryUI inventoryUI;
+	public InventoryUI inventoryUI;
 
 	[SerializeField]
 	private ItemToolTip itemToolTip;

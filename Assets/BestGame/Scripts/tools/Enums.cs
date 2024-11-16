@@ -29,6 +29,7 @@ public enum PartType
 	Hoe,
 	Collect,
 	Water,
+	Chop,
 	Broken
 }
 
@@ -46,6 +47,14 @@ public enum GridType
 	DropItem,
 	PlaceFurniture,
 	NpcObstacle
+}
 
+public enum ParticleEffectType
+{ 
+	None,
+	LeaveFalling01,
+	LeaveFalling02,
+	Rock,
+	ReapableScenery
 }
 

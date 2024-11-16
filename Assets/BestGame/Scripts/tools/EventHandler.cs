@@ -95,5 +95,17 @@ public static class EventHandler
 	{
 		HarvestAtPlayerPosition?.Invoke(ID);
 	}
+
+	public static event Action RefreshCurrentMap;
+	public static void CallRefreshCurrentMap()
+	{
+		RefreshCurrentMap?.Invoke();
+	}
+
+	public static event Action<ParticleEffectType, Vector3> ParticleEffectEvent;
+	public static void CallParticleEffectEvent(ParticleEffectType effectType, Vector3 pos)
+	{
+		ParticleEffectEvent?.Invoke(effectType, pos);
+	}
 }
 

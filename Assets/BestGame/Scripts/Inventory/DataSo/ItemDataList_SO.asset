@@ -160,7 +160,7 @@ MonoBehaviour:
   - itemID: 1013
     itemName: Collect Tool
     itemType: 8
-    itemDescription: Water Tool
+    itemDescription: Collect Tool
     itemUseRadius: 1
     itemIcon: {fileID: 21300000, guid: 21f88cda6c810402583055801e6a2c73, type: 3}
     itemOnWorldSprite: {fileID: 21300000, guid: 21f88cda6c810402583055801e6a2c73, type: 3}
@@ -168,4 +168,28 @@ MonoBehaviour:
     canDropped: 0
     canCarried: 0
     itemPrice: 100
+    sellPercentage: 0.5
+  - itemID: 1014
+    itemName: Pinecone
+    itemType: 0
+    itemDescription: Pinecone
+    itemUseRadius: 1
+    itemIcon: {fileID: 21300000, guid: 9930d861d3ccf4ddc87536ae85a56425, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: 9930d861d3ccf4ddc87536ae85a56425, type: 3}
+    canPickedup: 1
+    canDropped: 0
+    canCarried: 1
+    itemPrice: 1
+    sellPercentage: 0.5
+  - itemID: 1015
+    itemName: trunk
+    itemType: 9
+    itemDescription: trunk
+    itemUseRadius: 1
+    itemIcon: {fileID: 21300000, guid: f92caccf9fb8e45bcb3b3b1116dcbf48, type: 3}
+    itemOnWorldSprite: {fileID: 21300000, guid: f92caccf9fb8e45bcb3b3b1116dcbf48, type: 3}
+    canPickedup: 0
+    canDropped: 0
+    canCarried: 0
+    itemPrice: 0
     sellPercentage: 0.5

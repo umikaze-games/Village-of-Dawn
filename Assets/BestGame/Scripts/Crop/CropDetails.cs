@@ -51,7 +51,10 @@ public class CropDetails
 	public bool generateAtPlayerPosition;
 	public bool hasAnimation;
 	public bool hasParticleEffect;
+	public bool hasParticaleEffect;
+	public ParticleEffectType effectType;
 
+	public Vector3 effectPosition;
 	public bool CheckToolAvaliable(int toolID)
 	{
 		if (toolID == harvestToolItemID)

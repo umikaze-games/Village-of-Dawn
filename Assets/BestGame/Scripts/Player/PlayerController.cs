@@ -97,7 +97,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 		if (itemDetails.itemType != ItemType.Seed && itemDetails.itemType != ItemType.Product && itemDetails.itemType != ItemType.Furniture)
 		{
 			mouseX = mouseWorldPos.x - transform.position.x;
-			mouseY = mouseWorldPos.y - (transform.position.y + 0.85f);
+			mouseY = mouseWorldPos.y - (transform.position.y + 0.85f);// 0.85f is a height compensation value for the character
 
 			if (Mathf.Abs(mouseX) > Mathf.Abs(mouseY))
 				mouseY = 0;
