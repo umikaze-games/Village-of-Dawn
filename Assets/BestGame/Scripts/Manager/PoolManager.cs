@@ -46,13 +46,13 @@ public class PoolManager : MonoBehaviour
 
 	private void OnParticalEffectEvent(ParticleEffectType effectType, Vector3 pos)
 	{
-
+		Debug.Log("111");
 		ObjectPool<GameObject> objPool = effectType switch
 		{
 			ParticleEffectType.LeaveFalling01 => poolEffectList[0],
-			ParticleEffectType.LeaveFalling02 => poolEffectList[1],
-			ParticleEffectType.Rock => poolEffectList[2],
-			ParticleEffectType.ReapableScenery => poolEffectList[3],
+			ParticleEffectType.Rock => poolEffectList[1],
+			ParticleEffectType.ReapableScenery => poolEffectList[2],
+			ParticleEffectType.LeaveFalling02 => poolEffectList[3],
 			_ => null,
 		};
 

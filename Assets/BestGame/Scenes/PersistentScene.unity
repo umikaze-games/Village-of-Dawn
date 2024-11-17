@@ -8595,6 +8595,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolPrefabs:
   - {fileID: 7049448767426368198, guid: ff6e182a71500b742bce86217e74bcd3, type: 3}
+  - {fileID: 9088505454427204177, guid: b2992a8badfa9d44bb54d545c911bbb7, type: 3}
+  - {fileID: 9088505454427204177, guid: 9521eae230efd7645a82a5daba4b4cf5, type: 3}
 --- !u!4 &2131191616
 Transform:
   m_ObjectHideFlags: 0

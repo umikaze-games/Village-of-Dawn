@@ -36,5 +36,12 @@ public class Item : MonoBehaviour
 			boxCollider2D.offset = new Vector2(0, spriteRenderer.sprite.bounds.center.y);
 	
 		}
+
+		if (itemDetails.itemType == ItemType.ReapableScenery)
+		{
+			gameObject.AddComponent<ReapItem>();
+			gameObject.GetComponent<ReapItem>().InitCropData(itemDetails.itemID);
+			gameObject.AddComponent<ItemInteractive>();
+		}
 	}
 }

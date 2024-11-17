@@ -30,7 +30,8 @@ public enum PartType
 	Collect,
 	Water,
 	Chop,
-	Broken
+	Broken,
+	Reap
 }
 
 public enum PartName

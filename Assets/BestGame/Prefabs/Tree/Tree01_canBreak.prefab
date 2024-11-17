@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 8849317400171472675}
   - component: {fileID: 3245617105493053325}
   - component: {fileID: -1189356691628687582}
+  - component: {fileID: -3187261871514339190}
   m_Layer: 0
   m_Name: Tree01_canBreak
   m_TagString: Untagged
@@ -352,7 +353,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.015129328, y: 1.0538449}
+  m_Offset: {x: 0.047000885, y: 1.7337747}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -362,7 +363,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.1008778, y: 2.7348042}
+  m_Size: {x: 1.8233032, y: 4.0946636}
   m_EdgeRadius: 0
 --- !u!114 &-1189356691628687582
 MonoBehaviour:
@@ -391,6 +392,9 @@ MonoBehaviour:
     generateAtPlayerPosition: 0
     hasAnimation: 1
     hasParticleEffect: 0
+    effectType: 0
+    effectPosition: {x: 0, y: 0, z: 0}
+  harvestActionCount: 0
   tileDetails:
     gridX: 0
     gridY: 0
@@ -403,3 +407,18 @@ MonoBehaviour:
     seedItemID: -1
     growthDays: -1
     daysSinceLastHarvest: -1
+--- !u!114 &-3187261871514339190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8275855208638746784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7995b485ed6c5d64b933576f55ecb8ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentGrid: {fileID: 0}
+  seedItemID: 1014
+  growthDays: 20

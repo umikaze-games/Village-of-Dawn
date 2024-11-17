@@ -113,9 +113,19 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 					else
 						SetCursorInValid();
 					break;
-					//case ItemType.ReapTool:
-					//	if (GridMapManager.Instance.HaveReapableItemsInRadius(mouseWorldPos, currentItem)) SetCursorValid(); else SetCursorInValid();
-					//	break;
+				case ItemType.ReapTool:
+					if (GridMapManager.Instance.HaveReapableItemInRadius(mouseWorldPosition, currentItem))
+					{
+						SetCursorValid();
+						//Debug.Log("CursorValid");
+					}
+
+					else
+					{
+						SetCursorInValid();
+						//Debug.Log("CursorInValid");
+					} 
+					break;
 					//case ItemType.Furniture:
 					//	buildImage.gameObject.SetActive(true);
 					//	var bluePrintDetails = InventoryManager.Instance.bluePrintData.GetBluePrintDetails(currentItem.itemID);

@@ -23,6 +23,8 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 	private Tilemap waterTilemap;
 
 	private int currentSeason;
+
+	private List<ReapItem> itemInRadius;
 	private void Start()
 	{
 		currentGrid=FindAnyObjectByType<Grid>();
@@ -190,6 +192,14 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 
 					currentCrop?.ProcessToolItem(itemDetails, currentCrop.tileDetails);
 					break;
+				case ItemType.ReapTool:
+					for (int i = 0; i < itemInRadius.Count; i++)			
+					{
+						EventHandler.CallParticleEffectEvent(ParticleEffectType.ReapableScenery, itemInRadius[i].transform.position + Vector3.up);
+						itemInRadius[i].SpawnHarvestItems();
+						Destroy(itemInRadius[i].gameObject);
+					}
+					break;
 
 			}
 			UpdateTileDetails(currentTile);
@@ -314,5 +324,22 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 
 		}
 		RefreshTilemap();
+	}
+
+	public bool HaveReapableItemInRadius(Vector3 mouseWorldPosition,ItemDetails tool)
+	{
+		itemInRadius = new List<ReapItem>();
+		Collider2D[] colliders = new Collider2D[20];
+		colliders=Physics2D.OverlapCircleAll(mouseWorldPosition, tool.itemUseRadius);
+		foreach (Collider2D collider in colliders)
+		{
+			if (collider.GetComponent<ReapItem>())
+			{
+				itemInRadius.Add(collider.GetComponent<ReapItem>());
+				
+			}
+
+		}
+		return itemInRadius.Count > 0;
 	}
 }

@@ -50,8 +50,7 @@ public class CropDetails
 	[Header("Options")]
 	public bool generateAtPlayerPosition;
 	public bool hasAnimation;
-	public bool hasParticleEffect;
-	public bool hasParticaleEffect;
+	public bool hasParticleEffect; 
 	public ParticleEffectType effectType;
 
 	public Vector3 effectPosition;

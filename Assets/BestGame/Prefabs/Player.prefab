@@ -225,6 +225,18 @@ MonoBehaviour:
   - partType: 4
     partName: 0
     overrideController: {fileID: 22100000, guid: 92a4605352d586a4bafa00c2f782cd8c, type: 2}
+  - partType: 7
+    partName: 1
+    overrideController: {fileID: 22100000, guid: 6281f4cf8974b5947af5736b1a4aba96, type: 2}
+  - partType: 7
+    partName: 0
+    overrideController: {fileID: 22100000, guid: 4c91e05743a6bd942af22bc3acd4e70b, type: 2}
+  - partType: 7
+    partName: 2
+    overrideController: {fileID: 22100000, guid: 4c9099597fe15614ea8acd68534fafcb, type: 2}
+  - partType: 7
+    partName: 3
+    overrideController: {fileID: 22100000, guid: 85f022c498ad45044a8e898c5adc0ac5, type: 2}
 --- !u!1 &1196373847042718887
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,7 +324,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &4337644221412825603
 Animator:
   serializedVersion: 7
@@ -422,7 +434,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &4781854671865937949
 Animator:
   serializedVersion: 7

@@ -19,7 +19,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 	public InventoryUI inventoryUI;
 
 	[SerializeField]
-	private ItemToolTip itemToolTip;
+	private ItemToolTip itemToolTip=>FindAnyObjectByType<ItemToolTip>();
 
 	public SlotType slotType;
 
@@ -36,7 +36,6 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 	private void Awake()
 	{
 		inventoryUI = FindFirstObjectByType<InventoryUI>();
-		itemToolTip = FindFirstObjectByType<ItemToolTip>();
 	}
 	private void Start()
 	{
@@ -49,7 +48,10 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 		if (itemDetails==null)
 		{
 			UpdateSlotEmpty();
-			itemToolTip.gameObject.SetActive(false);
+			if (itemToolTip != null)
+			{
+				itemToolTip.gameObject.SetActive(false);
+			}	
 		}
 	}
 
@@ -111,7 +113,6 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 	public void OnEndDrag(PointerEventData eventData)
 	{
 			inventoryUI.dragImage.enabled = false;
-		//Debug.Log(eventData.pointerCurrentRaycast);
 
 		if (eventData.pointerCurrentRaycast.gameObject != null)
 		{

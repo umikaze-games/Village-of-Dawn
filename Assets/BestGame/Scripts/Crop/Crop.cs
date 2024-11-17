@@ -24,6 +24,10 @@ public class Crop : MonoBehaviour
 				animator.SetTrigger("TreeRotation");
 				EventHandler.CallParticleEffectEvent(cropDetails.effectType, transform.position + cropDetails.effectPosition); //play particle effect
 			}
+			else
+			{
+				EventHandler.CallParticleEffectEvent(cropDetails.effectType, transform.position + cropDetails.effectPosition); //play particle effect
+			}
 		}
 
 		if (harvestActionCount>=requiredActionCount)
