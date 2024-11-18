@@ -19,7 +19,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 	public InventoryUI inventoryUI;
 
 	[SerializeField]
-	private ItemToolTip itemToolTip=>FindAnyObjectByType<ItemToolTip>();
+	private ItemToolTip itemToolTip;
 
 	public SlotType slotType;
 
