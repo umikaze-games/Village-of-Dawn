@@ -113,5 +113,11 @@ public static class EventHandler
 	{
 		GenerateCropEvent?.Invoke(); 
 	}
+
+	public static event Action<Dialogue> ShowDialogueEvent;
+	public static void CallShowDialogueEvent(Dialogue dialogue)
+	{
+		ShowDialogueEvent?.Invoke(dialogue);
+	}
 }
 

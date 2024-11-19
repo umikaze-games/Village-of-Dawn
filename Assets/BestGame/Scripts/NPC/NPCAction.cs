@@ -12,9 +12,9 @@ public class NPCAction : MonoBehaviour
 	private Rigidbody2D rb;
 	private Animator animator;
 
+	public bool canInteractive=true;
 	private bool canMove = true;
-	private bool isMoving = false;
-	private bool isInteracting = false; // Flag to check if NPC is in conversation
+	public bool isMoving = false;
 
 	[SerializeField]
 	private Vector3 targetPosition;
@@ -47,7 +47,7 @@ public class NPCAction : MonoBehaviour
 	private void Update()
 	{
 		// NPC moves only when not interacting and allowed to move
-		if (canMove && !isMoving && !isInteracting)
+		if (canMove && !isMoving)
 		{
 			idleTimer += Time.deltaTime;
 
@@ -67,16 +67,14 @@ public class NPCAction : MonoBehaviour
 
 	public void StartInteraction()
 	{
-		isInteracting = true;
+		canInteractive = false;
 		isMoving = false;
-		animator.SetBool("isMoving", false); // Stop movement animation
-											 // Add logic here to open dialogue box
+		animator.SetBool("isMoving", false); 							
 	}
 
 	public void EndInteraction()
 	{
-		isInteracting = false;
-		// Continue moving after closing the dialogue
+		canInteractive = true;
 	}
 
 	public void SetNPCVisable()
@@ -130,6 +128,7 @@ public class NPCAction : MonoBehaviour
 	private void StartMoving()
 	{
 		isMoving = true;
+		canInteractive=false;
 		GenerateTargetPosition();
 	}
 
@@ -171,6 +170,7 @@ public class NPCAction : MonoBehaviour
 			// Stop moving when close enough to the target
 			animator.SetBool("isMoving", false);
 			isMoving = false;
+			canInteractive = true;
 		}
 	}
 
