@@ -119,5 +119,11 @@ public static class EventHandler
 	{
 		ShowDialogueEvent?.Invoke(dialogue);
 	}
+
+	public static event Action EndDialogueEvent;
+	public static void CallEndDialogueEvent()
+	{
+		EndDialogueEvent?.Invoke();
+	}
 }
 

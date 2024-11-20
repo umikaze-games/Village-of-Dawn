@@ -61,6 +61,7 @@ public class DialogueController : MonoBehaviour
 		else
 		{
 			isTalking = false;
+			EventHandler.CallEndDialogueEvent();
 			ResetDialogueQueue();
 		}
 	

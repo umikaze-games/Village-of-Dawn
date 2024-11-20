@@ -24,24 +24,36 @@ public class DialogueUI : MonoBehaviour
 	private void OnEnable()
 	{
 		EventHandler.ShowDialogueEvent += OnShowDialogueEvent;
+		EventHandler.EndDialogueEvent += OnEndDialogueEvent;
 	}
 
 	
 	private void OnDisable()
 	{
 		EventHandler.ShowDialogueEvent -= OnShowDialogueEvent;
+		EventHandler.EndDialogueEvent -= OnEndDialogueEvent;
 	}
+
+	private void OnEndDialogueEvent()
+	{
+		dialoguePanel.SetActive(false);
+		nPCFaceImage.enabled = false;
+		playerFaceImage.enabled = false;
+	}
+
 	private void OnShowDialogueEvent(Dialogue dialogue)
 	{
 		dialoguePanel.SetActive(true);
 		if (dialogue.onLeft)
 		{
 			nPCFaceImage.sprite = dialogue.faceImage;
+			nPCFaceImage.enabled = true;
 
 		}
 		else
 		{ 
 			playerFaceImage.sprite = dialogue.faceImage;
+			playerFaceImage.enabled = true;
 		}
 		dialogueText.text = dialogue.dialogueText;
 		if (dialogue.needSpaceContinue)
