@@ -5,13 +5,30 @@ public class ActionBarKey : MonoBehaviour
    [SerializeField]
 	private KeyCode keyCode;
 	private SlotUI slotUI;
+	private bool canUse;
 	private void Awake()
 	{
 		slotUI = GetComponent<SlotUI>();
 	}
+
+	private void OnEnable()
+	{
+		EventHandler.GamePauseEvent += OnGamePauseEvent;
+	}
+
+	private void OnDisable()
+	{
+		EventHandler.GamePauseEvent -= OnGamePauseEvent;
+	}
+
+	private void OnGamePauseEvent(bool gamePause)
+	{
+		canUse = !gamePause;
+	}
+
 	private void Update()
 	{
-		if (Input.GetKeyDown(keyCode))
+		if (Input.GetKeyDown(keyCode)&&canUse)
 		{
 			if (slotUI.itemDetails!=null)
 			{
