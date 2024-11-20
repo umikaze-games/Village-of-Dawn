@@ -6,12 +6,15 @@ public class DialogueUI : MonoBehaviour
 {
 	public GameObject dialoguePanel;
 	public TextMeshProUGUI dialogueText;
-	public Image nPCFaceImage;
-	public Image playerFaceImage;
+	public GameObject nPCFaceGameObject;
+	public GameObject playerFaceGameObject;
 	public TextMeshProUGUI playerFaceText;
 	public TextMeshProUGUI nPCFaceText;
 	public GameObject continuneBox;
-
+	private Image dialogueLeftImage;
+	private Image dialogueRightImage;
+	public GameObject dialogueLeftName;
+	public GameObject dialoguerRightName;
 	private void Awake()
 	{
 		continuneBox.gameObject.SetActive(false);
@@ -36,9 +39,11 @@ public class DialogueUI : MonoBehaviour
 
 	private void OnEndDialogueEvent()
 	{
+		dialogueLeftName.SetActive(false);
+		dialoguerRightName.SetActive(false);
 		dialoguePanel.SetActive(false);
-		nPCFaceImage.enabled = false;
-		playerFaceImage.enabled = false;
+		dialogueLeftImage.enabled = false;
+		dialogueRightImage.enabled = false;
 	}
 
 	private void OnShowDialogueEvent(Dialogue dialogue)
@@ -46,22 +51,40 @@ public class DialogueUI : MonoBehaviour
 		dialoguePanel.SetActive(true);
 		if (dialogue.onLeft)
 		{
-			nPCFaceImage.sprite = dialogue.faceImage;
-			nPCFaceImage.enabled = true;
+			UpdateLeftDialogue(dialogue);
 
 		}
 		else
-		{ 
-			playerFaceImage.sprite = dialogue.faceImage;
-			playerFaceImage.enabled = true;
-		}
-		dialogueText.text = dialogue.dialogueText;
-		if (dialogue.needSpaceContinue)
 		{
-			continuneBox.SetActive(true);
+			UpdateRightDialogue(dialogue);
 		}
+
+		dialogueText.text = dialogue.dialogueText;
+
+		//if (dialogue.needSpaceContinue)
+		//{
+		//	continuneBox.SetActive(true);
+		//}
 		dialogue.isDone = true;
 		
 	}
 
+	private void UpdateLeftDialogue(Dialogue dialogue) 
+	{
+		dialogueLeftImage = nPCFaceGameObject.GetComponentInChildren<Image>();
+		dialogueLeftImage.sprite = dialogue.faceImage;
+		dialogueLeftName.SetActive(true);
+		dialogueLeftName.GetComponentInChildren<TextMeshProUGUI>().text = dialogue.characterName;
+		dialogueLeftImage.enabled = true;
+
+	}
+
+	private void UpdateRightDialogue(Dialogue dialogue)
+	{
+		dialogueRightImage = playerFaceGameObject.GetComponent<Image>();
+		dialogueRightImage.sprite = dialogue.faceImage;
+		dialoguerRightName.SetActive(true);
+		dialoguerRightName.GetComponentInChildren<TextMeshProUGUI>().text = dialogue.characterName;
+		dialogueRightImage.enabled = true;
+	}
 }

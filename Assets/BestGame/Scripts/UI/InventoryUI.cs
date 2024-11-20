@@ -18,6 +18,14 @@ public class InventoryUI : MonoBehaviour
 	[SerializeField]
 	private SlotUI[]playerSlots;
 
+	[Header("ShopUI")]
+	[SerializeField]
+	private GameObject baseBag;
+	public GameObject shopSlotPrefab;
+
+	[SerializeField]
+	private List<SlotUI> baseBagSlots;
+
 
 
 	private void Start()
@@ -39,14 +47,62 @@ public class InventoryUI : MonoBehaviour
 	private void OnEnable()
 	{
 		EventHandler.UpdateInventoryUI += OnUpdateInventoryUI;
+		EventHandler.BagOpenEvent += OnBagOpenEvent;
+		EventHandler.BagCloseEvent += OnBagCloseEvent;
 	}
 
 
 	private void OnDisable()
 	{
 		EventHandler.UpdateInventoryUI -= OnUpdateInventoryUI;
+		EventHandler.BagOpenEvent -= OnBagOpenEvent;
+		EventHandler.BagCloseEvent -= OnBagCloseEvent;
 	}
 
+	private void OnBagCloseEvent(SlotType slotType, InventoryBag_SO BagSO)
+	{
+		baseBag.SetActive(false);
+		itemToolTip.gameObject.SetActive(false);
+		HightlightSlot(-1);
+		foreach (SlotUI slotUI in baseBagSlots)
+		{
+			Destroy(slotUI.gameObject);
+		}
+		baseBagSlots.Clear();
+
+		if (slotType == SlotType.Shop)
+		{
+			bagUI.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
+			bagUI.SetActive(false);
+			bagOpened = false;
+		}
+	}
+
+	private void OnBagOpenEvent(SlotType slotType, InventoryBag_SO BagSO)
+	{
+		GameObject prefab = slotType switch
+		{
+			SlotType.Shop => shopSlotPrefab,
+			_ => null,
+
+		};
+		baseBag.gameObject.SetActive(true);
+		baseBagSlots=new List<SlotUI>();
+		for (int i = 0; i < BagSO.inventoryItems.Count; i++)
+		{
+			var slot = Instantiate(prefab, baseBag.transform.GetChild(0)).GetComponent<SlotUI>();
+			slot.slotIndex = i;
+			baseBagSlots.Add(slot);
+		}
+
+		if (slotType==SlotType.Shop)
+		{
+			bagUI.GetComponent<RectTransform>().pivot = new Vector2(-1, 0.5f);
+			bagUI.SetActive(true);
+			bagOpened = true;
+		}
+		OnUpdateInventoryUI(InventoryLocation.Box, BagSO.inventoryItems);
+	}
 
 	private void OnUpdateInventoryUI(InventoryLocation inventorytype, List<InventoryItem> list)
 	{
@@ -68,6 +124,18 @@ public class InventoryUI : MonoBehaviour
 
 				break;
 			case InventoryLocation.Box:
+				for (int i = 0; i < baseBagSlots.Count; i++)
+				{
+					if (list[i].itemAmount > 0)
+					{
+						var item = InventoryManager.Instance.GetItemDetails(list[i].itemID);
+						baseBagSlots[i].UpdateSlot(item, list[i].itemAmount);
+					}
+					else
+					{
+						baseBagSlots[i].UpdateSlotEmpty();
+					}
+				}
 				break;
 			default:
 				break;

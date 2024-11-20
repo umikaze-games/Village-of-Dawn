@@ -22,6 +22,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 	private float mouseY;
 	private bool useTool;
 	private bool inputDisable;
+	private bool canMove=true;
 
 	protected override void Awake()
 	{
@@ -37,8 +38,13 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 	}
 	private void FixedUpdate()
 	{
-		PlayerMove();
+		if (canMove&&!inputDisable)
+		{
+			PlayerMove();
+		}
+	
 	}
+	
 	void Update()
 	{
 
@@ -65,12 +71,19 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 	{
 		playerInputAction.Enable();
 		EventHandler.MouseClickedEvent += OnMouseClickEvent;
+		EventHandler.GamePauseEvent += OnGamePaueseEvent;
 	}
 
 	private void OnDisable()
 	{
 		playerInputAction.Disable();
-		EventHandler.MouseClickedEvent += OnMouseClickEvent;
+		EventHandler.MouseClickedEvent -= OnMouseClickEvent;
+		EventHandler.GamePauseEvent -= OnGamePaueseEvent;
+	}
+
+	private void OnGamePaueseEvent(bool gamePause)
+	{
+		canMove=!gamePause;
 	}
 
 	public void SwitchAnimation()

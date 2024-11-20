@@ -126,15 +126,15 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 			{
 				InventoryManager.Instance.SwapItem(slotIndex, targeIndex);
 			}
-			//else if (slotType == SlotType.Shop && targetSlot.slotType == SlotType.Bag) 
-			//{
-			//	EventHandler.CallShowTradeUI(itemDetails, false);
-			//}
-			//else if (slotType == SlotType.Bag && targetSlot.slotType == SlotType.Shop) 
-			////{
-			////	EventHandler.CallShowTradeUI(itemDetails, true);
-			//}
-			else if (slotType != SlotType.Shop && targetSlot.slotType != SlotType.Shop && slotType != targetSlot.slotType)
+			else if (slotType == SlotType.Shop && targetSlot.slotType == SlotType.Bag)//buy item
+			{
+				EventHandler.CallShowTradeUI(itemDetails, false);
+			}
+			else if (slotType == SlotType.Bag && targetSlot.slotType == SlotType.Shop)//sell item
+			{
+				EventHandler.CallShowTradeUI(itemDetails, true);
+			}
+		else if (slotType != SlotType.Shop && targetSlot.slotType != SlotType.Shop && slotType != targetSlot.slotType)
 			{
 				InventoryManager.Instance.SwapItem(Location, slotIndex, targetSlot.Location, targetSlot.slotIndex);
 			}

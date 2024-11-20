@@ -1,19 +1,26 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class NPCAction : MonoBehaviour
 {
+	//NPC Position
 	public Vector3 nPCPosition;
 	public string nPCInScene;
+
+	//NPC Shop
+	public InventoryBag_SO nPCShop;
+	private bool shopIsOpen;
 
 	private SpriteRenderer nPCSpriteRenderer;
 	private BoxCollider2D boxCollider;
 	private Rigidbody2D rb;
 	private Animator animator;
+	public DialogueController dialogueController;
 
 	public bool canInteractive=true;
-	private bool canMove = true;
+	public bool canMove = true;
 	public bool isMoving = false;
 
 	[SerializeField]
@@ -64,19 +71,23 @@ public class NPCAction : MonoBehaviour
 			MoveTowardsTarget();
 		}
 	}
+	public void OpenShop()
+	{ 
+		if(shopIsOpen)return;
+		shopIsOpen = true;
+		dialogueController.isTalking = true;
+		EventHandler.CallBagOpenEvent(SlotType.Shop,nPCShop);
+		EventHandler.CallGamePaueseEvent(true);
 
-	public void StartInteraction()
-	{
-		canInteractive = false;
-		isMoving = false;
-		animator.SetBool("isMoving", false); 							
 	}
 
-	public void EndInteraction()
-	{
-		canInteractive = true;
+	public void CloseShop()
+	{ 
+		shopIsOpen=false;
+		dialogueController.isTalking = false;
+		EventHandler.CallBagCloseEvent(SlotType.Shop,nPCShop);
+		EventHandler.CallGamePaueseEvent(false);
 	}
-
 	public void SetNPCVisable()
 	{
 		boxCollider.enabled = true;
@@ -92,18 +103,21 @@ public class NPCAction : MonoBehaviour
 	private void OnEnable()
 	{
 		EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
+		EventHandler.GamePauseEvent += OnGamePauseEvent;
 	}
-
 	private void OnDisable()
 	{
 		EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
+		EventHandler.GamePauseEvent -= OnGamePauseEvent;
 	}
-
 	private void OnAfterSceneLoadEvent()
 	{
 		CheckNPCVisable();
 	}
-
+	private void OnGamePauseEvent(bool gamePause)
+	{
+		canMove=!gamePause;
+	}
 	public void CheckNPCVisable()
 	{
 		if (nPCInScene == SceneManager.GetActiveScene().name)
@@ -115,7 +129,6 @@ public class NPCAction : MonoBehaviour
 			SetNPCInVisable();
 		}
 	}
-
 	public void GenerateTargetPosition()
 	{
 		targetPosition = new Vector3(
@@ -171,22 +184,6 @@ public class NPCAction : MonoBehaviour
 			animator.SetBool("isMoving", false);
 			isMoving = false;
 			canInteractive = true;
-		}
-	}
-
-	private void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.CompareTag("Player")) // Assumes player has "Player" tag
-		{
-			StartInteraction(); // Start conversation when player is nearby
-		}
-	}
-
-	private void OnTriggerExit2D(Collider2D other)
-	{
-		if (other.CompareTag("Player"))
-		{
-			EndInteraction(); // End conversation when player leaves
 		}
 	}
 }

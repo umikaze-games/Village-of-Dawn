@@ -60,7 +60,7 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 		EventHandler.ExecuteActionAfterAnimation -= OnExcuteActionAfterAnimation;
 		EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
 		EventHandler.GameDayEvent -= OnGameDayEvent;
-		EventHandler.RefreshCurrentMap += RefreshTilemap;
+		EventHandler.RefreshCurrentMap -= RefreshTilemap;
 	}
 
 

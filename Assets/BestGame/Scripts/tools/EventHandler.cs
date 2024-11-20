@@ -83,11 +83,11 @@ public static class EventHandler
 		GameDayEvent?.Invoke(day, season);
 	}
 
-	public static event Action<int, TileDetails > PlantSeedEvent;
+	public static event Action<int, TileDetails> PlantSeedEvent;
 	public static void CallPlantSeedEvent(int ID, TileDetails tile)
-	{ 
+	{
 		PlantSeedEvent?.Invoke(ID, tile);
-	
+
 	}
 
 	public static event Action<int> HarvestAtPlayerPosition;
@@ -111,7 +111,7 @@ public static class EventHandler
 	public static event Action GenerateCropEvent;
 	public static void CallGenerateCropEvent()
 	{
-		GenerateCropEvent?.Invoke(); 
+		GenerateCropEvent?.Invoke();
 	}
 
 	public static event Action<Dialogue> ShowDialogueEvent;
@@ -124,6 +124,31 @@ public static class EventHandler
 	public static void CallEndDialogueEvent()
 	{
 		EndDialogueEvent?.Invoke();
+	}
+
+	public static event Action<SlotType, InventoryBag_SO> BagOpenEvent;
+	public static void CallBagOpenEvent(SlotType slotType, InventoryBag_SO inventoryBag_SO)
+	{
+		BagOpenEvent?.Invoke(slotType, inventoryBag_SO);
+	}
+
+	public static event Action<SlotType, InventoryBag_SO> BagCloseEvent;
+	public static void CallBagCloseEvent(SlotType slotType, InventoryBag_SO inventoryBag_SO)
+	{
+		BagCloseEvent?.Invoke(slotType, inventoryBag_SO);
+	}
+
+	public static event Action<bool> GamePauseEvent;
+	public static void CallGamePaueseEvent(bool gamePause)
+	{
+		GamePauseEvent?.Invoke(gamePause);
+	}
+
+	public static event Action<ItemDetails, bool> ShowTradeUI;
+
+	public static void CallShowTradeUI(ItemDetails item, bool isSell)
+	{
+		ShowTradeUI?.Invoke(item, isSell);
 	}
 }
 

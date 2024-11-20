@@ -4,7 +4,6 @@ using UnityEngine;
 public class Crop : MonoBehaviour
 {
 	public CropDetails cropDetails;
-	[SerializeField]
 	private int harvestActionCount;
 	public TileDetails tileDetails;
 	private Transform playerTransform=>FindAnyObjectByType<PlayerController>().transform;
@@ -71,7 +70,6 @@ public class Crop : MonoBehaviour
 		tileDetails.seedItemID = cropDetails.transferItemID;
 		tileDetails.daysSinceLastHarvest = -1;
 		tileDetails.growthDays = 0;
-		//Debug.Log($"{tileDetails.seedItemID}");
 
 		EventHandler.CallRefreshCurrentMap();
 	}

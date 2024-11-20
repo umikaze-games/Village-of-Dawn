@@ -8,7 +8,7 @@ public class DialogueController : MonoBehaviour
 	public UnityEvent OnFinishDialogue;
 	public List<Dialogue> dialogueList;
 
-	private bool isTalking=false;
+	public bool isTalking=false;
 	private bool canShowDialogue=false;
 	private Queue<Dialogue> dialogueQueue=new Queue<Dialogue>();
 	private NPCAction nPCAction;
@@ -25,9 +25,10 @@ public class DialogueController : MonoBehaviour
 	}
 	private void Update()
 	{
-		if (canShowDialogue&&Input.GetKeyDown(KeyCode.Space)&&!isTalking)
+		if (canShowDialogue&&Input.GetKeyDown(KeyCode.Space) && !isTalking)
 		{
 			StartCoroutine(ShowDialogue());
+
 		}
 	}
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -35,7 +36,7 @@ public class DialogueController : MonoBehaviour
 		if (!nPCAction.isMoving&&collision.gameObject.CompareTag("Player"))
 		{
 			interactiveButton.SetActive(true);
-			canShowDialogue=true;
+			canShowDialogue =true;
 		}
 
 	}
@@ -43,19 +44,20 @@ public class DialogueController : MonoBehaviour
 	private void OnTriggerExit2D(Collider2D collision)
 	{
 		interactiveButton.SetActive(false);
-		canShowDialogue=false;
+		nPCAction.canMove = true;
+		canShowDialogue =false;
 
 	}
 
 	private IEnumerator ShowDialogue()
 	{
+		EventHandler.CallGamePaueseEvent(true);
 		if (dialogueQueue.Count>0)
 		{
 			Dialogue dialogue = dialogueQueue.Dequeue();
 			EventHandler.CallShowDialogueEvent(dialogue);
-			Debug.Log("CallShowDialogueEvent");
 			yield return new WaitUntil(() => dialogue.isDone);
-			Debug.Log("isdone");
+			//Debug.Log("isdone");
 			isTalking = false;
 		}
 		else
@@ -63,6 +65,8 @@ public class DialogueController : MonoBehaviour
 			isTalking = false;
 			EventHandler.CallEndDialogueEvent();
 			ResetDialogueQueue();
+			EventHandler.CallGamePaueseEvent(false);
+			OnFinishDialogue?.Invoke();
 		}
 	
 	}
