@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryUI : MonoBehaviour
+public class InventoryUI : SingletonMonoBehaviour<InventoryUI>
 {
 	public ItemToolTip itemToolTip;
 
@@ -26,6 +27,9 @@ public class InventoryUI : MonoBehaviour
 	[SerializeField]
 	private List<SlotUI> baseBagSlots;
 
+	[Header("TradeUI")]
+	public TradeUI tradeUI;
+	public TextMeshProUGUI playerMoneyUI;
 
 
 	private void Start()
@@ -36,6 +40,7 @@ public class InventoryUI : MonoBehaviour
 			playerSlots[i].slotIndex = i;
 		}
 		bagOpened = bagUI.activeInHierarchy;
+		UpdateMoneyUI();
 	}
 	private void Update()
 	{
@@ -44,11 +49,17 @@ public class InventoryUI : MonoBehaviour
 			OpenBagUI();
 		}
 	}
+
+	public void UpdateMoneyUI()
+	{
+		playerMoneyUI.text=Convert.ToString(InventoryManager.Instance.playerMoney);
+	}
 	private void OnEnable()
 	{
 		EventHandler.UpdateInventoryUI += OnUpdateInventoryUI;
 		EventHandler.BagOpenEvent += OnBagOpenEvent;
 		EventHandler.BagCloseEvent += OnBagCloseEvent;
+		EventHandler.ShowTradeUI += OnShowTradeUI;
 	}
 
 
@@ -57,6 +68,13 @@ public class InventoryUI : MonoBehaviour
 		EventHandler.UpdateInventoryUI -= OnUpdateInventoryUI;
 		EventHandler.BagOpenEvent -= OnBagOpenEvent;
 		EventHandler.BagCloseEvent -= OnBagCloseEvent;
+		EventHandler.ShowTradeUI -= OnShowTradeUI;
+	}
+
+	private void OnShowTradeUI(ItemDetails item, bool isSell)
+	{
+		tradeUI.gameObject.SetActive(true);
+		tradeUI.SetupTradeUI(item, isSell);
 	}
 
 	private void OnBagCloseEvent(SlotType slotType, InventoryBag_SO BagSO)
@@ -161,10 +179,7 @@ public class InventoryUI : MonoBehaviour
 				playerSlots[i].isSelected = false;
 				playerSlots[i].highlightImage.gameObject.SetActive(false);
 			}
-
-
 		}
-
-
 	}
+
 }

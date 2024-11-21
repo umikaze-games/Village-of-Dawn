@@ -13,6 +13,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 
 	private InventoryBag_SO currentBoxBag;
 
+	public int playerMoney=1000;
 	private void Start()
 	{
 		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.inventoryItems);
@@ -188,6 +189,36 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 			var item = new InventoryItem {  };
 			playerBag.inventoryItems[index]=item;
 		}
+		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag.inventoryItems);
+	}
+
+	public void TradeItem(ItemDetails item, int amount, bool isSell)
+	{
+		int cost = item.itemPrice * amount;
+		int index = GetItemIdexInBag(item.itemID);
+		if (isSell)
+		{
+			if (playerBag.inventoryItems[index].itemAmount>=amount)
+			{
+				RemoveItem(item.itemID, amount);
+				cost=(int)(cost*item.sellPercentage);
+				playerMoney += cost;
+		
+			}
+		}
+		else
+		{
+			if (playerMoney>=cost)
+			{
+				if (CheckInventoryCapacity())
+				{
+					AddItemAtIndex(item.itemID, index,amount);
+					playerMoney-=cost;
+				}
+			
+			}
+		}
+		InventoryUI.Instance.UpdateMoneyUI();
 		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag.inventoryItems);
 	}
 
