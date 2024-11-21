@@ -7,6 +7,16 @@ public class SwitchBounds : MonoBehaviour
 	{
 		SwitchConfinerShape();
 	}
+
+	private void OnEnable()
+	{
+		EventHandler.AfterSceneLoadEvent += SwitchConfinerShape;
+	}
+
+	private void OnDisable()
+	{
+		EventHandler.AfterSceneLoadEvent -= SwitchConfinerShape;
+	}
 	private void SwitchConfinerShape()
 	{
 		PolygonCollider2D ConfinerShape2D = GameObject.FindGameObjectWithTag("BoundConfiner").GetComponent<PolygonCollider2D>();

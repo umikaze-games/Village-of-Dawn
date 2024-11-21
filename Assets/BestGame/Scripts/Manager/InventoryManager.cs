@@ -22,13 +22,17 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 	{
 		EventHandler.DropItemEvent += OnDropItemEvent;
 		EventHandler.HarvestAtPlayerPosition += OnHarvestAtPlayerPosition;
+		EventHandler.BagOpenEvent += OnBagOpenEvent;
 	}
-
-
 	private void OnDisable()
 	{
 		EventHandler.DropItemEvent -= OnDropItemEvent;
 		EventHandler.HarvestAtPlayerPosition -= OnHarvestAtPlayerPosition;
+		EventHandler.BagOpenEvent -= OnBagOpenEvent;
+	}
+	private void OnBagOpenEvent(SlotType slottype, InventoryBag_SO bagSO)
+	{
+		currentBoxBag = bagSO;
 	}
 
 	private void OnHarvestAtPlayerPosition(int ID)
@@ -134,6 +138,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.inventoryItems);
 	}
 
+	//exchange item(playerbag and box)
 	public void SwapItem(InventoryLocation locationFrom, int fromIndex, InventoryLocation locationTarget, int targetIndex)
 	{
 		var currentList = GetItemList(locationFrom);
@@ -145,23 +150,23 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 		{
 			InventoryItem targetItem = targetList[targetIndex];
 
-			if (targetItem.itemID != 0 && currentItem.itemID != targetItem.itemID)
+			if (targetItem.itemID != 0 && currentItem.itemID != targetItem.itemID)//different item
 			{
 				currentList[fromIndex] = targetItem;
 				targetList[targetIndex] = currentItem;
 			}
-			else if (currentItem.itemID == targetItem.itemID)
+			else if (currentItem.itemID == targetItem.itemID)//same item
 			{
 				targetItem.itemAmount += currentItem.itemAmount;
 				targetList[targetIndex] = targetItem;
-				currentList[fromIndex] = new InventoryItem();
+				currentList[fromIndex] = new InventoryItem();//clear item
 			}
-			else
+			else//targe is empty box	
 			{
 				targetList[targetIndex] = currentItem;
 				currentList[fromIndex] = new InventoryItem();
 			}
-			EventHandler.CallUpdateInventoryUI(locationFrom, currentList);
+			EventHandler.CallUpdateInventoryUI(locationFrom, currentList);//update UI
 			EventHandler.CallUpdateInventoryUI(locationTarget, targetList);
 		}
 	}
@@ -196,6 +201,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 	{
 		int cost = item.itemPrice * amount;
 		int index = GetItemIdexInBag(item.itemID);
+		bool tradeSuccess = true;
 		if (isSell)
 		{
 			if (playerBag.inventoryItems[index].itemAmount>=amount)
@@ -205,6 +211,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 				playerMoney += cost;
 		
 			}
+			else tradeSuccess = false;
 		}
 		else
 		{
@@ -215,11 +222,15 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 					AddItemAtIndex(item.itemID, index,amount);
 					playerMoney-=cost;
 				}
-			
+				else tradeSuccess = false;
 			}
+			else tradeSuccess = false;
 		}
 		InventoryUI.Instance.UpdateMoneyUI();
+
 		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag.inventoryItems);
+
+		EventHandler.CallTradeNotifyEvent(tradeSuccess);
 	}
 
 }

@@ -11,7 +11,6 @@ public class TradeUI : MonoBehaviour
 	public TMP_InputField tradeAmount;
 	public Button confirmBtn;
 	public Button cancelBtn;
-	public GameObject transaction;
 
 	private ItemDetails itemdetails;
 	private bool isSellTrade;
@@ -39,17 +38,5 @@ public class TradeUI : MonoBehaviour
 		int amount = Convert.ToInt32(tradeAmount.text);
 		InventoryManager.Instance.TradeItem(itemdetails, amount, isSellTrade);
 		CancelTrade();
-	}
-
-	private IEnumerator ShowTransactionUI(bool tradeSuccess)
-	{
-		if (tradeSuccess)
-		{
-			transaction.GetComponent<TextMeshProUGUI>().text = "Transaction successful";
-		}
-		else transaction.GetComponent<TextMeshProUGUI>().text = "Transaction faild";
-		transaction.gameObject.SetActive(true);
-		yield return new WaitForSeconds(1);
-		transaction.gameObject.SetActive(false);
 	}
 }

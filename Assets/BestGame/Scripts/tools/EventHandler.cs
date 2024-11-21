@@ -150,5 +150,11 @@ public static class EventHandler
 	{
 		ShowTradeUI?.Invoke(item, isSell);
 	}
+
+	public static event Action<bool> TradeNotifyEvent;
+	public static void CallTradeNotifyEvent(bool success)
+	{
+		TradeNotifyEvent?.Invoke(success);
+	}
 }
 

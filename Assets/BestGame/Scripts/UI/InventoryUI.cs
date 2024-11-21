@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -30,7 +31,7 @@ public class InventoryUI : SingletonMonoBehaviour<InventoryUI>
 	[Header("TradeUI")]
 	public TradeUI tradeUI;
 	public TextMeshProUGUI playerMoneyUI;
-
+	public GameObject transaction;
 
 	private void Start()
 	{
@@ -60,6 +61,7 @@ public class InventoryUI : SingletonMonoBehaviour<InventoryUI>
 		EventHandler.BagOpenEvent += OnBagOpenEvent;
 		EventHandler.BagCloseEvent += OnBagCloseEvent;
 		EventHandler.ShowTradeUI += OnShowTradeUI;
+		EventHandler.TradeNotifyEvent += OnTradeNotifyEvent;
 	}
 
 
@@ -69,6 +71,7 @@ public class InventoryUI : SingletonMonoBehaviour<InventoryUI>
 		EventHandler.BagOpenEvent -= OnBagOpenEvent;
 		EventHandler.BagCloseEvent -= OnBagCloseEvent;
 		EventHandler.ShowTradeUI -= OnShowTradeUI;
+		EventHandler.TradeNotifyEvent -= OnTradeNotifyEvent;
 	}
 
 	private void OnShowTradeUI(ItemDetails item, bool isSell)
@@ -180,6 +183,26 @@ public class InventoryUI : SingletonMonoBehaviour<InventoryUI>
 				playerSlots[i].highlightImage.gameObject.SetActive(false);
 			}
 		}
+	}
+	private void OnTradeNotifyEvent(bool success)
+	{
+		StartCoroutine(ShowTransactionUI(success));
+	}
+	private IEnumerator ShowTransactionUI(bool tradeSuccess)
+	{
+		yield return new WaitForSecondsRealtime(0.2f);
+		if (tradeSuccess)
+		{
+			transaction.GetComponentInChildren<TextMeshProUGUI>().text = "Transaction successful";
+		}
+		else transaction.GetComponentInChildren<TextMeshProUGUI>().text = "Transaction faild";
+		transaction.gameObject.SetActive(true);
+
+		yield return new WaitForSecondsRealtime(1);
+
+		transaction.gameObject.SetActive(false);
+
+		yield return null;
 	}
 
 }

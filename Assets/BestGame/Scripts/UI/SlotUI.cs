@@ -143,6 +143,18 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 		}
 	}
 
+	public InventoryLocation InventoryLocation
+	{	get
+		{
+			return slotType switch
+			{
+				SlotType.Bag => InventoryLocation.Player,
+				SlotType.Box => InventoryLocation.Box,
+				_ => InventoryLocation.Player
+			};
+		
+		}
+	}
 
 }
  
