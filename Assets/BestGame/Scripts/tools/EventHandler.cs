@@ -156,5 +156,11 @@ public static class EventHandler
 	{
 		TradeNotifyEvent?.Invoke(success);
 	}
+
+	public static event Action UpdateLightEvent;
+	public static void CallUpdateLightEvent()
+	{ 
+		UpdateLightEvent?.Invoke();
+	}
 }
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5488953328201456506}
   - component: {fileID: 3221855568305966251}
   - component: {fileID: 1375838080583832290}
-  - component: {fileID: 4876069205396935505}
+  - component: {fileID: 1682539717332346377}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -93,7 +93,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2259364693185048828}
   m_Enabled: 1
---- !u!114 &4876069205396935505
+--- !u!114 &1682539717332346377
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,13 +102,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2259364693185048828}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
+  m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
   m_AssetsPPU: 16
   m_RefResolutionX: 320
   m_RefResolutionY: 240
-  m_UpscaleRT: 1
+  m_CropFrame: 0
+  m_GridSnapping: 2
+  m_FilterMode: 0
+  m_UpscaleRT: 0
   m_PixelSnapping: 0
   m_CropFrameX: 0
   m_CropFrameY: 0
@@ -174,7 +178,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

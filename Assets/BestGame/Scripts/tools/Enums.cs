@@ -59,3 +59,8 @@ public enum ParticleEffectType
 	ReapableScenery
 }
 
+public enum LightType
+{ 
+	Day,
+	Night
+}

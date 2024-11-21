@@ -24,6 +24,7 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>
 	{
 		initialTime();
 		timeUI.UpdateClockUI(gameHour);
+		EventHandler.CallUpdateLightEvent();
 	}
 
 	private void OnEnable()
@@ -70,7 +71,10 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>
 			
 		}
 	}
-
+	public int GetGameHour()
+	{ 
+		return gameHour;
+	}
 	public void initialTime()
 	{
 
@@ -100,6 +104,7 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>
 				timeUI.UpdateDayNight();
 				timeUI.UpdateTimeUI(gameMinute, gameHour);
 				timeUI.UpdateClockUI(gameHour);
+				EventHandler.CallUpdateLightEvent();
 
 				if (gameHour > Settings.hourHold)
 				{
