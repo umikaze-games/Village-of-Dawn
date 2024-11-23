@@ -64,3 +64,12 @@ public enum LightType
 	Day,
 	Night
 }
+
+public enum AudioType
+{ 
+	BGM,
+	BGS,
+	PlayerSE,
+	CropSE,
+	ToolSE
+}

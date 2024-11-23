@@ -162,5 +162,12 @@ public static class EventHandler
 	{ 
 		UpdateLightEvent?.Invoke();
 	}
+
+	public static event Action<string,AudioType> PlaySEEvent;
+	public static void CallPlaySEEvent(string sEName, AudioType audioType)
+	{ 
+		PlaySEEvent?.Invoke(sEName,audioType);
+	}
+
 }
 
