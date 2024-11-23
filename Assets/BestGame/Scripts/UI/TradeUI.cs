@@ -37,7 +37,7 @@ public class TradeUI : MonoBehaviour
 	{
 		int amount = Convert.ToInt32(tradeAmount.text);
 		InventoryManager.Instance.TradeItem(itemdetails, amount, isSellTrade);
-		EventHandler.CallPlaySEEvent("Coin", AudioType.PlayerSE);
+
 		CancelTrade();
 	}
 }

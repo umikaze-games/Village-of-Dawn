@@ -209,7 +209,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 				RemoveItem(item.itemID, amount);
 				cost=(int)(cost*item.sellPercentage);
 				playerMoney += cost;
-		
+				EventHandler.CallPlaySEEvent("Coin", AudioType.PlayerSE);
 			}
 			else tradeSuccess = false;
 		}
@@ -221,6 +221,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 				{
 					AddItemAtIndex(item.itemID, index,amount);
 					playerMoney-=cost;
+					EventHandler.CallPlaySEEvent("Coin", AudioType.PlayerSE);
 				}
 				else tradeSuccess = false;
 			}
