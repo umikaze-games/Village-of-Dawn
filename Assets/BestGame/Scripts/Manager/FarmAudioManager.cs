@@ -45,7 +45,7 @@ public class FarmAudioManager : MonoBehaviour
 	private void OnPlaySEEvent(string sEName,AudioType audioType)
 	{
 		string audioMixGropName=null;
-		AudioSO sEDatas = new AudioSO();
+		AudioSO sEDatas=new AudioSO();
 		AudioSource audioSource=GetSESoure(audioType);
 		switch (audioType)
 		{

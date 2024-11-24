@@ -13,6 +13,9 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 
 	private InventoryBag_SO currentBoxBag;
 
+	[Header("Blueprint data")]
+	public BlueprintSO bluePrintSO;
+
 	public int playerMoney=1000;
 	private void Start()
 	{
