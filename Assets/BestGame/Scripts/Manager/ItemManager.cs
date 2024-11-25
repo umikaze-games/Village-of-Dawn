@@ -2,9 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using static UnityEditor.FilePathAttribute;
 
-public class ItemManager : MonoBehaviour
+public class ItemManager : MonoBehaviour,ISaveable
 {
 	public Item itemPrefab;
 	//public Item bounceItemPrefab;
@@ -12,7 +11,7 @@ public class ItemManager : MonoBehaviour
 
 	private Transform PlayerTransform => FindAnyObjectByType<PlayerController>().transform;
 
-	//public string GUID => GetComponent<DataGUID>().guid;
+	public string GUID => GetComponent<DataGUID>().guid;
 
 	private Dictionary<string, List<SceneItem>> sceneItemDict = new Dictionary<string, List<SceneItem>>();
 
@@ -213,5 +212,24 @@ public class ItemManager : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	public GameSaveData GenerateSaveData()
+	{
+		GetAllSceneFurniture();
+		GetAllSceneItems();
+		GameSaveData gameSaveData = new GameSaveData();
+		gameSaveData.sceneItemDict = this.sceneItemDict;
+		gameSaveData.sceneFurnitureDict=this.sceneFurnitureDict;
+
+		return gameSaveData;
+	}
+
+	public void RestoreData(GameSaveData saveData)
+	{
+		this.sceneFurnitureDict = saveData.sceneFurnitureDict;
+		this.sceneItemDict= saveData.sceneItemDict;
+		RecreateAllItems();
+		RebuildFurniture();
 	}
 }

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
-public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
+public class GridMapManager : SingletonMonoBehaviour<GridMapManager>,ISaveable
 {
 	public List<MapData_SO> mapDatalist;
 
@@ -25,6 +25,9 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 	private int currentSeason;
 
 	private List<ReapItem> itemInRadius;
+
+	public string GUID => GetComponent<DataGUID>().guid;
+
 	private void Start()
 	{
 		currentGrid=FindAnyObjectByType<Grid>();
@@ -350,5 +353,19 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 
 		}
 		return itemInRadius.Count > 0;
+	}
+
+	public GameSaveData GenerateSaveData()
+	{
+		GameSaveData saveData = new GameSaveData();
+		saveData.tileDetailsDict = this.tileDetailsDict;
+		saveData.firstLoadDict = this.firstLoadDict;
+		return saveData;
+	}
+
+	public void RestoreData(GameSaveData saveData)
+	{
+		this.tileDetailsDict = saveData.tileDetailsDict;
+		this.firstLoadDict = saveData.firstLoadDict;
 	}
 }

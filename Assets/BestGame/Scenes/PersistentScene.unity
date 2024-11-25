@@ -1776,6 +1776,7 @@ GameObject:
   - component: {fileID: 192179074}
   - component: {fileID: 192179076}
   - component: {fileID: 192179077}
+  - component: {fileID: 192179078}
   m_Layer: 5
   m_Name: TimeManager
   m_TagString: Untagged
@@ -1824,6 +1825,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gamePause: 0
   timeUI: {fileID: 288880773}
+--- !u!114 &192179078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192179073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47350fdf85bb19f4f9ba38cde167c707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guid: 82c7f728-9d44-4f82-a44e-f3c9862dbf5c
 --- !u!1 &200310119
 GameObject:
   m_ObjectHideFlags: 0
@@ -7733,6 +7747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 185100921}
   - component: {fileID: 814232844}
+  - component: {fileID: 814232845}
   m_Layer: 0
   m_Name: ItemManager
   m_TagString: Untagged
@@ -7753,6 +7768,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 2823217695813575214, guid: 4afda4e023502644f964d8b55a02e665, type: 3}
+--- !u!114 &814232845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814232843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47350fdf85bb19f4f9ba38cde167c707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guid: 74f8bf43-b6ea-4417-9299-b72c31015105
 --- !u!1 &841235731 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3979795244626573961, guid: 4291fe3413268a24a9d73dfa1a1a8370, type: 3}
@@ -8704,6 +8732,10 @@ PrefabInstance:
     - target: {fileID: 1806094584528386117, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2704949211979829415, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
+      propertyPath: guid
+      value: de2c03e2-0866-49ba-88fd-1fb20d717124
       objectReference: {fileID: 0}
     - target: {fileID: 4151322012430475298, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_PlayOnAwake
@@ -10519,7 +10551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1184367975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11683,6 +11715,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1412945055}
   - component: {fileID: 1412945054}
+  - component: {fileID: 1412945056}
   m_Layer: 0
   m_Name: GridMapManager
   m_TagString: Untagged
@@ -11723,6 +11756,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1412945056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412945053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47350fdf85bb19f4f9ba38cde167c707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guid: 9b08f282-a4c4-484f-b7a4-d82731e1f006
 --- !u!1 &1426320305 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3979795244626573961, guid: 4291fe3413268a24a9d73dfa1a1a8370, type: 3}
@@ -12509,24 +12555,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0117b186683841442981a922166861ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cannotUseCursorImage: {fileID: 1055423673}
-  currentGrid: {fileID: 0}
-  currentItem:
-    itemID: 0
-    itemName: 
-    itemType: 0
-    itemDescription: 
-    itemUseRadius: 0
-    itemIcon: {fileID: 0}
-    itemOnWorldSprite: {fileID: 0}
-    canPickedup: 0
-    canDropped: 0
-    canCarried: 0
-    itemPrice: 0
-    sellPercentage: 0
-  playerTransform: {fileID: 1029001663}
-  cursorEnable: 0
-  buildImage: {fileID: 1184367975}
 --- !u!4 &1544249742
 Transform:
   m_ObjectHideFlags: 0
@@ -14970,6 +14998,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1920443303}
   m_CullTransparentMesh: 1
+--- !u!1 &1924556385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1924556386}
+  m_Layer: 0
+  m_Name: SaveLoadManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1924556386
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924556385}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1930386540
 GameObject:
   m_ObjectHideFlags: 0
@@ -16633,6 +16692,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2114585379}
   - component: {fileID: 2114585378}
+  - component: {fileID: 2114585380}
   m_Layer: 0
   m_Name: IventoryManager
   m_TagString: Untagged
@@ -16671,6 +16731,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2114585380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114585377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47350fdf85bb19f4f9ba38cde167c707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guid: 4e351e65-40bf-4a74-9867-482c89830d30
 --- !u!1 &2123269642
 GameObject:
   m_ObjectHideFlags: 0
@@ -16975,19 +17048,20 @@ SceneRoots:
   - {fileID: 961739753}
   - {fileID: 132593684}
   - {fileID: 203844589}
+  - {fileID: 1518971170}
+  - {fileID: 1730809112}
+  - {fileID: 1160234427}
+  - {fileID: 161803904}
+  - {fileID: 495712762}
   - {fileID: 2114585379}
   - {fileID: 185100921}
   - {fileID: 1954470846}
   - {fileID: 192179074}
-  - {fileID: 1518971170}
-  - {fileID: 1730809112}
-  - {fileID: 1160234427}
-  - {fileID: 495712762}
   - {fileID: 1412945055}
   - {fileID: 1544249742}
   - {fileID: 1965112690}
   - {fileID: 2131191616}
-  - {fileID: 161803904}
   - {fileID: 81633938}
   - {fileID: 209519085}
   - {fileID: 1760169559}
+  - {fileID: 1924556386}

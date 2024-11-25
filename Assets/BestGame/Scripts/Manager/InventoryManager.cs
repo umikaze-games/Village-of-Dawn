@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
+public class InventoryManager : SingletonMonoBehaviour<InventoryManager>,ISaveable
 {
 	[Header("item data")]
 	public ItemDataList_SO itemDataList_SO;
@@ -23,7 +23,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 
 	public int BoxDataAmount => boxDataDict.Count;
 
-	//public string GUID => GetComponent<DataGUID>().guid;
+	public string GUID => GetComponent<DataGUID>().guid;
 
 	private void Start()
 	{
@@ -292,5 +292,34 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 		{
 			boxDataDict.Add(key, box.boxBagData.inventoryItems);
 		}
+	}
+
+	public GameSaveData GenerateSaveData()
+	{
+		GameSaveData gameSaveData = new GameSaveData();
+		gameSaveData.playerMoney = playerMoney;
+		gameSaveData.inventoryDict = new Dictionary<string, List<InventoryItem>>();
+		gameSaveData.inventoryDict.Add(playerBag.name, playerBag.inventoryItems);
+		foreach (var item in boxDataDict)
+		{
+			gameSaveData.inventoryDict.Add(item.Key, item.Value);
+		}
+		return gameSaveData;
+	}
+
+	public void RestoreData(GameSaveData saveData)
+	{
+		this.playerMoney = saveData.playerMoney;
+		playerBag.inventoryItems=saveData.inventoryDict[playerBag.name];
+		foreach (var item in saveData.inventoryDict)
+		{
+			if (boxDataDict.ContainsKey(item.Key))
+			{
+				boxDataDict[item.Key]=item.Value;
+			}
+		}
+
+		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag.inventoryItems);
+
 	}
 }

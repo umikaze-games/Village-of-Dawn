@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -2033466026571714398}
   - component: {fileID: 7237726572836588259}
   - component: {fileID: 9099021149687743910}
+  - component: {fileID: 2704949211979829415}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -237,6 +238,19 @@ MonoBehaviour:
   - partType: 7
     partName: 3
     overrideController: {fileID: 22100000, guid: 85f022c498ad45044a8e898c5adc0ac5, type: 2}
+--- !u!114 &2704949211979829415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662784293118690828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47350fdf85bb19f4f9ba38cde167c707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guid: 
 --- !u!1 &1196373847042718887
 GameObject:
   m_ObjectHideFlags: 0

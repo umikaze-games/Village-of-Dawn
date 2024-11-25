@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TimeManager : SingletonMonoBehaviour<TimeManager>
+public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 {
 	private int gameSecond;
 	private int gameMinute;
@@ -20,6 +21,9 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>
 	{
 		get { return gameSeason; }
 	}
+
+	public string GUID =>GetComponent<DataGUID>().guid;
+
 	private void Start()
 	{
 		initialTime();
@@ -150,6 +154,32 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>
 				}
 			}
 		}
+	}
+
+	public GameSaveData GenerateSaveData()
+	{
+		GameSaveData saveData = new GameSaveData();
+		saveData.timeDict = new Dictionary<string, int>();
+		saveData.timeDict.Add("gameYear", gameYear);
+		saveData.timeDict.Add("gameSeason", gameSeason);
+		saveData.timeDict.Add("gameMonth", gameMonth);
+		saveData.timeDict.Add("gameDay", gameDay);
+		saveData.timeDict.Add("gameHour", gameHour);
+		saveData.timeDict.Add("gameMinute", gameMinute);
+		saveData.timeDict.Add("gameSecond", gameSecond);
+
+		return saveData;
+	}
+
+	public void RestoreData(GameSaveData saveData)
+	{
+		gameYear = saveData.timeDict["gameYear"];
+		gameSeason = saveData.timeDict["gameSeason"];
+		gameMonth = saveData.timeDict["gameMonth"];
+		gameDay = saveData.timeDict["gameDay"];
+		gameHour = saveData.timeDict["gameHour"];
+		gameMinute = saveData.timeDict["gameMinute"];
+		gameSecond = saveData.timeDict["gameSecond"];
 	}
 }
 

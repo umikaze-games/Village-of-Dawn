@@ -4,8 +4,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.InputSystem;
+using UnityEditor;
+using System.Collections.Generic;
 
-public class PlayerController : SingletonMonoBehaviour<PlayerController>
+public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveable
 {
 	[SerializeField]
 	private float playerMoveSpeed = 50;
@@ -24,6 +26,8 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 	private bool inputDisable;
 	private bool canMove=true;
 
+	public string GUID => GetComponent<DataGUID>().guid;
+
 	protected override void Awake()
 	{
 		base.Awake();
@@ -34,6 +38,8 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 	}
 	private void Start()
 	{
+		ISaveable saveable = this;
+		saveable.RegisterSaveable();
 
 	}
 	private void FixedUpdate()
@@ -146,5 +152,17 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>
 		inputDisable = false;
 	}
 
+	public GameSaveData GenerateSaveData()
+	{
+		GameSaveData gameSaveData = new GameSaveData();
+		gameSaveData.characterPosDict = new Dictionary<string, SerializableVector3>();
+		gameSaveData.characterPosDict.Add(this.name, new SerializableVector3(transform.position));
+		return gameSaveData;
+	}
 
+	public void RestoreData(GameSaveData saveData)
+	{
+		Vector3 targetPosition=saveData.characterPosDict[this.name].ToVector3();
+		transform.position = targetPosition;
+	}
 }
