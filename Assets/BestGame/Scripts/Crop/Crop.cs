@@ -45,10 +45,11 @@ public class Crop : MonoBehaviour
 				{
 					animator.SetTrigger("FallRight");
 				}
-				
+				EventHandler.CallPlaySEEvent("TreeFall",AudioType.CropSE);
 				StartCoroutine(AfterAnimSpawnSpawnHarvestItem());
 			}
 		}
+
 	}
 
 	private IEnumerator AfterAnimSpawnSpawnHarvestItem()
@@ -90,8 +91,7 @@ public class Crop : MonoBehaviour
 
 				EventHandler.CallInstantiateItemInScene(cropDetails.producedItemID, spawnPos);
 			}
-			//EventHandler.CallHarvestAtPlayerPosition(cropDetails.producedItemID);
-			//Debug.Log("SpawnHarvestItem");
+
 		}
 
 		if (tileDetails != null)

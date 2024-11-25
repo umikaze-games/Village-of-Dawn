@@ -1,4 +1,4 @@
-using TMPro;
+ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +9,12 @@ public class ItemToolTip : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI descriptionText;
 	[SerializeField] private Text coinValueText;
 	[SerializeField] private GameObject bottom;
+
+	[Header("Build")]
+	[SerializeField]
+	public GameObject requiredPanel;
+	[SerializeField]
+	private Image[] requeiredImage;
 
 	public void SetupTooltip(ItemDetails itemDetails, SlotType slotType)
 	{
@@ -31,6 +37,25 @@ public class ItemToolTip : MonoBehaviour
 		else
 		{
 			bottom.SetActive(false);
+		}
+	}
+
+	public void SetupResourcePanel(int ID)
+	{
+		var bluePrintDetails = InventoryManager.Instance.bluePrintSO.GetBluePrintDetails(ID);
+		for (int i = 0; i < bluePrintDetails.requireItem.Length; i++)
+		{
+			if (i < requeiredImage.Length)
+			{
+				var item = bluePrintDetails.requireItem[i];
+				requeiredImage[i].gameObject.SetActive(true);
+				requeiredImage[i].sprite = InventoryManager.Instance.GetItemDetails(item.itemID).itemIcon;
+				requeiredImage[i].transform.GetChild(0).GetComponent<Text>().text = item.itemAmount.ToString();
+			}
+			else
+			{
+				requeiredImage[i].gameObject.SetActive(false);
+			}
 		}
 	}
 }

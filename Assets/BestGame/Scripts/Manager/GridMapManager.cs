@@ -167,19 +167,20 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 					currentTile.daySinceDug = 0;
 					currentTile.canDig = false;
 					currentTile.canDropItem = false;
-
-					//sfx
+					EventHandler.CallPlaySEEvent("Hoe", AudioType.ToolSE);
 					break;
+
 				case ItemType.WaterTool:
 					SetWaterTilemap(currentTile);
 					currentTile.daysSinceWatered = 0;
 					currentTile.canDig = false;
 					currentTile.canDropItem = false;
+					EventHandler.CallPlaySEEvent("Water", AudioType.ToolSE);
 					break;
 
 				case ItemType.Seed:
 					EventHandler.CallPlantSeedEvent(itemDetails.itemID, currentTile);
-					//Debug.Log("CallPlantSeedEvent");
+					EventHandler.CallPlaySEEvent("Seed", AudioType.ToolSE);
 					break;
 
 				case ItemType.CollectTool:
@@ -188,14 +189,19 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 					break;
 
 				case ItemType.BreakTool:
-				case ItemType.ChopTool:
+					EventHandler.CallPlaySEEvent("PickAxe", AudioType.ToolSE);
+					currentCrop?.ProcessToolItem(itemDetails, currentCrop.tileDetails);
+					break;
 
+				case ItemType.ChopTool:
+					EventHandler.CallPlaySEEvent("PickAxe", AudioType.ToolSE);
 					currentCrop?.ProcessToolItem(itemDetails, currentCrop.tileDetails);
 					break;
 				case ItemType.ReapTool:
 					for (int i = 0; i < itemInRadius.Count; i++)			
 					{
 						EventHandler.CallParticleEffectEvent(ParticleEffectType.ReapableScenery, itemInRadius[i].transform.position + Vector3.up);
+						EventHandler.CallPlaySEEvent("Scythe", AudioType.ToolSE);
 						itemInRadius[i].SpawnHarvestItems();
 						Destroy(itemInRadius[i].gameObject);
 					}

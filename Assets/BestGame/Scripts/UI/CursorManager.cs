@@ -149,8 +149,6 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 			EventHandler.CallMouseClickedEvent(mouseWorldPosition, currentItem);
 		}	
 	}
-
-	//xuyao xiugai
 	private void OnItemSelectedEvent(ItemDetails itemDetails, bool isSelected)
 	{
 

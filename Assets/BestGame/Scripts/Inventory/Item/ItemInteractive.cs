@@ -20,7 +20,12 @@ public class ItemInteractive : MonoBehaviour
 			{
 				StartCoroutine(RotateLeft());
 			}
-			//EventHandler.CallPlaySoundEvent(SoundName.Rustle);
+
+			if (collision.gameObject.CompareTag("Player"))
+			{
+				EventHandler.CallPlaySEEvent("Rustle", AudioType.PlayerSE);
+			}
+
 		}
 	}
 	private void OnTriggerExit2D(Collider2D collision)
@@ -37,7 +42,12 @@ public class ItemInteractive : MonoBehaviour
 			{
 				StartCoroutine(RotateLeft());
 			}
-			//EventHandler.CallPlaySoundEvent(SoundName.Rustle);
+
+			if (collision.gameObject.CompareTag("Player"))
+			{
+				EventHandler.CallPlaySEEvent("Rustle", AudioType.PlayerSE);
+			}
+
 		}
 	}
 

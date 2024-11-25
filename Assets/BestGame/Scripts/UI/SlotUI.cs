@@ -112,7 +112,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 
 	public void OnEndDrag(PointerEventData eventData)
 	{
-			inventoryUI.dragImage.enabled = false;
+		inventoryUI.dragImage.enabled = false;
 
 		if (eventData.pointerCurrentRaycast.gameObject != null)
 		{
@@ -141,6 +141,7 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 
 			inventoryUI.HightlightSlot(-1);
 		}
+		EventHandler.CallPlaySEEvent("Pluck", AudioType.CropSE);
 	}
 
 	public InventoryLocation InventoryLocation
