@@ -101,4 +101,11 @@ public class SerializableVector3
 	{
 		return new Vector2Int((int)x, (int)y);
 	}
+
+}
+public class SceneFurniture
+{
+	public int itemID;
+	public SerializableVector3 position;
+	public int boxIndex;
 }

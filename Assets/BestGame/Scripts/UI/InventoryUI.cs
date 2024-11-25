@@ -33,6 +33,9 @@ public class InventoryUI : SingletonMonoBehaviour<InventoryUI>
 	public TextMeshProUGUI playerMoneyUI;
 	public GameObject transaction;
 
+	[Header("BoxUI")]
+	public GameObject boxSlotPrefab;
+
 	private void Start()
 	{
 		HightlightSlot(-1);
@@ -104,6 +107,7 @@ public class InventoryUI : SingletonMonoBehaviour<InventoryUI>
 		GameObject prefab = slotType switch
 		{
 			SlotType.Shop => shopSlotPrefab,
+			SlotType.Box=> boxSlotPrefab,
 			_ => null,
 
 		};

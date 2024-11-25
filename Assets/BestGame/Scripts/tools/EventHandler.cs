@@ -169,5 +169,11 @@ public static class EventHandler
 		PlaySEEvent?.Invoke(sEName,audioType);
 	}
 
+	public static event Action<int,Vector3> BuildFurnitureEvent;
+	public static void CallBuildFurnitureEvent(int ID,Vector3 mosPosition)
+	{ 
+		BuildFurnitureEvent?.Invoke(ID,mosPosition);
+	}
+
 }
 

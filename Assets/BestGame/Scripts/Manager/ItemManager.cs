@@ -16,7 +16,7 @@ public class ItemManager : MonoBehaviour
 
 	private Dictionary<string, List<SceneItem>> sceneItemDict = new Dictionary<string, List<SceneItem>>();
 
-	//private Dictionary<string, List<SceneFurniture>> sceneFurnitureDict = new Dictionary<string, List<SceneFurniture>>();
+	private Dictionary<string, List<SceneFurniture>> sceneFurnitureDict = new Dictionary<string, List<SceneFurniture>>();
 	private void Awake()
 	{
 
@@ -37,6 +37,7 @@ public class ItemManager : MonoBehaviour
 		EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
 		EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
 		EventHandler.DropItemEvent += OnDropItemEvent;
+		EventHandler.BuildFurnitureEvent += OnBuildFurnitureEvent;
 	}
 
 	
@@ -47,7 +48,16 @@ public class ItemManager : MonoBehaviour
 		EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
 		EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
 		EventHandler.DropItemEvent -= OnDropItemEvent;
+		EventHandler.BuildFurnitureEvent -= OnBuildFurnitureEvent;
 	}
+
+	private void OnBuildFurnitureEvent(int ID,Vector3 mosPosition)
+	{
+		BluePrintDetails bluePrintDetails = InventoryManager.Instance.bluePrintSO.GetBluePrintDetails(ID);
+		var buildItem = Instantiate(bluePrintDetails.buildPrefab, mosPosition, Quaternion.identity, itemParent);
+		
+	}
+
 	private void OnDropItemEvent(int ID, Vector3 mousePos, ItemType itemType)
 	{
 		if (itemType == ItemType.Seed) return;
@@ -96,14 +106,14 @@ public class ItemManager : MonoBehaviour
 	private void OnBeforeSceneUnloadEvent()
 	{
 		GetAllSceneItems();
-		//GetAllSceneFurniture();
+		GetAllSceneFurniture();
 	}
 
 	private void OnAfterSceneLoadEvent()
 	{
 		itemParent = GameObject.FindWithTag("ItemParent").transform;
 		RecreateAllItems();
-		//RebuildFurniture();
+		RebuildFurniture();
 	}
 
 	private void GetAllSceneItems()
@@ -154,52 +164,54 @@ public class ItemManager : MonoBehaviour
 		}
 	}
 
-	//private void GetAllSceneFurniture()
-	//{
-	//	List<SceneFurniture> currentSceneFurniture = new List<SceneFurniture>();
+	private void GetAllSceneFurniture()
+	{
+		List<SceneFurniture> currentSceneFurniture = new List<SceneFurniture>();
 
-	//	foreach (var item in FindObjectsOfType<Furniture>())
-	//	{
-	//		SceneFurniture sceneFurniture = new SceneFurniture
-	//		{
-	//			itemID = item.itemID,
-	//			position = new SerializableVector3(item.transform.position)
-	//		};
-	//		if (item.GetComponent<Box>())
-	//			sceneFurniture.boxIndex = item.GetComponent<Box>().index;
+		foreach (var item in FindObjectsByType<Furniture>(FindObjectsSortMode.None))
+		{
+			SceneFurniture sceneFurniture = new SceneFurniture
+			{
+				itemID = item.itemID,
+				position = new SerializableVector3(item.transform.position)
+			};
+			if (item.GetComponent<Box>())
+			{
+				sceneFurniture.boxIndex = item.GetComponent<Box>().index;
+			}
 
-	//		currentSceneFurniture.Add(sceneFurniture);
-	//	}
+			currentSceneFurniture.Add(sceneFurniture);
+		}
 
-	//	if (sceneFurnitureDict.ContainsKey(SceneManager.GetActiveScene().name))
-	//	{
+		if (sceneFurnitureDict.ContainsKey(SceneManager.GetActiveScene().name))
+		{
 
-	//		sceneFurnitureDict[SceneManager.GetActiveScene().name] = currentSceneFurniture;
-	//	}
-	//	else
-	//	{
-	//		sceneFurnitureDict.Add(SceneManager.GetActiveScene().name, currentSceneFurniture);
-	//	}
-	//}
+			sceneFurnitureDict[SceneManager.GetActiveScene().name] = currentSceneFurniture;
+		}
+		else
+		{
+			sceneFurnitureDict.Add(SceneManager.GetActiveScene().name, currentSceneFurniture);
+		}
+	}
 
-	//private void RebuildFurniture()
-	//{
-	//	List<SceneFurniture> currentSceneFurniture = new List<SceneFurniture>();
+	private void RebuildFurniture()
+	{
+		List<SceneFurniture> currentSceneFurniture = new List<SceneFurniture>();
 
-	//	if (sceneFurnitureDict.TryGetValue(SceneManager.GetActiveScene().name, out currentSceneFurniture))
-	//	{
-	//		if (currentSceneFurniture != null)
-	//		{
-	//			foreach (var sceneFurniture in currentSceneFurniture)
-	//			{
-	//				BluePrintDetails bluePrint = InventoryManager.Instance.bluePrintData.GetBluePrintDetails(sceneFurniture.itemID);
-	//				var buildItem = Instantiate(bluePrint.buildPrefab, sceneFurniture.position.ToVector3(), Quaternion.identity, itemParent);
-	//				if (buildItem.GetComponent<Box>())
-	//				{
-	//					buildItem.GetComponent<Box>().InitBox(sceneFurniture.boxIndex);
-	//				}
-	//			}
-	//		}
-	//	}
-	//}
+		if (sceneFurnitureDict.TryGetValue(SceneManager.GetActiveScene().name, out currentSceneFurniture))
+		{
+			if (currentSceneFurniture != null)
+			{
+				foreach (var sceneFurniture in currentSceneFurniture)
+				{
+					BluePrintDetails bluePrint = InventoryManager.Instance.bluePrintSO.GetBluePrintDetails(sceneFurniture.itemID);
+					var buildItem = Instantiate(bluePrint.buildPrefab, sceneFurniture.position.ToVector3(), Quaternion.identity, itemParent);
+					if (buildItem.GetComponent<Box>())
+					{
+						buildItem.GetComponent<Box>().InitBox(sceneFurniture.boxIndex);
+					}
+				}
+			}
+		}
+	}
 }

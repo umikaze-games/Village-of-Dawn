@@ -50,7 +50,7 @@ public class ItemToolTip : MonoBehaviour
 				var item = bluePrintDetails.requireItem[i];
 				requeiredImage[i].gameObject.SetActive(true);
 				requeiredImage[i].sprite = InventoryManager.Instance.GetItemDetails(item.itemID).itemIcon;
-				requeiredImage[i].transform.GetChild(0).GetComponent<Text>().text = item.itemAmount.ToString();
+				requeiredImage[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = item.itemAmount.ToString();
 			}
 			else
 			{

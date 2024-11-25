@@ -5,5 +5,10 @@ using UnityEngine;
 public class InventoryBag_SO : ScriptableObject
 {
     public List<InventoryItem> inventoryItems;
+
+    public InventoryItem GetInventoryItem(int ID)
+    {
+        return inventoryItems.Find(i => i.itemID == ID);
+    }
 }
  

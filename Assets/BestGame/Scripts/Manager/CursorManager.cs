@@ -19,9 +19,11 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 	private bool cursorEnable=true;
 	private bool cursorPositionValid;
 
+	public Image buildImage;
 	private void Start()
 	{
 		currentGrid = FindAnyObjectByType<Grid>();
+		buildImage.gameObject.SetActive(false);
 	}
 	private void OnEnable()
 	{
@@ -44,7 +46,11 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 			CheckCursorValid();
 			CheckPlayerInput();
 		}
-		
+		else
+		{
+			buildImage.gameObject.SetActive(false);
+		}
+
 	}
 
 	public void SetMouseUI(bool boolValue)
@@ -58,6 +64,9 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 		mouseGridPosition = currentGrid.WorldToCell(mouseWorldPosition);
 
 		var playerGridPos = currentGrid.WorldToCell(playerTransform.position);
+
+		buildImage.rectTransform.position = Input.mousePosition;
+
 		if (currentItem == null) return;
 	
 		if (Mathf.Abs(mouseGridPosition.x - playerGridPos.x) > currentItem.itemUseRadius || Mathf.Abs(mouseGridPosition.y - playerGridPos.y) > currentItem.itemUseRadius)
@@ -126,14 +135,15 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 						//Debug.Log("CursorInValid");
 					} 
 					break;
-					//case ItemType.Furniture:
-					//	buildImage.gameObject.SetActive(true);
-					//	var bluePrintDetails = InventoryManager.Instance.bluePrintData.GetBluePrintDetails(currentItem.itemID);
 
-					//	if (currentTile.canPlaceFurniture && InventoryManager.Instance.CheckStock(currentItem.itemID) && !HaveFurnitureInRaduis(bluePrintDetails))
-					//		SetCursorValid();
-					//	else SetCursorInValid();
-					//	break;
+				case ItemType.Furniture:
+					buildImage.gameObject.SetActive(true);
+					var bluePrintDetails = InventoryManager.Instance.bluePrintSO.GetBluePrintDetails(currentItem.itemID);
+
+					if (currentTile.canPlaceFurniture && InventoryManager.Instance.CheckStock(currentItem.itemID) /*&& !HaveFurnitureInRaduis(bluePrintDetails)*/)
+						SetCursorValid();
+					else SetCursorInValid();
+					break;
 			}
 		}
 		else
@@ -156,11 +166,18 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 		{
 			currentItem = null;
 			cursorEnable = false;
+			buildImage.gameObject.SetActive(false);
 		}
 		else
 		{
 			currentItem = itemDetails;
 			cursorEnable = true;
+			if (itemDetails.itemType == ItemType.Furniture)
+			{
+				buildImage.gameObject.SetActive(true);
+				buildImage.sprite = itemDetails.itemOnWorldSprite;
+				buildImage.SetNativeSize();
+			}
 		}
 	}
 
@@ -183,5 +200,17 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 	{
 		cursorPositionValid = false;
 	}
+
+	//private bool HaveFurnitureInRaduis(BluePrintDetails bluePrintDetails)
+	//{
+	//	var buildItem = bluePrintDetails.buildPrefab;
+	//	Vector2 point = mouseWorldPos;
+	//	var size = buildItem.GetComponent<BoxCollider2D>().size;
+
+	//	var otherColl = Physics2D.OverlapBox(point, size, 0);
+	//	if (otherColl != null)
+	//		return otherColl.GetComponent<Furniture>();
+	//	return false;
+	//}
 
 }

@@ -16,7 +16,15 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 	[Header("Blueprint data")]
 	public BlueprintSO bluePrintSO;
 
-	public int playerMoney=1000;
+	[Header("Box")]
+	public int playerMoney;
+
+	private Dictionary<string, List<InventoryItem>> boxDataDict = new Dictionary<string, List<InventoryItem>>();
+
+	public int BoxDataAmount => boxDataDict.Count;
+
+	//public string GUID => GetComponent<DataGUID>().guid;
+
 	private void Start()
 	{
 		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.inventoryItems);
@@ -26,12 +34,26 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 		EventHandler.DropItemEvent += OnDropItemEvent;
 		EventHandler.HarvestAtPlayerPosition += OnHarvestAtPlayerPosition;
 		EventHandler.BagOpenEvent += OnBagOpenEvent;
+		EventHandler.BuildFurnitureEvent += OnBuildFurnitureEvent;
 	}
+
+	private void OnBuildFurnitureEvent(int ID, Vector3 position)
+	{
+		RemoveItem(ID, 1);
+		BluePrintDetails bluePrintDetails = bluePrintSO.GetBluePrintDetails(ID);
+		foreach (var item in bluePrintDetails.requireItem)
+		{
+			RemoveItem(item.itemID, item.itemAmount);
+		}
+		EventHandler.CallPlaySEEvent("Pluck", AudioType.CropSE);
+	}
+
 	private void OnDisable()
 	{
 		EventHandler.DropItemEvent -= OnDropItemEvent;
 		EventHandler.HarvestAtPlayerPosition -= OnHarvestAtPlayerPosition;
 		EventHandler.BagOpenEvent -= OnBagOpenEvent;
+		EventHandler.BuildFurnitureEvent += OnBuildFurnitureEvent;
 	}
 	private void OnBagOpenEvent(SlotType slottype, InventoryBag_SO bagSO)
 	{
@@ -237,4 +259,38 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>
 		EventHandler.CallTradeNotifyEvent(tradeSuccess);
 	}
 
+	//ID=blueprintID
+	public bool CheckStock(int ID)
+	{
+		var bluePrintDetails = bluePrintSO.GetBluePrintDetails(ID);
+
+		foreach (var requireItem in bluePrintDetails.requireItem)
+		{
+			var itemStock = playerBag.GetInventoryItem(requireItem.itemID);
+			if (itemStock.itemAmount >= requireItem.itemAmount)
+			{
+				continue;
+			}
+			else return false;
+		}
+		return true;
+	}
+
+	public List<InventoryItem> GetBoxDataList(string key)
+	{
+		if (boxDataDict.ContainsKey(key))
+		{
+			return boxDataDict[key];
+		} 
+		return null;
+	}
+
+	public void AddBoxDataDict(Box box)
+	{
+		var key = box.name + box.index;
+		if (!boxDataDict.ContainsKey(key))
+		{
+			boxDataDict.Add(key, box.boxBagData.inventoryItems);
+		}
+	}
 }

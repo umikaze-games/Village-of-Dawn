@@ -206,6 +206,9 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>
 						Destroy(itemInRadius[i].gameObject);
 					}
 					break;
+				case ItemType.Furniture:
+					EventHandler.CallBuildFurnitureEvent(itemDetails.itemID,mouseWorldPos);
+					break;
 
 			}
 			UpdateTileDetails(currentTile);

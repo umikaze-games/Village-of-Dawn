@@ -3,8 +3,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEditor.FilePathAttribute;
-
 public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDragHandler,IEndDragHandler
 {
 	[SerializeField]
@@ -54,7 +52,6 @@ public class SlotUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IDrag
 			}	
 		}
 	}
-
 	public void UpdateSlotEmpty()
 	{
 		if (isSelected)
