@@ -10,7 +10,7 @@ using System.Collections.Generic;
 public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveable
 {
 	[SerializeField]
-	private float playerMoveSpeed = 50;
+	private float playerMoveSpeed = 5;
 
 	private PlayerInputActions playerInputAction;
 	private Rigidbody2D rb;
@@ -22,8 +22,8 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveab
 
 	private float mouseX;
 	private float mouseY;
-	private bool useTool;
-	private bool inputDisable;
+	private bool useTool=false;
+	private bool inputDisable=false;
 	private bool canMove=true;
 
 	public string GUID => GetComponent<DataGUID>().guid;
@@ -44,7 +44,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveab
 	}
 	private void FixedUpdate()
 	{
-		if (canMove&&!inputDisable)
+		if (canMove&&!inputDisable&&!useTool)
 		{
 			PlayerMove();
 		}
@@ -78,6 +78,8 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveab
 		playerInputAction.Enable();
 		EventHandler.MouseClickedEvent += OnMouseClickEvent;
 		EventHandler.GamePauseEvent += OnGamePaueseEvent;
+		EventHandler.StartNewGameEvent += OnStartNewGameEvent;
+		EventHandler.EndGameEvent += OnEndGameEvent;
 	}
 
 	private void OnDisable()
@@ -85,6 +87,19 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveab
 		playerInputAction.Disable();
 		EventHandler.MouseClickedEvent -= OnMouseClickEvent;
 		EventHandler.GamePauseEvent -= OnGamePaueseEvent;
+		EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
+		EventHandler.EndGameEvent -= OnEndGameEvent;
+	}
+
+	private void OnEndGameEvent()
+	{
+		inputDisable = true;
+	}
+
+	private void OnStartNewGameEvent(int obj)
+	{
+		inputDisable=false;
+		transform.position=Settings.playerInitialPosition;
 	}
 
 	private void OnGamePaueseEvent(bool gamePause)

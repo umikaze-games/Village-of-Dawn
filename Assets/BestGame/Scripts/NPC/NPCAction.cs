@@ -17,7 +17,7 @@ public class NPCAction : MonoBehaviour
 	private BoxCollider2D boxCollider;
 	private Rigidbody2D rb;
 	private Animator animator;
-	public DialogueController dialogueController;
+	public DialogueController dialogueController; 
 
 	public bool canInteractive=true;
 	public bool canMove = true;

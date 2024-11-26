@@ -105,11 +105,9 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 					if (crop != null && crop.CanHarvest && crop.cropDetails.CheckToolAvaliable(currentItem.itemID))
 					{
 						SetCursorValid();
-						//Debug.Log($"{currentTile.growthDays}?{crop.cropDetails.TotalGrowthDays}");
 					}
 					else
 					{
-						//Debug.Log($"{currentTile.growthDays}?{crop.cropDetails.TotalGrowthDays}");
 						SetCursorInValid();
 					}
 					break;
@@ -126,13 +124,11 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 					if (GridMapManager.Instance.HaveReapableItemInRadius(mouseWorldPosition, currentItem))
 					{
 						SetCursorValid();
-						//Debug.Log("CursorValid");
 					}
 
 					else
 					{
 						SetCursorInValid();
-						//Debug.Log("CursorInValid");
 					} 
 					break;
 
@@ -140,7 +136,7 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 					buildImage.gameObject.SetActive(true);
 					var bluePrintDetails = InventoryManager.Instance.bluePrintSO.GetBluePrintDetails(currentItem.itemID);
 
-					if (currentTile.canPlaceFurniture && InventoryManager.Instance.CheckStock(currentItem.itemID) /*&& !HaveFurnitureInRaduis(bluePrintDetails)*/)
+					if (currentTile.canPlaceFurniture && InventoryManager.Instance.CheckStock(currentItem.itemID))
 						SetCursorValid();
 					else SetCursorInValid();
 					break;
@@ -200,17 +196,5 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 	{
 		cursorPositionValid = false;
 	}
-
-	//private bool HaveFurnitureInRaduis(BluePrintDetails bluePrintDetails)
-	//{
-	//	var buildItem = bluePrintDetails.buildPrefab;
-	//	Vector2 point = mouseWorldPos;
-	//	var size = buildItem.GetComponent<BoxCollider2D>().size;
-
-	//	var otherColl = Physics2D.OverlapBox(point, size, 0);
-	//	if (otherColl != null)
-	//		return otherColl.GetComponent<Furniture>();
-	//	return false;
-	//}
 
 }

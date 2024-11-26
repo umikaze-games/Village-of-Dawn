@@ -13,8 +13,6 @@ public class CropManager : SingletonMonoBehaviour<CropManager>
 
 	private void Start()
 	{
-		currentGrid = FindAnyObjectByType<Grid>();
-		cropParent = GameObject.Find("CropParent").transform;
 
 	}
 	private void OnEnable()
@@ -37,7 +35,6 @@ public class CropManager : SingletonMonoBehaviour<CropManager>
 	private void OnPlantSeedEvent(int ID, TileDetails tileDetails)
 	{
 		CropDetails currentCrop = GetCropDetails(ID);
-		//Debug.Log($"{currentCrop}{ID}");
 	
 		if (currentCrop!=null&&SeasonCanCrop(currentCrop)&&tileDetails.seedItemID==-1)
 		{

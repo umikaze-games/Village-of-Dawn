@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
-public class FarmAudioManager : MonoBehaviour
+public class FarmAudioManager : SingletonMonoBehaviour<FarmAudioManager>
 {
 	private AudioSource bGMAudioSource;
 	private AudioSource bGSAudioSource;
@@ -19,8 +19,9 @@ public class FarmAudioManager : MonoBehaviour
 	public AudioSO toolSEDatas;
 
 	public AudioMixer audioMixer;
-	private void Awake()
+	protected override void Awake()
 	{
+		base.Awake();
 		bGMAudioSource = transform.GetChild(0).GetComponent<AudioSource>();
 		bGSAudioSource = transform.GetChild(1).GetComponent<AudioSource>();
 		cropSEAudioSource = transform.GetChild(2).GetComponent<AudioSource>();
@@ -134,8 +135,12 @@ public class FarmAudioManager : MonoBehaviour
 				break;
 			default:
 				return null;
-				break;
 		}
 		return audioSource;
+	}
+
+	public void SetMasterVolume(float volume)
+	{
+		audioMixer.SetFloat("MasterVolume", Mathf.Clamp((volume * 100 - 80),-80,20));
 	}
 }

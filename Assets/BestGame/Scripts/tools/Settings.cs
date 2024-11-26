@@ -17,4 +17,8 @@ public class Settings
 	//day and night
 	public const int dayHour = 6;
 	public const int nightHour = 18;
+
+	//player data
+	public static Vector3 playerInitialPosition=new Vector3(0, 0, 0);
+	public const int playerMoney = 2000;
 }

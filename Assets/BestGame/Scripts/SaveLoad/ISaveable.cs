@@ -11,4 +11,5 @@ public interface ISaveable
 	{
 		SaveLoadManager.Instance.RegisterSaveable(this);
 	}
+
 }

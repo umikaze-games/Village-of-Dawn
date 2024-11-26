@@ -22,13 +22,10 @@ public class ItemManager : MonoBehaviour,ISaveable
 	}
 	private void Start()
 	{
-		itemParent = GameObject.FindWithTag("ItemParent").transform;
-	}
+		ISaveable saveable = this;
+		saveable.RegisterSaveable();
 
-	private void OnStartNewGameEvent(int obj)
-	{
-		sceneItemDict.Clear();
-		//sceneFurnitureDict.Clear();
+		itemParent = GameObject.FindWithTag("ItemParent").transform;
 	}
 	private void OnEnable()
 	{
@@ -37,10 +34,9 @@ public class ItemManager : MonoBehaviour,ISaveable
 		EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
 		EventHandler.DropItemEvent += OnDropItemEvent;
 		EventHandler.BuildFurnitureEvent += OnBuildFurnitureEvent;
+		EventHandler.StartNewGameEvent += OnStartNewGameEvent;
+
 	}
-
-	
-
 	private void OnDisable()
 	{
 		EventHandler.InstantiateItemInScene -= OnInstantiateItemInScene;
@@ -48,8 +44,14 @@ public class ItemManager : MonoBehaviour,ISaveable
 		EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
 		EventHandler.DropItemEvent -= OnDropItemEvent;
 		EventHandler.BuildFurnitureEvent -= OnBuildFurnitureEvent;
+		EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
 	}
 
+	private void OnStartNewGameEvent(int obj)
+	{
+		sceneItemDict.Clear();
+		sceneFurnitureDict.Clear();
+	}
 	private void OnBuildFurnitureEvent(int ID,Vector3 mosPosition)
 	{
 		BluePrintDetails bluePrintDetails = InventoryManager.Instance.bluePrintSO.GetBluePrintDetails(ID);

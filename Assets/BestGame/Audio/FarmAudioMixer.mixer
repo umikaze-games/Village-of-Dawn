@@ -149,6 +149,8 @@ AudioMixerController:
     name: BGSVolume
   - guid: 965ad02e083d82e4a893d90bb0f3a0d3
     name: CropSEVolume
+  - guid: b3e504e188ba3e442b1c28b63a65419e
+    name: MasterVolume
   - guid: f1eed2464f9f4074ab26e50382cc4096
     name: PlayerSEVolume
   - guid: 1b1de764585ffe541a4803e4c6b17b25

@@ -5,7 +5,7 @@ public class SwitchBounds : MonoBehaviour
 {
 	private void Start()
 	{
-		SwitchConfinerShape();
+
 	}
 
 	private void OnEnable()

@@ -175,5 +175,17 @@ public static class EventHandler
 		BuildFurnitureEvent?.Invoke(ID,mosPosition);
 	}
 
+	public static event Action<int> StartNewGameEvent;
+	public static void CallStartNewGameEvent(int index)
+	{ 
+		StartNewGameEvent?.Invoke(index);
+	}
+
+	public static event Action EndGameEvent;
+	public static void CallEndGameEvent()
+	{ 
+		EndGameEvent?.Invoke();
+	}
+
 }
 

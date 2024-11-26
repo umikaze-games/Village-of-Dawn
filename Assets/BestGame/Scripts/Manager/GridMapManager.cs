@@ -30,6 +30,9 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>,ISaveable
 
 	private void Start()
 	{
+		ISaveable saveable = this;
+		saveable.RegisterSaveable();
+
 		currentGrid=FindAnyObjectByType<Grid>();
 		foreach (var mapData in mapDatalist)
 		{

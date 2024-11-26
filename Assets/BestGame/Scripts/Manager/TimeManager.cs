@@ -26,24 +26,44 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 
 	private void Start()
 	{
-		initialTime();
+	
 		timeUI.UpdateClockUI(gameHour);
 		EventHandler.CallUpdateLightEvent();
+
+		ISaveable saveable = this;
+		saveable.RegisterSaveable();
+		gamePause = true;
 	}
+
 
 	private void OnEnable()
 	{
 		EventHandler.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
 		EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
-
+		EventHandler.StartNewGameEvent += OnStartNewGameEvent;
+		EventHandler.EndGameEvent += OnEndGameEvent;
 	}
 
 	private void OnDisable()
 	{
 		EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
 		EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
+		EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
+		EventHandler.EndGameEvent -= OnEndGameEvent;
 
 	}
+
+	private void OnEndGameEvent()
+	{
+		gamePause = true;
+	}
+
+	private void OnStartNewGameEvent(int obj)
+	{
+		InitialTime();
+		gamePause = false;
+	}
+
 	private void OnBeforeSceneUnloadEvent()
 	{
 		gamePause = true;
@@ -79,7 +99,7 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 	{ 
 		return gameHour;
 	}
-	public void initialTime()
+	public void InitialTime()
 	{
 
 		gameSecond = 0;

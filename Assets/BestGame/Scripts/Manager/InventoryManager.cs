@@ -11,6 +11,8 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>,ISaveab
 	[Header("inventory data")]
 	public InventoryBag_SO playerBag;
 
+	public InventoryBag_SO bagTemplate;
+
 	private InventoryBag_SO currentBoxBag;
 
 	[Header("Blueprint data")]
@@ -27,7 +29,10 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>,ISaveab
 
 	private void Start()
 	{
-		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.inventoryItems);
+		ISaveable saveable = this;
+		saveable.RegisterSaveable();
+
+		//EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.inventoryItems);
 	}
 	private void OnEnable()
 	{
@@ -35,6 +40,23 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>,ISaveab
 		EventHandler.HarvestAtPlayerPosition += OnHarvestAtPlayerPosition;
 		EventHandler.BagOpenEvent += OnBagOpenEvent;
 		EventHandler.BuildFurnitureEvent += OnBuildFurnitureEvent;
+		EventHandler.StartNewGameEvent += OnStartNewGameEvent;
+	}
+	private void OnDisable()
+	{
+		EventHandler.DropItemEvent -= OnDropItemEvent;
+		EventHandler.HarvestAtPlayerPosition -= OnHarvestAtPlayerPosition;
+		EventHandler.BagOpenEvent -= OnBagOpenEvent;
+		EventHandler.BuildFurnitureEvent += OnBuildFurnitureEvent;
+		EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
+	}
+
+	private void OnStartNewGameEvent(int obj)
+	{
+		playerBag = Instantiate(bagTemplate);
+		playerMoney = Settings.playerMoney;
+		boxDataDict.Clear();
+		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag.inventoryItems);
 	}
 
 	private void OnBuildFurnitureEvent(int ID, Vector3 position)
@@ -46,14 +68,6 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>,ISaveab
 			RemoveItem(item.itemID, item.itemAmount);
 		}
 		EventHandler.CallPlaySEEvent("Pluck", AudioType.CropSE);
-	}
-
-	private void OnDisable()
-	{
-		EventHandler.DropItemEvent -= OnDropItemEvent;
-		EventHandler.HarvestAtPlayerPosition -= OnHarvestAtPlayerPosition;
-		EventHandler.BagOpenEvent -= OnBagOpenEvent;
-		EventHandler.BuildFurnitureEvent += OnBuildFurnitureEvent;
 	}
 	private void OnBagOpenEvent(SlotType slottype, InventoryBag_SO bagSO)
 	{
@@ -310,6 +324,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>,ISaveab
 	public void RestoreData(GameSaveData saveData)
 	{
 		this.playerMoney = saveData.playerMoney;
+		playerBag = Instantiate(bagTemplate);
 		playerBag.inventoryItems=saveData.inventoryDict[playerBag.name];
 		foreach (var item in saveData.inventoryDict)
 		{
