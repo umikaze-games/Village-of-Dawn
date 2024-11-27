@@ -14,6 +14,7 @@ public class NPCAction : MonoBehaviour
 	private bool shopIsOpen;
 
 	private SpriteRenderer nPCSpriteRenderer;
+	private SpriteRenderer shadowSprite;
 	private BoxCollider2D boxCollider;
 	private Rigidbody2D rb;
 	private Animator animator;
@@ -40,6 +41,7 @@ public class NPCAction : MonoBehaviour
 		idleTime = Random.Range(2, 5);
 		boxCollider = GetComponent<BoxCollider2D>();
 		nPCSpriteRenderer = GetComponent<SpriteRenderer>();
+		shadowSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
 		rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 	}
@@ -91,12 +93,14 @@ public class NPCAction : MonoBehaviour
 	public void SetNPCVisable()
 	{
 		boxCollider.enabled = true;
+		shadowSprite.enabled = true;
 		nPCSpriteRenderer.enabled = true;
 	}
 
 	public void SetNPCInVisable()
 	{
 		boxCollider.enabled = false;
+		shadowSprite.enabled = false;
 		nPCSpriteRenderer.enabled = false;
 	}
 

@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class DataSlot : MonoBehaviour
+public class DataSlot
 {
-	//string=GUID
+	// Dictionary storing save data for objects by GUID
 	public Dictionary<string, GameSaveData> dataDict=new Dictionary<string, GameSaveData>();
 
 	public string DataTime
@@ -16,10 +16,10 @@ public class DataSlot : MonoBehaviour
 			if (dataDict.ContainsKey(key))
 			{
 				var timeData = dataDict[key];
-				return timeData.timeDict["gameYear"] + "”N/" +
-					   timeData.timeDict["gameSeason"] + " / " +
-					   timeData.timeDict["gameMonth"] + "ŒŽ/" +
-					   timeData.timeDict["gameDay"] + "“ú/";
+				return timeData.timeDict["gameYear"] + "/" +
+					   timeData.timeDict["gameSeason"] + "/ " +
+					   timeData.timeDict["gameMonth"] + "/" +
+					   timeData.timeDict["gameDay"] + "/";
 			}
 			else return string.Empty;
 		}

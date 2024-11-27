@@ -44,7 +44,7 @@ public class InventoryUI : SingletonMonoBehaviour<InventoryUI>
 			playerSlots[i].slotIndex = i;
 		}
 		bagOpened = bagUI.activeInHierarchy;
-		UpdateMoneyUI();
+
 	}
 	private void Update()
 	{
@@ -104,6 +104,7 @@ public class InventoryUI : SingletonMonoBehaviour<InventoryUI>
 
 	private void OnBagOpenEvent(SlotType slotType, InventoryBag_SO BagSO)
 	{
+		UpdateMoneyUI();
 		GameObject prefab = slotType switch
 		{
 			SlotType.Shop => shopSlotPrefab,
@@ -169,6 +170,7 @@ public class InventoryUI : SingletonMonoBehaviour<InventoryUI>
 
 	public void OpenBagUI()
 	{
+		UpdateMoneyUI();
 		bagOpened = !bagOpened;
 		bagUI.SetActive(bagOpened);
 	}
