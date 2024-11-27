@@ -5,18 +5,24 @@ using UnityEngine;
 
 public class SaveLoadManager : SingletonMonoBehaviour<SaveLoadManager>
 {
+	// List of all saveable objects
 	private List<ISaveable> saveableList = new List<ISaveable>();
 
-	public List<DataSlot> dataSlots = new List<DataSlot>(new DataSlot[3]);
+	// Save slots for the game
+	public List<DataSlot> dataSlots=new List<DataSlot>(new DataSlot[3]);
 
+	// Path to save JSON files
 	private string jsonFolder;
 
+	// Current save slot index
 	private int currentDataIndex;
 
 	protected  override void Awake()
 	{
 		base.Awake();
 		jsonFolder = Application.persistentDataPath + "/SAVE/";
+		ReadSavaData();
+
 	}
 
 	private void OnEnable()
@@ -31,16 +37,7 @@ public class SaveLoadManager : SingletonMonoBehaviour<SaveLoadManager>
 		EventHandler.EndGameEvent -= OnEndGameEvent;
 	}
 
-	private void OnEndGameEvent()
-	{
-		Save(currentDataIndex);
-	}
-
-	private void OnStartNewGameEvent(int index)
-	{
-		currentDataIndex = index;
-	}
-
+	// Registers a saveable object to the save manager
 	public void RegisterSaveable(ISaveable saveable)
 	{
 		if (!saveableList.Contains(saveable))
@@ -49,6 +46,7 @@ public class SaveLoadManager : SingletonMonoBehaviour<SaveLoadManager>
 		}
 	}
 
+	// Saves the game state to the specified save slot
 	public void Save(int index)
 	{
 		DataSlot data = new DataSlot();
@@ -58,7 +56,7 @@ public class SaveLoadManager : SingletonMonoBehaviour<SaveLoadManager>
 		}
 		dataSlots[index] = data;
 
-		var resultPath = jsonFolder + "data" + index + ".json";
+		var resultPath = jsonFolder + "save" + index + ".json";
 		var jsonData = JsonConvert.SerializeObject(dataSlots[index], Formatting.Indented);
 
 		if (!File.Exists(resultPath))
@@ -69,11 +67,12 @@ public class SaveLoadManager : SingletonMonoBehaviour<SaveLoadManager>
 		File.WriteAllText(resultPath, jsonData);
 	}
 
+	// Loads the game state from the specified save slot
 	public void Load(int index)
 	{
 		currentDataIndex = index;
 
-		var resultPath = jsonFolder + "data" + index + ".json";
+		var resultPath = jsonFolder + "save" + index + ".json";
 
 		var stringData = File.ReadAllText(resultPath);
 
@@ -85,13 +84,14 @@ public class SaveLoadManager : SingletonMonoBehaviour<SaveLoadManager>
 		}
 	}
 
+	// Reads metadata for all save slots
 	public void ReadSavaData()
 	{
 		if (Directory.Exists(jsonFolder))
 		{
 			for (int i = 0; i < dataSlots.Count; i++)
 			{
-				var resultPath = jsonFolder + "data" + i + ".json";
+				var resultPath = jsonFolder + "save" + i + ".json";
 				if (File.Exists(resultPath))
 				{
 					var stringData = File.ReadAllText(resultPath);
@@ -102,5 +102,15 @@ public class SaveLoadManager : SingletonMonoBehaviour<SaveLoadManager>
 		}
 	}
 
+	// Saves the game when the game ends
+	private void OnEndGameEvent()
+	{
+		Save(currentDataIndex);
+	}
+	// Sets the current save slot index when a new game starts
+	private void OnStartNewGameEvent(int index)
+	{
+		currentDataIndex = index;
+	}
 
 }

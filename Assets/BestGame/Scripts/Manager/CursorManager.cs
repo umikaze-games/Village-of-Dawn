@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class CursorManager : SingletonMonoBehaviour<CursorManager>
 {
 	public Image cannotUseCursorImage;
-	[SerializeField]
 	private Grid currentGrid;
 
 	private CropDetails currentCrop;
@@ -15,7 +14,6 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 
 	public Transform playerTransform;
 
-	[SerializeField]
 	private bool cursorEnable=true;
 	private bool cursorPositionValid;
 

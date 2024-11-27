@@ -6,9 +6,8 @@ using UnityEngine.UIElements;
 public class ItemManager : MonoBehaviour,ISaveable
 {
 	public Item itemPrefab;
-	//public Item bounceItemPrefab;
-	private Transform itemParent;
 
+	private Transform itemParent;
 	private Transform PlayerTransform => FindAnyObjectByType<PlayerController>().transform;
 
 	public string GUID => GetComponent<DataGUID>().guid;
@@ -24,8 +23,6 @@ public class ItemManager : MonoBehaviour,ISaveable
 	{
 		ISaveable saveable = this;
 		saveable.RegisterSaveable();
-
-		itemParent = GameObject.FindWithTag("ItemParent").transform;
 	}
 	private void OnEnable()
 	{
@@ -73,37 +70,6 @@ public class ItemManager : MonoBehaviour,ISaveable
 		var item = Instantiate(itemPrefab,location,Quaternion.identity,itemParent);
 		item.itemID = itemID;
 	}
-	//public void SaveItemInLoadScene()
-	//{
-	//	sceneItemDatas.Clear();
-	//	itemsInScene.Clear();
-	//	itemsInScene = new List<Item>();
-	//	Item[]items=FindObjectsByType<Item>(FindObjectsSortMode.None);
-	//	if (items!=null)
-	//	{
-	//		foreach (var item in items)
-	//		{
-	//			itemsInScene.Add(item);
-	//		}
-
-	//		for (int i = 0; i < itemsInScene.Count; i++)
-	//		{
-	//			sceneItemDatas.Add(new SceneItemData());
-	//		}
-
-	//		string sceneName = SceneManager.GetActiveScene().name;
-
-	//		for (int i = 0; i < itemsInScene.Count; i++)
-	//		{
-	//			sceneItemDatas[i].position = itemsInScene[i].transform.position;
-	//			sceneItemDatas[i].itemID = itemsInScene[i].itemID;
-	//			sceneItemDatas[i].itemAmount = 1;
-	//			sceneItemDatas[i].sceneName = sceneName;
-	//		}
-	//	}
-
-	//}
-
 	private void OnBeforeSceneUnloadEvent()
 	{
 		GetAllSceneItems();
@@ -113,6 +79,10 @@ public class ItemManager : MonoBehaviour,ISaveable
 	private void OnAfterSceneLoadEvent()
 	{
 		itemParent = GameObject.FindWithTag("ItemParent").transform;
+		foreach (Transform child in itemParent.transform)
+		{
+			Destroy(child.gameObject);
+		}
 		RecreateAllItems();
 		RebuildFurniture();
 	}
@@ -146,6 +116,7 @@ public class ItemManager : MonoBehaviour,ISaveable
 	private void RecreateAllItems()
 	{
 		List<SceneItem> currentSceneItems = new List<SceneItem>();
+		
 
 		if (sceneItemDict.TryGetValue(SceneManager.GetActiveScene().name, out currentSceneItems))
 		{

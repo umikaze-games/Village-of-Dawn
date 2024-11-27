@@ -49,12 +49,13 @@ public class MenuUIManager : SingletonMonoBehaviour<MenuUIManager>
 	}
 
 	public void ReturnMenuCavans()
-	{ 
+	{
+		gamePausePanel.SetActive(false);
+
 		Time.timeScale = 1.0f;
 		
 		EventHandler.CallEndGameEvent();
 
-		gamePausePanel.SetActive(false);
 	}
 
 

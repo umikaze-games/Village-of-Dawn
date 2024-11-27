@@ -43,9 +43,9 @@ public class ItemToolTip : MonoBehaviour
 	public void SetupResourcePanel(int ID)
 	{
 		var bluePrintDetails = InventoryManager.Instance.bluePrintSO.GetBluePrintDetails(ID);
-		for (int i = 0; i < bluePrintDetails.requireItem.Length; i++)
+		for (int i = 0; i < requeiredImage.Length; i++)
 		{
-			if (i < requeiredImage.Length)
+			if (i < bluePrintDetails.requireItem.Length)
 			{
 				var item = bluePrintDetails.requireItem[i];
 				requeiredImage[i].gameObject.SetActive(true);

@@ -3206,6 +3206,7 @@ MonoBehaviour:
   baseBag: {fileID: 1685562449}
   shopSlotPrefab: {fileID: 3979795244626573961, guid: 51c69e3a98c3602478775227c7edebb9, type: 3}
   baseBagSlots: []
+  bagBaseSlotHolder: {fileID: 1407402095}
   tradeUI: {fileID: 1582712811}
   playerMoneyUI: {fileID: 466010011}
   transaction: {fileID: 2138104777}
@@ -13944,7 +13945,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cannotUseCursorImage: {fileID: 0}
-  currentGrid: {fileID: 0}
   currentItem:
     itemID: 0
     itemName: 
@@ -13959,7 +13959,6 @@ MonoBehaviour:
     itemPrice: 0
     sellPercentage: 0
   playerTransform: {fileID: 1029001663}
-  cursorEnable: 1
   buildImage: {fileID: 1184367975}
 --- !u!4 &1544249742
 Transform:
@@ -16738,10 +16737,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c325ca1642d5574ba5639a3c5b17a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataSlots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &1930386540
 GameObject:
   m_ObjectHideFlags: 0

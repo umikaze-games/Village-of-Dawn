@@ -5,7 +5,6 @@ public class GameSaveData
 {
     public string dataSceneName;
 
-
 	//save name and position
 	public Dictionary<string, SerializableVector3> characterPosDict;
 
@@ -25,10 +24,4 @@ public class GameSaveData
 
 	public int playerMoney;
 
-	//NPC
-	public string targetScene;
-
-	public bool interactable;
-
-	public int animationInstanceID;
 }
