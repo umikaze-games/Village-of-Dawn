@@ -62,6 +62,10 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 	{
 		InitialTime();
 		gamePause = false;
+		timeUI.UpdateDayNight();
+		timeUI.UpdateTimeUI(gameMinute, gameHour);
+		timeUI.UpdateClockUI(gameHour);
+		timeUI.UpdateDayMonthYearUI(gameYear, gameMonth, gameDay);
 	}
 
 	private void OnBeforeSceneUnloadEvent()
@@ -72,6 +76,10 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 	private void OnAfterSceneLoadEvent()
 	{
 		gamePause = false;
+		timeUI.UpdateDayNight();
+		timeUI.UpdateTimeUI(gameMinute, gameHour);
+		timeUI.UpdateClockUI(gameHour);
+		timeUI.UpdateDayMonthYearUI(gameYear, gameMonth, gameDay);
 	}
 	private void Update()
 	{

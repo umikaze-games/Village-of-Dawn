@@ -27,6 +27,7 @@ public class InventoryUI : SingletonMonoBehaviour<InventoryUI>
 
 	[SerializeField]
 	private List<SlotUI> baseBagSlots;
+	public GameObject bagBaseSlotHolder;
 
 	[Header("TradeUI")]
 	public TradeUI tradeUI;
@@ -85,15 +86,15 @@ public class InventoryUI : SingletonMonoBehaviour<InventoryUI>
 
 	private void OnBagCloseEvent(SlotType slotType, InventoryBag_SO BagSO)
 	{
-		baseBag.SetActive(false);
+	
 		itemToolTip.gameObject.SetActive(false);
 		HightlightSlot(-1);
-		foreach (SlotUI slotUI in baseBagSlots)
+		foreach (Transform slotUI in bagBaseSlotHolder.transform)
 		{
 			Destroy(slotUI.gameObject);
 		}
 		baseBagSlots.Clear();
-
+		baseBag.SetActive(false);
 		if (slotType == SlotType.Shop)
 		{
 			bagUI.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
@@ -112,8 +113,11 @@ public class InventoryUI : SingletonMonoBehaviour<InventoryUI>
 			_ => null,
 
 		};
+
 		baseBag.gameObject.SetActive(true);
-		baseBagSlots=new List<SlotUI>();
+
+		baseBagSlots = new List<SlotUI>();
+
 		for (int i = 0; i < BagSO.inventoryItems.Count; i++)
 		{
 			var slot = Instantiate(prefab, baseBag.transform.GetChild(0)).GetComponent<SlotUI>();
