@@ -203,7 +203,7 @@ MonoBehaviour:
     canPickedup: 0
     canDropped: 0
     canCarried: 0
-    itemPrice: 0
+    itemPrice: 2
     sellPercentage: 0.5
   - itemID: 1017
     itemName: Rock
@@ -215,7 +215,7 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 1
     canCarried: 1
-    itemPrice: 1
+    itemPrice: 2
     sellPercentage: 0.5
   - itemID: 1018
     itemName: BreakTool
@@ -227,7 +227,7 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 0
     canCarried: 0
-    itemPrice: 1
+    itemPrice: 2
     sellPercentage: 0.5
   - itemID: 1019
     itemName: Grass01
@@ -239,7 +239,7 @@ MonoBehaviour:
     canPickedup: 0
     canDropped: 0
     canCarried: 0
-    itemPrice: 1
+    itemPrice: 2
     sellPercentage: 0.5
   - itemID: 1020
     itemName: Grass02
@@ -251,7 +251,7 @@ MonoBehaviour:
     canPickedup: 0
     canDropped: 0
     canCarried: 0
-    itemPrice: 1
+    itemPrice: 2
     sellPercentage: 0.5
   - itemID: 1021
     itemName: Grass03
@@ -263,7 +263,7 @@ MonoBehaviour:
     canPickedup: 0
     canDropped: 0
     canCarried: 0
-    itemPrice: 1
+    itemPrice: 2
     sellPercentage: 0.5
   - itemID: 1022
     itemName: Grass
@@ -275,7 +275,7 @@ MonoBehaviour:
     canPickedup: 1
     canDropped: 1
     canCarried: 1
-    itemPrice: 1
+    itemPrice: 2
     sellPercentage: 0.5
   - itemID: 1023
     itemName: ReapTool
@@ -299,5 +299,5 @@ MonoBehaviour:
     canPickedup: 0
     canDropped: 1
     canCarried: 1
-    itemPrice: 90
+    itemPrice: 10
     sellPercentage: 0.5

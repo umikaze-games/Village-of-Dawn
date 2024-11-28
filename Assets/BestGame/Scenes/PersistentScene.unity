@@ -3206,6 +3206,7 @@ MonoBehaviour:
   baseBag: {fileID: 1685562449}
   shopSlotPrefab: {fileID: 3979795244626573961, guid: 51c69e3a98c3602478775227c7edebb9, type: 3}
   baseBagSlots: []
+  bagBaseSlotHolder: {fileID: 1407402095}
   tradeUI: {fileID: 1582712811}
   playerMoneyUI: {fileID: 466010011}
   transaction: {fileID: 2138104777}
@@ -4576,7 +4577,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Return To Title
+  m_text: Save And Return
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6436,7 +6437,13 @@ MonoBehaviour:
   - faceImage: {fileID: 21300000, guid: bcb4accdbcb044b98bc839a4ab34d0f6, type: 3}
     onLeft: 1
     characterName: Allice
-    dialogueText: Can I help you?
+    dialogueText: Oh, you must be the new face around here!
+    needSpaceContinue: 1
+    isDone: 0
+  - faceImage: {fileID: 21300000, guid: bcb4accdbcb044b98bc839a4ab34d0f6, type: 3}
+    onLeft: 1
+    characterName: Allice
+    dialogueText: Take your time and enjoy yourself!
     needSpaceContinue: 1
     isDone: 0
   isTalking: 0
@@ -7732,6 +7739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuCavans: {fileID: 1865124411}
+  menuPanel: {fileID: 2099700353}
   gamePauseBtn: {fileID: 1403407675}
   gamePausePanel: {fileID: 2087625569}
   volumeSlider: {fileID: 1163583897}
@@ -13944,7 +13952,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cannotUseCursorImage: {fileID: 0}
-  currentGrid: {fileID: 0}
   currentItem:
     itemID: 0
     itemName: 
@@ -13959,7 +13966,6 @@ MonoBehaviour:
     itemPrice: 0
     sellPercentage: 0
   playerTransform: {fileID: 1029001663}
-  cursorEnable: 1
   buildImage: {fileID: 1184367975}
 --- !u!4 &1544249742
 Transform:
@@ -16738,10 +16744,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c325ca1642d5574ba5639a3c5b17a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataSlots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &1930386540
 GameObject:
   m_ObjectHideFlags: 0

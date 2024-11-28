@@ -23,6 +23,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>,ISaveab
 
 	private Dictionary<string, List<InventoryItem>> boxDataDict = new Dictionary<string, List<InventoryItem>>();
 
+	public GameSaveData gameSaveData;
 	public int BoxDataAmount => boxDataDict.Count;
 
 	public string GUID => GetComponent<DataGUID>().guid;
@@ -33,6 +34,22 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>,ISaveab
 		saveable.RegisterSaveable();
 
 		//EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.inventoryItems);
+	}
+
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.N))
+		{
+			foreach (var key in InventoryManager.Instance.boxDataDict.Keys)
+			{
+				Debug.Log($"Key in boxDataDict: {key}");
+			}
+			foreach (var key in InventoryManager.Instance.gameSaveData.inventoryDict.Keys)
+			{
+				Debug.Log($"Key in inventoryDict: {key}");
+			}
+			EventHandler.CallUpdateBoxEvent();
+		}
 	}
 	private void OnEnable()
 	{
@@ -325,16 +342,17 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>,ISaveab
 	{
 		this.playerMoney = saveData.playerMoney;
 		playerBag = Instantiate(bagTemplate);
-		playerBag.inventoryItems=saveData.inventoryDict[playerBag.name];
+		playerBag.inventoryItems = saveData.inventoryDict[playerBag.name];
+
+		gameSaveData = saveData;
 		foreach (var item in saveData.inventoryDict)
 		{
 			if (boxDataDict.ContainsKey(item.Key))
 			{
-				boxDataDict[item.Key]=item.Value;
+				boxDataDict[item.Key] = item.Value;
 			}
 		}
-
-		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player,playerBag.inventoryItems);
-
+		EventHandler.CallUpdateBoxEvent();
+		EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.inventoryItems);
 	}
 }

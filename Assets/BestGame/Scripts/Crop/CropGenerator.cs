@@ -25,6 +25,11 @@ public class CropGenerator : MonoBehaviour
 
 		private void GenerateCrop()
 		{
+			if (currentGrid == null)
+			{
+				currentGrid = FindFirstObjectByType<Grid>();
+			}
+		
 			Vector3Int cropGridPos = currentGrid.WorldToCell(transform.position);
 
 			if (seedItemID != 0)

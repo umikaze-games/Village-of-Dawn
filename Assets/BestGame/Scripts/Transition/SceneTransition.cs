@@ -38,6 +38,7 @@ public class SceneTransition : MonoBehaviour,ISaveable
 
 	private void OnEndGameEvent()
 	{
+		StopAllCoroutines();
 		StartCoroutine(UnloadScene());
 	}
 
@@ -76,6 +77,7 @@ public class SceneTransition : MonoBehaviour,ISaveable
 
 	private void OnSceneTransition(string fromsceneName, string tosceneName, Vector3 transitionPosition)
 	{
+		EventHandler.CallBeforeSceneUnloadEvent();
 		StartCoroutine(TransitionToScenePosition(fromsceneName, tosceneName,transitionPosition));
 	}
 

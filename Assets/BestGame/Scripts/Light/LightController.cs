@@ -7,7 +7,6 @@ public class LightController : MonoBehaviour
     private Light2D currentlight2D;
     private LightDetails currentlightDetails;
 	
-
 	private void Awake()
 	{
 		currentlight2D = GetComponent<Light2D>();

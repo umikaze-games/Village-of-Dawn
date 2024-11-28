@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class MenuUIManager : SingletonMonoBehaviour<MenuUIManager>
 {
 	public GameObject menuCavans;
+	public GameObject menuPanel;	
 	public Button gamePauseBtn;
 	public GameObject gamePausePanel;
 	public Slider volumeSlider;
@@ -49,12 +50,14 @@ public class MenuUIManager : SingletonMonoBehaviour<MenuUIManager>
 	}
 
 	public void ReturnMenuCavans()
-	{ 
-		Time.timeScale = 1.0f;
-		
-		EventHandler.CallEndGameEvent();
-
+	{
 		gamePausePanel.SetActive(false);
+
+		Time.timeScale = 1.0f;
+
+		menuCavans.gameObject.SetActive(true);
+		menuPanel.gameObject.SetActive(true);
+		EventHandler.CallEndGameEvent();
 	}
 
 
