@@ -6,9 +6,8 @@ using UnityEngine.UIElements;
 public class ItemManager : MonoBehaviour,ISaveable
 {
 	public Item itemPrefab;
-	//public Item bounceItemPrefab;
-	private Transform itemParent;
 
+	private Transform itemParent;
 	private Transform PlayerTransform => FindAnyObjectByType<PlayerController>().transform;
 
 	public string GUID => GetComponent<DataGUID>().guid;
@@ -80,6 +79,10 @@ public class ItemManager : MonoBehaviour,ISaveable
 	private void OnAfterSceneLoadEvent()
 	{
 		itemParent = GameObject.FindWithTag("ItemParent").transform;
+		foreach (Transform child in itemParent.transform)
+		{
+			Destroy(child.gameObject);
+		}
 		RecreateAllItems();
 		RebuildFurniture();
 	}
@@ -113,6 +116,7 @@ public class ItemManager : MonoBehaviour,ISaveable
 	private void RecreateAllItems()
 	{
 		List<SceneItem> currentSceneItems = new List<SceneItem>();
+		
 
 		if (sceneItemDict.TryGetValue(SceneManager.GetActiveScene().name, out currentSceneItems))
 		{
