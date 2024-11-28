@@ -13283,6 +13283,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1584218300155798293, guid: 34aa6ac17a412da4bbb8c205a2cf33fd, type: 3}
+      propertyPath: m_SortingLayer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1584218300155798293, guid: 34aa6ac17a412da4bbb8c205a2cf33fd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1584218300155798293, guid: 34aa6ac17a412da4bbb8c205a2cf33fd, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 88074909
+      objectReference: {fileID: 0}
     - target: {fileID: 2649895734914400352, guid: 34aa6ac17a412da4bbb8c205a2cf33fd, type: 3}
       propertyPath: m_Name
       value: Fireplace

@@ -23,11 +23,12 @@ public class SaveSlotUI : MonoBehaviour
 	{
 		currentButton = GetComponent<Button>();
 		currentButton.onClick.AddListener(LoadGameData);
+		index = transform.GetSiblingIndex();
 
 	}
 	private void Start()
 	{
-		index = transform.GetSiblingIndex();
+	
 
 	}
 	private void OnEnable()
@@ -42,6 +43,7 @@ public class SaveSlotUI : MonoBehaviour
 		if (currentData != null)
 		{
 			dataTime.text = currentData.DataTime;
+			dataScene.text = currentData.DataScene;
 		}
 		else
 		{

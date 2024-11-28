@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,10 +17,48 @@ public class DataSlot
 			if (dataDict.ContainsKey(key))
 			{
 				var timeData = dataDict[key];
+				string season;
+				switch (timeData.timeDict["gameSeason"])
+				{
+					case 0:
+						season= "Spring";
+						break;
+					case 1:
+						season = "Summer";
+						break;
+					case 2:
+						season = "Autumn";
+						break;
+					case 3:
+						season = "Winter";
+						break;
+					default:
+						season = "Season";
+						break;
+				}
 				return timeData.timeDict["gameYear"] + "/" +
-					   timeData.timeDict["gameSeason"] + "/ " +
+					   season + "/ " +
 					   timeData.timeDict["gameMonth"] + "/" +
 					   timeData.timeDict["gameDay"] + "/";
+			}
+			else return string.Empty;
+		}
+	}
+
+	public string DataScene
+	{
+		get
+		{
+			var key = SceneTransition.Instance.GUID;
+			if (dataDict.ContainsKey(key))
+			{
+				var transitionData = dataDict[key];
+				return transitionData.dataSceneName switch
+				{
+					"Scene01"=>"Farm",
+					"Scene02"=>"Home",
+					_ => string.Empty
+				};
 			}
 			else return string.Empty;
 		}
