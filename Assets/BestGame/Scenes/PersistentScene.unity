@@ -4577,7 +4577,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Return To Title
+  m_text: Save And Return
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6437,7 +6437,13 @@ MonoBehaviour:
   - faceImage: {fileID: 21300000, guid: bcb4accdbcb044b98bc839a4ab34d0f6, type: 3}
     onLeft: 1
     characterName: Allice
-    dialogueText: Can I help you?
+    dialogueText: Oh, you must be the new face around here!
+    needSpaceContinue: 1
+    isDone: 0
+  - faceImage: {fileID: 21300000, guid: bcb4accdbcb044b98bc839a4ab34d0f6, type: 3}
+    onLeft: 1
+    characterName: Allice
+    dialogueText: Take your time and enjoy yourself!
     needSpaceContinue: 1
     isDone: 0
   isTalking: 0
@@ -7733,6 +7739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuCavans: {fileID: 1865124411}
+  menuPanel: {fileID: 2099700353}
   gamePauseBtn: {fileID: 1403407675}
   gamePausePanel: {fileID: 2087625569}
   volumeSlider: {fileID: 1163583897}

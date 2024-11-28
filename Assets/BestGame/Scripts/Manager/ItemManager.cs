@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class ItemManager : MonoBehaviour,ISaveable
+public class ItemManager : SingletonMonoBehaviour<ItemManager>,ISaveable
 {
 	public Item itemPrefab;
 
@@ -166,7 +166,7 @@ public class ItemManager : MonoBehaviour,ISaveable
 		}
 	}
 
-	private void RebuildFurniture()
+	public void RebuildFurniture()
 	{
 		List<SceneFurniture> currentSceneFurniture = new List<SceneFurniture>();
 

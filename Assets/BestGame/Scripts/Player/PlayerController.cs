@@ -179,5 +179,6 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveab
 	{
 		Vector3 targetPosition=saveData.characterPosDict[this.name].ToVector3();
 		transform.position = targetPosition;
+		inputDisable = false;
 	}
 }

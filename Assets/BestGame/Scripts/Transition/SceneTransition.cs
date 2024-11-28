@@ -38,6 +38,7 @@ public class SceneTransition : MonoBehaviour,ISaveable
 
 	private void OnEndGameEvent()
 	{
+		StopAllCoroutines();
 		StartCoroutine(UnloadScene());
 	}
 

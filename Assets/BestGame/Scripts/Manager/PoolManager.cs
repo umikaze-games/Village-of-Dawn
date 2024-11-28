@@ -14,12 +14,10 @@ public class PoolManager : MonoBehaviour
 	private void OnEnable()
 	{
 		EventHandler.ParticleEffectEvent += OnParticalEffectEvent;
-		//EventHandler.InitSoundEffect += InitSoundEffect;
 	}
 	private void OnDisable()
 	{
 		EventHandler.ParticleEffectEvent -= OnParticalEffectEvent;
-		//EventHandler.InitSoundEffect -= InitSoundEffect;
 	}
 
 	private void Start()
@@ -54,7 +52,7 @@ public class PoolManager : MonoBehaviour
 			ParticleEffectType.LeaveFalling02 => poolEffectList[3],
 			_ => null,
 		};
-
+		if (objPool == null) return;
 		GameObject obj = objPool.Get();
 		obj.transform.position = pos;
 		StartCoroutine(ReleaseRoutine(objPool, obj));
