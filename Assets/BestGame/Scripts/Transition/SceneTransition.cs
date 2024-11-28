@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class SceneTransition : MonoBehaviour,ISaveable
+public class SceneTransition : SingletonMonoBehaviour<SceneTransition>,ISaveable
 {
 	public string startSceneName = string.Empty;
 
@@ -12,9 +12,9 @@ public class SceneTransition : MonoBehaviour,ISaveable
 
 	public string GUID => GetComponent<DataGUID>().guid;
 
-	private void Awake()
+	protected override void Awake()
 	{
-		loadingPannel.GetComponent<CanvasGroup>();
+		base.Awake();
 	}
 
 
@@ -38,6 +38,7 @@ public class SceneTransition : MonoBehaviour,ISaveable
 
 	private void OnEndGameEvent()
 	{
+		StopAllCoroutines();
 		StartCoroutine(UnloadScene());
 	}
 

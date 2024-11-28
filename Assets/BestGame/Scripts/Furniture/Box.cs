@@ -1,4 +1,8 @@
+using Unity.VisualScripting;
+using UnityEditor.Overlays;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Box : MonoBehaviour
 {
@@ -20,7 +24,14 @@ public class Box : MonoBehaviour
 		{
 			boxBagData = Instantiate(boxBagTemplate);
 		}
+
+		EventHandler.UpdateBoxEvent += OnUpdateBoxEvent;
 	}
+	private void OnDisable()
+	{
+		EventHandler.UpdateBoxEvent -= OnUpdateBoxEvent;
+	}
+
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
@@ -44,6 +55,7 @@ public class Box : MonoBehaviour
 		if (!isOpen && canOpen && Input.GetMouseButtonDown(1))
 		{
 			EventHandler.CallBagOpenEvent(SlotType.Box, boxBagData);
+			InventoryManager.Instance.RestoreData(InventoryManager.Instance.gameSaveData);
 			isOpen = true;
 		}
 
@@ -58,24 +70,29 @@ public class Box : MonoBehaviour
 			EventHandler.CallBagCloseEvent(SlotType.Box, boxBagData);
 			isOpen = false;
 		}
-	}
 
+	}
 	public void InitBox(int boxIndex)
 	{
-		// Set the box index
 		index = boxIndex;
-		string key = this.name + index;
-		if (InventoryManager.Instance.GetBoxDataList(key) != null) // Existing box record
+		var key = this.name + index;
+		if (InventoryManager.Instance.GetBoxDataList(key) != null)
 		{
 			boxBagData.inventoryItems = InventoryManager.Instance.GetBoxDataList(key);
 		}
-		else // New box record
+		else
 		{
 			if (index == 0)
-			{
 				index = InventoryManager.Instance.BoxDataAmount;
-			} 
 			InventoryManager.Instance.AddBoxDataDict(this);
 		}
+
+	}
+	private void OnUpdateBoxEvent()
+	{
+		var key = this.name + index;
+		boxBagData.inventoryItems = InventoryManager.Instance.GetBoxDataList(key);
+		EventHandler.CallUpdateInventoryUI(InventoryLocation.Box, boxBagData.inventoryItems);
+
 	}
 }

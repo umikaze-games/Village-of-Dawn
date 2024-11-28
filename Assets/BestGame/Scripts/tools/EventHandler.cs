@@ -187,5 +187,11 @@ public static class EventHandler
 		EndGameEvent?.Invoke();
 	}
 
+	public static event Action UpdateBoxEvent;
+	public static void CallUpdateBoxEvent()
+	{
+		UpdateBoxEvent?.Invoke();
+	}
+
 }
 
