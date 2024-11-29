@@ -193,5 +193,10 @@ public static class EventHandler
 		UpdateBoxEvent?.Invoke();
 	}
 
+	public static event Action UpdateSaveSlotUIEvent;
+	public static void CallUpdateSaveSlotUIEvent()
+	{ 
+		UpdateSaveSlotUIEvent?.Invoke();
+	}
 }
 

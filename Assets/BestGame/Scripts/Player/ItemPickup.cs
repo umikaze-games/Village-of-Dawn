@@ -11,6 +11,7 @@ public class ItemPickup : MonoBehaviour
 			{
 
 				InventoryManager.Instance.AddItem(item, item.itemDetails.canPickedup);
+				EventHandler.CallPlaySEEvent("Pluck", AudioType.CropSE);
 			}
 		
 		}

@@ -57,6 +57,7 @@ public class MenuUIManager : SingletonMonoBehaviour<MenuUIManager>
 
 		menuCavans.gameObject.SetActive(true);
 		menuPanel.gameObject.SetActive(true);
+		EventHandler.CallUpdateSaveSlotUIEvent();
 		EventHandler.CallEndGameEvent();
 	}
 
