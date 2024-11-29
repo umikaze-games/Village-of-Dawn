@@ -91,7 +91,7 @@ public class Crop : MonoBehaviour
 
 				EventHandler.CallInstantiateItemInScene(cropDetails.producedItemID, spawnPos);
 			}
-
+			EventHandler.CallPlaySEEvent("Pluck", AudioType.CropSE);
 		}
 
 		if (tileDetails != null)

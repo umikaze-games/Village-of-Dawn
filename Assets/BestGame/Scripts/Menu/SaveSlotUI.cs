@@ -33,9 +33,13 @@ public class SaveSlotUI : MonoBehaviour
 	}
 	private void OnEnable()
 	{
-		SetupSlotUI();
+		EventHandler.UpdateSaveSlotUIEvent += SetupSlotUI;
+		EventHandler.CallUpdateSaveSlotUIEvent();
 	}
+	private void OnDisable()
+	{
 
+	}
 	private void SetupSlotUI()
 	{
 		currentData = SaveLoadManager.Instance.dataSlots[Index];

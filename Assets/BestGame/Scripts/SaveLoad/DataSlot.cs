@@ -36,10 +36,11 @@ public class DataSlot
 						season = "Season";
 						break;
 				}
-				return timeData.timeDict["gameYear"] + "/" +
-					   season + "/ " +
-					   timeData.timeDict["gameMonth"] + "/" +
-					   timeData.timeDict["gameDay"] + "/";
+				return
+						season + "/ " + 
+						timeData.timeDict["gameYear"] + "/" +
+						((int)timeData.timeDict["gameMonth"]).ToString("D2") + "/" +
+						((int)timeData.timeDict["gameDay"]).ToString("D2") + "/";
 			}
 			else return string.Empty;
 		}
