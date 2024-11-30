@@ -21,4 +21,5 @@ public class MenuUI : MonoBehaviour
         Application.Quit();
         Debug.Log("ExitGame");
     }
+
 }

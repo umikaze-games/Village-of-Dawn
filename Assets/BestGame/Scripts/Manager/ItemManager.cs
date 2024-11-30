@@ -15,10 +15,7 @@ public class ItemManager : SingletonMonoBehaviour<ItemManager>,ISaveable
 	private Dictionary<string, List<SceneItem>> sceneItemDict = new Dictionary<string, List<SceneItem>>();
 
 	private Dictionary<string, List<SceneFurniture>> sceneFurnitureDict = new Dictionary<string, List<SceneFurniture>>();
-	private void Awake()
-	{
 
-	}
 	private void Start()
 	{
 		ISaveable saveable = this;
@@ -53,7 +50,12 @@ public class ItemManager : SingletonMonoBehaviour<ItemManager>,ISaveable
 	{
 		BluePrintDetails bluePrintDetails = InventoryManager.Instance.bluePrintSO.GetBluePrintDetails(ID);
 		var buildItem = Instantiate(bluePrintDetails.buildPrefab, mosPosition, Quaternion.identity, itemParent);
-		
+		if (buildItem.GetComponent<Box>())
+		{
+			buildItem.GetComponent<Box>().index = InventoryManager.Instance.BoxDataAmount;
+			buildItem.GetComponent<Box>().InitBox(buildItem.GetComponent<Box>().index);
+		}
+
 	}
 
 	private void OnDropItemEvent(int ID, Vector3 mousePos, ItemType itemType)

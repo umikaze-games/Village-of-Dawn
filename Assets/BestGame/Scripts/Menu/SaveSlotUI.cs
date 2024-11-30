@@ -24,21 +24,11 @@ public class SaveSlotUI : MonoBehaviour
 		currentButton = GetComponent<Button>();
 		currentButton.onClick.AddListener(LoadGameData);
 		index = transform.GetSiblingIndex();
-
-	}
-	private void Start()
-	{
-	
-
 	}
 	private void OnEnable()
 	{
 		EventHandler.UpdateSaveSlotUIEvent += SetupSlotUI;
 		EventHandler.CallUpdateSaveSlotUIEvent();
-	}
-	private void OnDisable()
-	{
-
 	}
 	private void SetupSlotUI()
 	{
