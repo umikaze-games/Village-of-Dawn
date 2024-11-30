@@ -7,13 +7,15 @@ public class MenuUIManager : SingletonMonoBehaviour<MenuUIManager>
 	public GameObject menuPanel;	
 	public Button gamePauseBtn;
 	public GameObject gamePausePanel;
+	public GameObject guidebook;
+	public Button guidebookBtn;
 	public Slider volumeSlider;
 
 	protected override void Awake()
 	{
 		base.Awake();
 		gamePauseBtn.onClick.AddListener(TogglePausePanel);
-
+		guidebookBtn.onClick.AddListener(ToggleGuideBook);
 	}
 	private void Start()
 	{
@@ -34,11 +36,27 @@ public class MenuUIManager : SingletonMonoBehaviour<MenuUIManager>
 		menuCavans.transform.GetChild(0).gameObject.SetActive(false);
 	}
 
+	private void ToggleGuideBook()
+	{
+		bool isOpen = guidebook.activeInHierarchy;
+		if (isOpen)
+		{ 
+			guidebook.SetActive(false);
+			Time.timeScale = 1.0f;
+			EventHandler.CallPlaySEEvent("Page", AudioType.PlayerSE);
+		}
+		else
+		{
+			guidebook.SetActive(true);
+			Time.timeScale = 0.0f;
+			EventHandler.CallPlaySEEvent("Page", AudioType.PlayerSE);
+		}
+	}
 	private void TogglePausePanel()
 	{
 		bool isOpen = gamePausePanel.activeInHierarchy;
 		if (isOpen)
-		{ 
+		{
 			gamePausePanel.SetActive(false);
 			Time.timeScale = 1.0f;
 		}
@@ -54,11 +72,11 @@ public class MenuUIManager : SingletonMonoBehaviour<MenuUIManager>
 		gamePausePanel.SetActive(false);
 
 		Time.timeScale = 1.0f;
+		EventHandler.CallUpdateSaveSlotUIEvent();
+		EventHandler.CallEndGameEvent();
 
 		menuCavans.gameObject.SetActive(true);
 		menuPanel.gameObject.SetActive(true);
-		EventHandler.CallUpdateSaveSlotUIEvent();
-		EventHandler.CallEndGameEvent();
 	}
 
 

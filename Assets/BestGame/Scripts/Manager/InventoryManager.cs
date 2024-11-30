@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,24 +33,6 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>,ISaveab
 	{
 		ISaveable saveable = this;
 		saveable.RegisterSaveable();
-
-		//EventHandler.CallUpdateInventoryUI(InventoryLocation.Player, playerBag.inventoryItems);
-	}
-
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.N))
-		{
-			foreach (var key in InventoryManager.Instance.boxDataDict.Keys)
-			{
-				Debug.Log($"Key in boxDataDict: {key}");
-			}
-			foreach (var key in InventoryManager.Instance.gameSaveData.inventoryDict.Keys)
-			{
-				Debug.Log($"Key in inventoryDict: {key}");
-			}
-			EventHandler.CallUpdateBoxEvent();
-		}
 	}
 	private void OnEnable()
 	{
@@ -101,6 +84,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>,ISaveab
 	public void OnDropItemEvent(int ID, Vector3 pos, ItemType itemType)
 	{
 		RemoveItem(ID, 1);
+		EventHandler.CallPlaySEEvent("Pluck", AudioType.CropSE);
 	}
 
 	public ItemDetails GetItemDetails(int ID)
@@ -331,6 +315,7 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>,ISaveab
 		gameSaveData.playerMoney = playerMoney;
 		gameSaveData.inventoryDict = new Dictionary<string, List<InventoryItem>>();
 		gameSaveData.inventoryDict.Add(playerBag.name, playerBag.inventoryItems);
+
 		foreach (var item in boxDataDict)
 		{
 			gameSaveData.inventoryDict.Add(item.Key, item.Value);
@@ -344,7 +329,6 @@ public class InventoryManager : SingletonMonoBehaviour<InventoryManager>,ISaveab
 		playerBag = Instantiate(bagTemplate);
 		playerBag.inventoryItems = saveData.inventoryDict[playerBag.name];
 
-		gameSaveData = saveData;
 		foreach (var item in saveData.inventoryDict)
 		{
 			if (boxDataDict.ContainsKey(item.Key))

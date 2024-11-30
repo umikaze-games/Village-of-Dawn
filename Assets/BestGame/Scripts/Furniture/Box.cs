@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
-using UnityEditor.Overlays;
-using UnityEditor.Rendering;
+﻿using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -55,19 +53,21 @@ public class Box : MonoBehaviour
 		if (!isOpen && canOpen && Input.GetMouseButtonDown(1))
 		{
 			EventHandler.CallBagOpenEvent(SlotType.Box, boxBagData);
-			InventoryManager.Instance.RestoreData(InventoryManager.Instance.gameSaveData);
+			EventHandler.CallPlaySEEvent("OpenBox", AudioType.PlayerSE);
 			isOpen = true;
 		}
 
 		if (!canOpen && isOpen)
 		{
 			EventHandler.CallBagCloseEvent(SlotType.Box, boxBagData);
+			EventHandler.CallPlaySEEvent("OpenBox", AudioType.PlayerSE);
 			isOpen = false;
 		}
 
 		if (isOpen && Input.GetKeyDown(KeyCode.Escape))
 		{
 			EventHandler.CallBagCloseEvent(SlotType.Box, boxBagData);
+			EventHandler.CallPlaySEEvent("OpenBox", AudioType.PlayerSE);
 			isOpen = false;
 		}
 

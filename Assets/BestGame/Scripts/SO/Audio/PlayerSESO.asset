@@ -28,3 +28,13 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: cc88160b342057844b698bbdcf164fc6, type: 3}
     audioVolume: 0.8
     audioType: 2
+  - sceneName: 
+    clipName: Page
+    audioClip: {fileID: 8300000, guid: f4c7fca7104f94e4584ddf80a1c236cb, type: 3}
+    audioVolume: 0.8
+    audioType: 2
+  - sceneName: 
+    clipName: OpenBox
+    audioClip: {fileID: 8300000, guid: 874dfdcec4ad05648a479e3b5854ae35, type: 3}
+    audioVolume: 0.8
+    audioType: 2
