@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
-using UnityEditor.Overlays;
-using UnityEditor.Rendering;
+﻿using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -55,7 +53,6 @@ public class Box : MonoBehaviour
 		if (!isOpen && canOpen && Input.GetMouseButtonDown(1))
 		{
 			EventHandler.CallBagOpenEvent(SlotType.Box, boxBagData);
-			InventoryManager.Instance.RestoreData(InventoryManager.Instance.gameSaveData);
 			isOpen = true;
 		}
 

@@ -96,7 +96,7 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 		}
 		if (Input.GetKey(KeyCode.T))
 		{
-			for (int i = 0; i < 600; i++)
+			for (int i = 0; i < 100; i++)
 			{
 				UpdateGameTime();
 			}
