@@ -18,6 +18,8 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 	private bool cursorPositionValid;
 
 	public Image buildImage;
+
+	public GameObject gridHightlight;
 	private void Start()
 	{
 		currentGrid = FindAnyObjectByType<Grid>();
@@ -69,6 +71,7 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 	
 		if (Mathf.Abs(mouseGridPosition.x - playerGridPos.x) > currentItem.itemUseRadius || Mathf.Abs(mouseGridPosition.y - playerGridPos.y) > currentItem.itemUseRadius)
 		{
+			HideGridHighlight(mouseWorldPosition);
 			SetCursorInValid();
 			return;
 		}
@@ -82,30 +85,66 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 
 			switch (currentItem.itemType)
 			{
-				case ItemType.Seed: 
-					if (currentTile.daySinceDug > -1 && currentTile.seedItemID == -1) SetCursorValid(); 
-					else SetCursorInValid();
+				case ItemType.Seed:
+					if (currentTile.daySinceDug > -1 && currentTile.seedItemID == -1)
+					{
+						ShowGridHighlight(mouseWorldPosition);
+						SetCursorValid();
+					} 
+					else 
+					{
+						HideGridHighlight(mouseWorldPosition);
+						SetCursorInValid();
+					}
 					break;
-				case ItemType.Product: 
-					if (currentTile.canDropItem && currentItem.canDropped) SetCursorValid();
-					else SetCursorInValid();
+				case ItemType.Product:
+					if (currentTile.canDropItem && currentItem.canDropped)
+					{
+						ShowGridHighlight(mouseWorldPosition);
+						SetCursorValid();
+					} 
+					else
+					{
+						HideGridHighlight(mouseWorldPosition);
+						SetCursorInValid();
+					} 
 					break;
-				case ItemType.HoeTool: 
-					if (currentTile.canDig) SetCursorValid(); else SetCursorInValid();
+				case ItemType.HoeTool:
+					if (currentTile.canDig)
+					{
+						ShowGridHighlight(mouseWorldPosition);
+						SetCursorValid();
+					}
+					else
+					{
+						HideGridHighlight(mouseWorldPosition);
+						SetCursorInValid();	
+					} 
 					break;
 				case ItemType.WaterTool:
-					if (currentTile.daySinceDug > -1 && currentTile.daysSinceWatered == -1) SetCursorValid(); 
-					else SetCursorInValid();
+					if (currentTile.daySinceDug > -1 && currentTile.daysSinceWatered == -1)
+					{
+						ShowGridHighlight(mouseWorldPosition);
+						SetCursorValid();
+					}
+					else
+					{
+						HideGridHighlight(mouseWorldPosition);
+						SetCursorInValid();
+					}
+					
 					break;
 				case ItemType.BreakTool:
 				case ItemType.ChopTool:
 				
 					if (crop != null && crop.CanHarvest && crop.cropDetails.CheckToolAvaliable(currentItem.itemID))
 					{
+						ShowGridHighlight(mouseWorldPosition);
 						SetCursorValid();
 					}
 					else
 					{
+						HideGridHighlight(mouseWorldPosition);
 						SetCursorInValid();
 					}
 					break;
@@ -113,7 +152,16 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 					if (currentCrop != null)
 					{
 						if (currentCrop.CheckToolAvaliable(currentItem.itemID))
-							if (currentTile.growthDays >= currentCrop.TotalGrowthDays) SetCursorValid(); else SetCursorInValid();
+							if (currentTile.growthDays >= currentCrop.TotalGrowthDays)
+							{
+								ShowGridHighlight(mouseWorldPosition);
+								SetCursorValid();
+							}
+							else 
+							{
+								HideGridHighlight(mouseWorldPosition);
+								SetCursorInValid();
+							} 
 					}
 					else
 						SetCursorInValid();
@@ -121,11 +169,13 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 				case ItemType.ReapTool:
 					if (GridMapManager.Instance.HaveReapableItemInRadius(mouseWorldPosition, currentItem))
 					{
+						ShowGridHighlight(mouseWorldPosition);
 						SetCursorValid();
 					}
 
 					else
 					{
+						HideGridHighlight(mouseWorldPosition);
 						SetCursorInValid();
 					} 
 					break;
@@ -135,15 +185,39 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 					var bluePrintDetails = InventoryManager.Instance.bluePrintSO.GetBluePrintDetails(currentItem.itemID);
 
 					if (currentTile.canPlaceFurniture && InventoryManager.Instance.CheckStock(currentItem.itemID))
+					{
+
+						ShowGridHighlight(mouseWorldPosition);
 						SetCursorValid();
-					else SetCursorInValid();
+					}
+					else
+					{
+						HideGridHighlight(mouseWorldPosition);
+						SetCursorInValid();	
+					} 
 					break;
 			}
 		}
 		else
 		{
+			HideGridHighlight(mouseWorldPosition);
 			SetCursorInValid();
 		}
+	}
+	private void ShowGridHighlight(Vector3 mouseWorldPosition)
+	{
+		Vector3Int gridPosition = currentGrid.WorldToCell(mouseWorldPosition);
+		Vector3 cellCenterPosition = currentGrid.GetCellCenterWorld(gridPosition);
+		gridHightlight.gameObject.SetActive(true);
+		gridHightlight.transform.position = cellCenterPosition;
+	}
+
+	private void HideGridHighlight(Vector3 mouseWorldPosition)
+	{
+		Vector3Int gridPosition = currentGrid.WorldToCell(mouseWorldPosition);
+		Vector3 cellCenterPosition = currentGrid.GetCellCenterWorld(gridPosition);
+		gridHightlight.gameObject.SetActive(false);
+		gridHightlight.transform.position = cellCenterPosition;
 	}
 
 	private void CheckPlayerInput()

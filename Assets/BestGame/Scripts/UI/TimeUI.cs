@@ -30,7 +30,7 @@ public class TimeUI : MonoBehaviour
 	}
 	public void UpdateDayMonthYearUI(int year, int month,int day)
 	{
-		dateText.text = string.Format("{0:D2}.{1:D2}.{2:D2}", year, month,day);
+		dateText.text = string.Format("{0:D2}/{1:D2}/{2:D2}", year, month,day);
 	}
 
 	public void UpdateSeasonUI(int season)
@@ -44,7 +44,11 @@ public class TimeUI : MonoBehaviour
 	{
 		dayNightImage.transform.Rotate(0, 0, 15);
 	}
+	public void NewDay()
+	{
+		dayNightImage.transform.rotation=Quaternion.Euler(0,0,0);
 
+	}
 	public void UpdateClockUI(int hour)
 	{
 		for (int i = 0; i < (hour+1)/4; i++)

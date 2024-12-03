@@ -198,5 +198,11 @@ public static class EventHandler
 	{ 
 		UpdateSaveSlotUIEvent?.Invoke();
 	}
+
+	public static event Action NewDayEvent;
+	public static void CallNewDayEvent() 
+	{ 
+		NewDayEvent?.Invoke();
+	}
 }
 

@@ -23,7 +23,9 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveab
 	private float mouseX;
 	private float mouseY;
 	private bool useTool=false;
-	private bool inputDisable=false;
+	public bool inputDisable=false;
+
+	[SerializeField]
 	private bool canMove=true;
 
 	public string GUID => GetComponent<DataGUID>().guid;

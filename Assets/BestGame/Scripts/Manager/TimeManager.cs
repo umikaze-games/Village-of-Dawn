@@ -42,6 +42,7 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 		EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
 		EventHandler.StartNewGameEvent += OnStartNewGameEvent;
 		EventHandler.EndGameEvent += OnEndGameEvent;
+		EventHandler.NewDayEvent += OnNewDayEvent;
 	}
 
 	private void OnDisable()
@@ -50,6 +51,7 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 		EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
 		EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
 		EventHandler.EndGameEvent -= OnEndGameEvent;
+		EventHandler.NewDayEvent -= OnNewDayEvent;
 
 	}
 
@@ -208,6 +210,51 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 		gameHour = saveData.timeDict["gameHour"];
 		gameMinute = saveData.timeDict["gameMinute"];
 		gameSecond = saveData.timeDict["gameSecond"];
+	}
+
+	public void OnNewDayEvent()
+	{
+		gameDay++;
+		gameHour = 6;
+		gameMinute=0;
+		gameSecond=0;
+		EventHandler.CallGameDayEvent(gameDay, gameSeason);
+		if (gameDay > Settings.dayHold)
+		{
+			gameDay = 1;
+			gameMonth++;
+			monthInSeason--;
+			timeUI.UpdateDayMonthYearUI(gameYear, gameMonth, gameDay);
+
+			if (gameMonth > 12)
+				gameMonth = 1;
+			if (monthInSeason == 0)
+			{
+				gameSeason++;
+				timeUI.UpdateSeasonUI(gameSeason);
+
+				if (gameSeason > Settings.seasonHold)
+				{
+					gameSeason = 0;
+					timeUI.UpdateSeasonUI(gameSeason);
+
+					gameYear++;
+					timeUI.UpdateDayMonthYearUI(gameYear, gameMonth, gameDay);
+
+					if (gameYear > 9999)
+					{
+						gameYear = 2025;
+						timeUI.UpdateDayMonthYearUI(gameYear, gameMonth, gameDay);
+
+					}
+				}
+
+			}
+		}
+		timeUI.UpdateDayMonthYearUI(gameYear, gameMonth, gameDay);
+		timeUI.NewDay();
+		timeUI.UpdateTimeUI(gameMinute, gameHour);
+		timeUI.UpdateClockUI(gameHour);
 	}
 }
 
