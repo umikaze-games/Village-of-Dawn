@@ -198,5 +198,11 @@ public static class EventHandler
 	{ 
 		UpdateSaveSlotUIEvent?.Invoke();
 	}
+
+	public static event Action<Vector3>ShowGridHightlightEvent;
+	public static void CallShowGridHightlightEvent(Vector3 mouseWorldPosition)
+	{
+		ShowGridHightlightEvent?.Invoke(mouseWorldPosition);
+	}
 }
 
