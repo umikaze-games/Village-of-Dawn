@@ -46,7 +46,6 @@ public class FarmAudioManager : SingletonMonoBehaviour<FarmAudioManager>
 	private void OnPlaySEEvent(string sEName,AudioType audioType)
 	{
 		string audioMixGropName=null;
-		//AudioSO sEDatas=new AudioSO();
 		AudioSO sEDatas = ScriptableObject.CreateInstance<AudioSO>();
 		AudioSource audioSource=GetSESoure(audioType);
 		switch (audioType)
@@ -79,7 +78,7 @@ public class FarmAudioManager : SingletonMonoBehaviour<FarmAudioManager>
 			}
 		}
 		audioMixer.SetFloat(audioMixGropName, audioSource.volume * 100 - 80);
-		if (audioSource.isPlaying) return;
+		//if (audioSource.isPlaying) return;
 		audioSource.Play();
 	}
 

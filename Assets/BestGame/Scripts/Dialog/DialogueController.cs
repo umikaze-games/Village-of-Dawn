@@ -9,16 +9,14 @@ public class DialogueController : MonoBehaviour
 	public List<Dialogue> dialogueList;
 
 	public bool isTalking=false;
-	private bool canShowDialogue=false;
+	public bool canShowDialogue=false;
 	private Queue<Dialogue> dialogueQueue=new Queue<Dialogue>();
 	private NPCAction nPCAction;
 	public GameObject interactiveButton;
 	private void Awake()
 	{
 		nPCAction = GetComponent<NPCAction>();
-
 	}
-
 	private void Start()
 	{
 		ResetDialogueQueue();
@@ -28,15 +26,25 @@ public class DialogueController : MonoBehaviour
 		if (canShowDialogue&&Input.GetKeyDown(KeyCode.Space) && !isTalking)
 		{
 			StartCoroutine(ShowDialogue());
-
 		}
 	}
-	private void OnTriggerEnter2D(Collider2D collision)
+	//private void OnTriggerEnter2D(Collider2D collision)
+	//{
+	//	if (!nPCAction.isMoving&&collision.gameObject.CompareTag("Player"))
+	//	{
+	//		interactiveButton.SetActive(true);
+	//		canShowDialogue =true;
+	//	}
+
+	//}
+
+	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (!nPCAction.isMoving&&collision.gameObject.CompareTag("Player"))
+		if (!nPCAction.isMoving && collision.gameObject.CompareTag("Player"))
 		{
 			interactiveButton.SetActive(true);
-			canShowDialogue =true;
+			canShowDialogue = true;
+			nPCAction.canMove = false;
 		}
 
 	}
@@ -49,7 +57,7 @@ public class DialogueController : MonoBehaviour
 
 	}
 
-	private IEnumerator ShowDialogue()
+	public IEnumerator ShowDialogue()
 	{
 		EventHandler.CallGamePaueseEvent(true);
 		if (dialogueQueue.Count>0)
@@ -90,4 +98,5 @@ public class DialogueController : MonoBehaviour
 	
 		GetDialogDetail(dialogueList);
 	}
+
 }

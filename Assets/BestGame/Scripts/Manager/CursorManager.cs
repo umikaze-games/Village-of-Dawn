@@ -67,7 +67,11 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 
 		buildImage.rectTransform.position = Input.mousePosition;
 
-		if (currentItem == null) return;
+		if (currentItem == null)
+		{
+			HideGridHighlight(mouseWorldPosition);
+			return;
+		}
 	
 		if (Mathf.Abs(mouseGridPosition.x - playerGridPos.x) > currentItem.itemUseRadius || Mathf.Abs(mouseGridPosition.y - playerGridPos.y) > currentItem.itemUseRadius)
 		{
