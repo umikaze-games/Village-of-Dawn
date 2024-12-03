@@ -3,69 +3,57 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DialogueController : MonoBehaviour
+public class OpeningDialogue : MonoBehaviour
 {
 	public UnityEvent OnFinishDialogue;
 	public List<Dialogue> dialogueList;
-
-	public bool isTalking=false;
-	public bool canShowDialogue=false;
-	private Queue<Dialogue> dialogueQueue=new Queue<Dialogue>();
-	private NPCAction nPCAction;
 	public GameObject interactiveButton;
-	private void Awake()
+	public bool canShowDialogue = false;
+	private Queue<Dialogue> dialogueQueue = new Queue<Dialogue>();
+	private void OnEnable()
 	{
-		nPCAction = GetComponent<NPCAction>();
+		EventHandler.StartNewGameEvent += OnStartNewGameEvent;
 	}
+
+	private void OnDisable()
+	{
+		EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
+	}
+
 	private void Start()
 	{
 		ResetDialogueQueue();
 	}
 	private void Update()
 	{
-		if (canShowDialogue&&Input.GetKeyDown(KeyCode.Space) && !isTalking)
+		if (canShowDialogue && Input.GetKeyDown(KeyCode.Space))
 		{
 			StartCoroutine(ShowDialogue());
 		}
 	}
-	private void OnTriggerEnter2D(Collider2D collision)
+	private void OnStartNewGameEvent(int obj)
 	{
-		if (!nPCAction.isMoving&&collision.gameObject.CompareTag("Player"))
-		{
-			interactiveButton.SetActive(true);
-			canShowDialogue =true;
-		}
-
-	}
-
-	private void OnTriggerExit2D(Collider2D collision)
-	{
-		interactiveButton.SetActive(false);
-		nPCAction.canMove = true;
-		canShowDialogue =false;
-
+		StartCoroutine(ShowDialogue());
 	}
 
 	public IEnumerator ShowDialogue()
 	{
+		canShowDialogue = true;
 		EventHandler.CallGamePaueseEvent(true);
-		if (dialogueQueue.Count>0)
+		if (dialogueQueue.Count > 0)
 		{
 			Dialogue dialogue = dialogueQueue.Dequeue();
 			EventHandler.CallShowDialogueEvent(dialogue);
 			yield return new WaitUntil(() => dialogue.isDone);
 			//Debug.Log("isdone");
-			isTalking = false;
 		}
 		else
 		{
-			isTalking = false;
+			canShowDialogue=false;
 			EventHandler.CallEndDialogueEvent();
-			ResetDialogueQueue();
-			EventHandler.CallGamePaueseEvent(false);
-			OnFinishDialogue?.Invoke();
+			//EventHandler.CallGamePaueseEvent(false);
 		}
-	
+
 	}
 
 	private void GetDialogDetail(List<Dialogue> dialogueList)
@@ -79,13 +67,12 @@ public class DialogueController : MonoBehaviour
 
 	private void ResetDialogueQueue()
 	{
-		if (dialogueQueue.Count>0)
+		if (dialogueQueue.Count > 0)
 		{
 			dialogueQueue.Clear();
 			Debug.Log("dialogueQueueClear");
 		}
-	
+
 		GetDialogDetail(dialogueList);
 	}
-
 }

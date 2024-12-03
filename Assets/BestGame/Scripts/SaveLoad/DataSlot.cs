@@ -40,7 +40,7 @@ public class DataSlot
 						season + "/ " + 
 						timeData.timeDict["gameYear"] + "/" +
 						((int)timeData.timeDict["gameMonth"]).ToString("D2") + "/" +
-						((int)timeData.timeDict["gameDay"]).ToString("D2") + "/";
+						((int)timeData.timeDict["gameDay"]).ToString("D2");
 			}
 			else return string.Empty;
 		}
