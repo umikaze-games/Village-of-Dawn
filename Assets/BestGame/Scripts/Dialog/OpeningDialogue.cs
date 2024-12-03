@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class OpeningDialogue : MonoBehaviour
 {
-	public UnityEvent OnFinishDialogue;
 	public List<Dialogue> dialogueList;
 	public GameObject interactiveButton;
 	public bool canShowDialogue = false;
@@ -38,10 +37,11 @@ public class OpeningDialogue : MonoBehaviour
 
 	public IEnumerator ShowDialogue()
 	{
-		canShowDialogue = true;
 		EventHandler.CallGamePaueseEvent(true);
 		if (dialogueQueue.Count > 0)
 		{
+			interactiveButton.gameObject.SetActive(true);
+			canShowDialogue = true;
 			Dialogue dialogue = dialogueQueue.Dequeue();
 			EventHandler.CallShowDialogueEvent(dialogue);
 			yield return new WaitUntil(() => dialogue.isDone);
@@ -51,7 +51,8 @@ public class OpeningDialogue : MonoBehaviour
 		{
 			canShowDialogue=false;
 			EventHandler.CallEndDialogueEvent();
-			//EventHandler.CallGamePaueseEvent(false);
+			EventHandler.CallGamePaueseEvent(false);
+			interactiveButton.gameObject.SetActive(false);
 		}
 
 	}

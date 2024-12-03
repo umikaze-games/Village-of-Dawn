@@ -304,8 +304,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 9
-  m_fontSizeBase: 9
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1776,7 +1776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &75874561
 Animator:
   serializedVersion: 7
@@ -1863,7 +1863,7 @@ Transform:
   m_GameObject: {fileID: 75874560}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6, y: 4.8, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 0.39999998, y: 0.39999998, z: 0.39999998}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8770,7 +8770,7 @@ MonoBehaviour:
   canMove: 1
   isMoving: 0
   targetPosition: {x: 0, y: 0, z: 0}
-  moveSpeed: 3
+  moveSpeed: 5
   moveRange: {x: 3, y: 1.5}
 --- !u!114 &546925814
 MonoBehaviour:
@@ -10255,6 +10255,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1426805709}
+        m_TargetAssemblyTypeName: MenuUI, Assembly-CSharp
+        m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -12571,7 +12583,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 0
-  orthographic size: 0
+  orthographic size: 5.4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -18160,6 +18172,8 @@ Transform:
   - {fileID: 1123542685}
   - {fileID: 1865124415}
   - {fileID: 8340877}
+  - {fileID: 633249943}
+  - {fileID: 1789508547}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1528693715 stripped
@@ -21945,29 +21959,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b601fabec1def4090f11d74f669d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnFinishDialogue:
-    m_PersistentCalls:
-      m_Calls: []
   dialogueList:
-  - faceImage: {fileID: 21300000, guid: 9250cb0d0524f439fb2e48d5ecc828e5, type: 3}
-    onLeft: 0
-    characterName: Player
-    dialogueText: "This is a fresh start. I\u2019ve finally arrived on this land."
+  - faceImage: {fileID: 21300000, guid: 954616e3c701f4e22bd74bbccd87ccc2, type: 3}
+    onLeft: 1
+    characterName: Allice
+    dialogueText: Hello! Welcome to Village! This is your new home!
     needSpaceContinue: 1
     isDone: 0
   - faceImage: {fileID: 21300000, guid: 9250cb0d0524f439fb2e48d5ecc828e5, type: 3}
     onLeft: 0
     characterName: Player
-    dialogueText: An empty field, a few seeds. Everything starts here.
+    dialogueText: Hi! So, what can I do around here?
     needSpaceContinue: 1
     isDone: 0
-  - faceImage: {fileID: 21300000, guid: 9250cb0d0524f439fb2e48d5ecc828e5, type: 3}
+  - faceImage: {fileID: 21300000, guid: bcb4accdbcb044b98bc839a4ab34d0f6, type: 3}
+    onLeft: 1
+    characterName: Allice
+    dialogueText: 'Oh, there''s so much! You can farm or even explore the area and
+      make friends with the villagers. '
+    needSpaceContinue: 1
+    isDone: 0
+  - faceImage: {fileID: 21300000, guid: bcb4accdbcb044b98bc839a4ab34d0f6, type: 3}
+    onLeft: 1
+    characterName: Allice
+    dialogueText: I'm sure you'll have a great time!
+    needSpaceContinue: 1
+    isDone: 0
+  - faceImage: {fileID: 21300000, guid: e62c299aa3fef458f9f46e8a98fc0608, type: 3}
     onLeft: 0
     characterName: Player
-    dialogueText: "Alright, it\u2019s time to get to work!"
-    needSpaceContinue: 1
+    dialogueText: "That sounds amazing! Leave it to me\u2014I\u2019ll make this place
+      thrive!"
+    needSpaceContinue: 0
     isDone: 0
-  interactiveButton: {fileID: 0}
+  interactiveButton: {fileID: 75874560}
   canShowDialogue: 0
 --- !u!1 &1900222655
 GameObject:

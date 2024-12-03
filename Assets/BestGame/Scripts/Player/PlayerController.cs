@@ -64,7 +64,7 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveab
 		Vector2 readValue = playerInputAction.PlayerControls.Move.ReadValue<Vector2>();
 		inputX = readValue.normalized.x;
 		inputY = readValue.normalized.y;
-		Vector2 moveDir = new Vector2(inputX, inputY);
+		Vector2 moveDir = new Vector2(inputX, inputY).normalized;
 		if (readValue == Vector2.zero)
 		{
 			isRunning = false;
@@ -130,8 +130,10 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveab
 	}
 	private void OnMouseClickEvent(Vector3 mouseWorldPos, ItemDetails itemDetails)
 	{
+		if (inputDisable) return;
 		if (itemDetails.itemType != ItemType.Seed && itemDetails.itemType != ItemType.Product && itemDetails.itemType != ItemType.Furniture)
 		{
+			inputDisable=true;
 			mouseX = mouseWorldPos.x - transform.position.x;
 			mouseY = mouseWorldPos.y - (transform.position.y + 0.85f);// 0.85f is a height compensation value for the character
 
@@ -161,9 +163,9 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveab
 			anim.SetFloat("InputX", mouseX);
 			anim.SetFloat("InputY", mouseY);
 		}
-		yield return new WaitForSeconds(0.45f);
+		yield return new WaitForSeconds(0.6f);
 		EventHandler.CallExecuteActionAfterAnimation(mouseWorldPos, itemDetails);
-		yield return new WaitForSeconds(0.25f);
+		yield return new WaitForSeconds(0.5f);
 	
 		useTool = false;
 		inputDisable = false;

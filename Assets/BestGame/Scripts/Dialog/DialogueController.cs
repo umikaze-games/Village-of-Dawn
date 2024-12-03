@@ -28,12 +28,23 @@ public class DialogueController : MonoBehaviour
 			StartCoroutine(ShowDialogue());
 		}
 	}
-	private void OnTriggerEnter2D(Collider2D collision)
+	//private void OnTriggerEnter2D(Collider2D collision)
+	//{
+	//	if (!nPCAction.isMoving&&collision.gameObject.CompareTag("Player"))
+	//	{
+	//		interactiveButton.SetActive(true);
+	//		canShowDialogue =true;
+	//	}
+
+	//}
+
+	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (!nPCAction.isMoving&&collision.gameObject.CompareTag("Player"))
+		if (!nPCAction.isMoving && collision.gameObject.CompareTag("Player"))
 		{
 			interactiveButton.SetActive(true);
-			canShowDialogue =true;
+			canShowDialogue = true;
+			nPCAction.canMove = false;
 		}
 
 	}

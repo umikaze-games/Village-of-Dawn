@@ -60,6 +60,6 @@ public class SaveSlotUI : MonoBehaviour
 		{
 			MenuUIManager.Instance.menuCavans.SetActive(false);
 		}
-	
+		EventHandler.CallPlaySEEvent("Confirm", AudioType.PlayerSE);
 	}
 }
