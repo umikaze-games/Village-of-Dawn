@@ -18159,15 +18159,7 @@ Transform:
   - {fileID: 185100920}
   - {fileID: 1123542685}
   - {fileID: 1865124415}
-<<<<<<< HEAD
   - {fileID: 8340877}
-=======
-  - {fileID: 1789508547}
-<<<<<<< HEAD
->>>>>>> Home
-=======
-  - {fileID: 633249943}
->>>>>>> 41233e35a5d4ffbbf423e0eb94b9209b19466a46
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1528693715 stripped
