@@ -68,10 +68,21 @@ public class NPCAction : MonoBehaviour
 			}
 		}
 
-		if (isMoving)
+		if (isMoving && canMove)
 		{
 			MoveTowardsTarget();
 		}
+		else animator.SetBool("isMoving",false);
+	}
+	private void OnEnable()
+	{
+		EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
+		EventHandler.GamePauseEvent += OnGamePauseEvent;
+	}
+	private void OnDisable()
+	{
+		EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
+		EventHandler.GamePauseEvent -= OnGamePauseEvent;
 	}
 	public void OpenShop()
 	{ 
@@ -102,17 +113,6 @@ public class NPCAction : MonoBehaviour
 		boxCollider.enabled = false;
 		shadowSprite.enabled = false;
 		nPCSpriteRenderer.enabled = false;
-	}
-
-	private void OnEnable()
-	{
-		EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
-		EventHandler.GamePauseEvent += OnGamePauseEvent;
-	}
-	private void OnDisable()
-	{
-		EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
-		EventHandler.GamePauseEvent -= OnGamePauseEvent;
 	}
 	private void OnAfterSceneLoadEvent()
 	{

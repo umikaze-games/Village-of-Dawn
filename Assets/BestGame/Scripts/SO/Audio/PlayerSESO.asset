@@ -38,3 +38,13 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 874dfdcec4ad05648a479e3b5854ae35, type: 3}
     audioVolume: 0.8
     audioType: 2
+  - sceneName: 
+    clipName: Confirm
+    audioClip: {fileID: 8300000, guid: 49323e2b3d1598a4e8791b296f070ba7, type: 3}
+    audioVolume: 0.8
+    audioType: 2
+  - sceneName: 
+    clipName: Sleep
+    audioClip: {fileID: 8300000, guid: d24324e417408a245bac4352b77762df, type: 3}
+    audioVolume: 0.8
+    audioType: 2

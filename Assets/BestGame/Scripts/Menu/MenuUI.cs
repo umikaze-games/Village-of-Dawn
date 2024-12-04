@@ -14,6 +14,7 @@ public class MenuUI : MonoBehaviour
             }
         
         }
+        EventHandler.CallPlaySEEvent("Confirm", AudioType.PlayerSE);
     
     }
     public void ExitGame()

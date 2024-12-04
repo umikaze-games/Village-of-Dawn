@@ -24,6 +24,8 @@ public class PoolManager : MonoBehaviour
 	{
 		CreatePool();
 	}
+
+	// Create object pools for each prefab in the list
 	private void CreatePool()
 	{
 		foreach (GameObject item in poolPrefabs)
@@ -33,15 +35,16 @@ public class PoolManager : MonoBehaviour
 
 			var newPool = new ObjectPool<GameObject>(
 				() => Instantiate(item, parent),
-				e => { e.SetActive(true); },
-				e => { e.SetActive(false); },
-				e => { Destroy(e); }
-				);
+				e => e.SetActive(true),
+				e => e.SetActive(false),
+				e => Destroy(e)
+			);
 
 			poolEffectList.Add(newPool);
 		}
 	}
 
+	// Handle the particle effect event to spawn the appropriate effect
 	private void OnParticalEffectEvent(ParticleEffectType effectType, Vector3 pos)
 	{
 		ObjectPool<GameObject> objPool = effectType switch
@@ -53,17 +56,20 @@ public class PoolManager : MonoBehaviour
 			_ => null,
 		};
 		if (objPool == null) return;
+
 		GameObject obj = objPool.Get();
 		obj.transform.position = pos;
 		StartCoroutine(ReleaseRoutine(objPool, obj));
 	}
 
+	// Release an object back to the pool after a delay
 	private IEnumerator ReleaseRoutine(ObjectPool<GameObject> pool, GameObject obj)
 	{
 		yield return new WaitForSeconds(1.5f);
 		pool.Release(obj);
 	}
 
+	// Create a pool for sound effect objects
 	private void CreateSoundPool()
 	{
 		var parent = new GameObject(poolPrefabs[4].name).transform;
@@ -77,6 +83,7 @@ public class PoolManager : MonoBehaviour
 		}
 	}
 
+	// Get a sound object from the pool
 	private GameObject GetPoolObject()
 	{
 		if (soundQueue.Count < 2)
@@ -84,14 +91,7 @@ public class PoolManager : MonoBehaviour
 		return soundQueue.Dequeue();
 	}
 
-	//private void InitSoundEffect(SoundDetails soundDetails)
-	//{
-	//	var obj = GetPoolObject();
-	//	obj.GetComponent<Sound>().SetSound(soundDetails);
-	//	obj.SetActive(true);
-	//	StartCoroutine(DisableSound(obj, soundDetails.soundClip.length));
-	//}
-
+	// Disable a sound object after its duration
 	private IEnumerator DisableSound(GameObject obj, float duration)
 	{
 		yield return new WaitForSeconds(duration);

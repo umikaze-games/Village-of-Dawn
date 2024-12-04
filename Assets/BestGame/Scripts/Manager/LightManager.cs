@@ -7,12 +7,12 @@ public class LightManager : MonoBehaviour
 
 	private void OnEnable()
 	{
-		EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
+
 	}
 
 	private void OnDisable()
 	{
-		EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
+
 	}
 
 	private void OnAfterSceneLoadEvent()

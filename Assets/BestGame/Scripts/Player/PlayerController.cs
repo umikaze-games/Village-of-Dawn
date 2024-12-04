@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEditor;
 using System.Collections.Generic;
 
-public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveable
+public class PlayerController : SingletonMonoBehaviour<PlayerController>, ISaveable
 {
 	[SerializeField]
 	private float playerMoveSpeed = 5;
@@ -22,9 +22,11 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveab
 
 	private float mouseX;
 	private float mouseY;
-	private bool useTool=false;
-	private bool inputDisable=false;
-	private bool canMove=true;
+	private bool useTool = false;
+	public bool inputDisable = false;
+
+	[SerializeField]
+	private bool canMove = true;
 
 	public string GUID => GetComponent<DataGUID>().guid;
 
@@ -36,38 +38,43 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveab
 		animators = GetComponentsInChildren<Animator>();
 		rb = GetComponent<Rigidbody2D>();
 	}
+
 	private void Start()
 	{
 		ISaveable saveable = this;
 		saveable.RegisterSaveable();
-
 	}
+
 	private void FixedUpdate()
 	{
-		if (canMove&&!inputDisable&&!useTool)
+		if (canMove && !inputDisable && !useTool)
 		{
 			PlayerMove();
 		}
-	
+		
 	}
-	
 	void Update()
 	{
 
 		SwitchAnimation();
-
 	}
+
 	private void PlayerMove()
 	{
+		// Read movement input from player
 		Vector2 readValue = playerInputAction.PlayerControls.Move.ReadValue<Vector2>();
 		inputX = readValue.normalized.x;
 		inputY = readValue.normalized.y;
-		Vector2 moveDir = new Vector2(inputX, inputY);
+		Vector2 moveDir = new Vector2(inputX, inputY).normalized;
+
+		// If no input, set running state to false and return
 		if (readValue == Vector2.zero)
 		{
 			isRunning = false;
 			return;
 		}
+
+		// Calculate new position and move the player
 		Vector2 newPosition = rb.position + moveDir * playerMoveSpeed * Time.deltaTime;
 		rb.MovePosition(newPosition);
 		isRunning = true;
@@ -98,17 +105,19 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveab
 
 	private void OnStartNewGameEvent(int obj)
 	{
-		inputDisable=false;
-		transform.position=Settings.playerInitialPosition;
+		// Enable input and reset player position when a new game starts
+		inputDisable = false;
+		transform.position = Settings.playerInitialPosition;
 	}
 
 	private void OnGamePaueseEvent(bool gamePause)
 	{
-		canMove=!gamePause;
+		canMove = !gamePause;
 	}
 
 	public void SwitchAnimation()
 	{
+		// Update animation parameters for all animators based on player movement
 		foreach (var animator in animators)
 		{
 			animator.SetFloat("MouseX", mouseX);
@@ -124,27 +133,30 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveab
 				animator.SetBool("isRunning", false);
 			}
 		}
-
 	}
+
 	private void OnMouseClickEvent(Vector3 mouseWorldPos, ItemDetails itemDetails)
 	{
+		if (inputDisable) return;
+
+		// Handle different item types for mouse click
 		if (itemDetails.itemType != ItemType.Seed && itemDetails.itemType != ItemType.Product && itemDetails.itemType != ItemType.Furniture)
 		{
+			inputDisable = true;
 			mouseX = mouseWorldPos.x - transform.position.x;
-			mouseY = mouseWorldPos.y - (transform.position.y + 0.85f);// 0.85f is a height compensation value for the character
+			mouseY = mouseWorldPos.y - (transform.position.y + 0.85f); // 0.85f is a height compensation value for the character
 
+			// Determine which axis has the larger movement
 			if (Mathf.Abs(mouseX) > Mathf.Abs(mouseY))
 				mouseY = 0;
 			else
 				mouseX = 0;
 
 			StartCoroutine(UseToolRoutine(mouseWorldPos, itemDetails));
-
 		}
 		else
 		{
 			EventHandler.CallExecuteActionAfterAnimation(mouseWorldPos, itemDetails);
-
 		}
 	}
 
@@ -153,22 +165,27 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveab
 		useTool = true;
 		inputDisable = true;
 		yield return null;
+
+		// Set trigger for using the tool in all animators
 		foreach (var anim in animators)
 		{
 			anim.SetTrigger("UseTool");
 			anim.SetFloat("InputX", mouseX);
 			anim.SetFloat("InputY", mouseY);
 		}
-		yield return new WaitForSeconds(0.45f);
+
+		// Wait for tool usage animation to complete
+		yield return new WaitForSeconds(0.6f);
 		EventHandler.CallExecuteActionAfterAnimation(mouseWorldPos, itemDetails);
-		yield return new WaitForSeconds(0.25f);
-	
+		yield return new WaitForSeconds(0.5f);
+
 		useTool = false;
 		inputDisable = false;
 	}
 
 	public GameSaveData GenerateSaveData()
 	{
+		// Create and return save data containing player's position
 		GameSaveData gameSaveData = new GameSaveData();
 		gameSaveData.characterPosDict = new Dictionary<string, SerializableVector3>();
 		gameSaveData.characterPosDict.Add(this.name, new SerializableVector3(transform.position));
@@ -177,7 +194,8 @@ public class PlayerController : SingletonMonoBehaviour<PlayerController>,ISaveab
 
 	public void RestoreData(GameSaveData saveData)
 	{
-		Vector3 targetPosition=saveData.characterPosDict[this.name].ToVector3();
+		// Restore player's position from save data
+		Vector3 targetPosition = saveData.characterPosDict[this.name].ToVector3();
 		transform.position = targetPosition;
 		inputDisable = false;
 	}

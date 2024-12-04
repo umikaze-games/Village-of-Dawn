@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class ActionBarKey : MonoBehaviour
 {
-   [SerializeField]
-	private KeyCode keyCode;
-	private SlotUI slotUI;
+	[SerializeField]
+	private KeyCode keyCode; 
+	private SlotUI slotUI; 
 	private bool canUse;
 	private void Awake()
 	{
@@ -28,16 +28,23 @@ public class ActionBarKey : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(keyCode)&&canUse)
+		if (Input.GetKeyDown(keyCode) && canUse)
 		{
-			if (slotUI.itemDetails!=null)
+			if (slotUI.itemDetails != null)
 			{
+				// Toggle the selection state of the slot
 				slotUI.isSelected = !slotUI.isSelected;
+
+				// Highlight the slot if it is selected, otherwise remove the highlight
 				if (slotUI.isSelected)
 				{
 					slotUI.inventoryUI.HightlightSlot(slotUI.slotIndex);
 				}
-				else slotUI.inventoryUI.HightlightSlot(-1);
+				else
+				{
+					slotUI.inventoryUI.HightlightSlot(-1);
+				}
+
 				EventHandler.CallItemSelectedEvent(slotUI.itemDetails, slotUI.isSelected);
 			}
 		}
