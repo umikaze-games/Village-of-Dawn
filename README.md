@@ -10,12 +10,8 @@
 - [Controls](#controls)  
 - [Gameplay Preview](#gameplay-preview)  
 
----
-
 ## Overview  
 *"Village of Dawn "* is a 2D farming simulation game where players inherit a piece of farmland. Expand your territory through crop cultivation, mining, crafting, and interactions with village residents.  
-
----
 
 ## Features  
 - **Time System**: Simulates realistic day-night cycles and seasonal changes, adding depth to the gameplay.  
@@ -24,12 +20,8 @@
 - **Item Storage**: Utilize storage facilities like chests to organize and manage collected resources.  
 - **NPC Interaction and Trading**: Interact with villagers to trade resources, unlock quests, and learn their stories.  
 
----
-
 ## World Setting  
 Inherit your uncle's farm in Dawn Village and embark on a new journey. With hard work and dedication, turn this small piece of land into a thriving farm and discover the secrets of the village.  
-
----
 
 ## Main Characters  
 - **Player**:![Boy01-5](https://github.com/user-attachments/assets/594de52d-34d1-4a4a-9fe6-0b83c3d1bfc8)
@@ -37,9 +29,6 @@ Inherit your uncle's farm in Dawn Village and embark on a new journey. With hard
  
 - **Alice**:![Girl01-5](https://github.com/user-attachments/assets/dfcc404a-63ab-4e13-9899-dafa439febdb)
 - A kind and helpful girl who offers guidance and support during your journey. 
- 
-
----
 
 ## Controls  
 | Key                  | Action                    |
@@ -48,8 +37,6 @@ Inherit your uncle's farm in Dawn Village and embark on a new journey. With hard
 | **Spacebar**         | Interact with NPCs        |
 | **Left Mouse Button**| Use tools or items        |
 | **T Key**            | Fast forward time         |
-
----
 
 ## Gameplay Preview  
 ![df9ab1972611bdc3c4263d0be766e645](https://github.com/user-attachments/assets/b034927e-94fb-4848-9a90-20c334c28acd)
@@ -61,8 +48,6 @@ Inherit your uncle's farm in Dawn Village and embark on a new journey. With hard
 
 
 Discover the joys of farming, crafting, and exploration in this dynamic and immersive 2D simulation game.  
-
----
 
 ### Notes  
 This game is a demo project showcasing core gameplay systems and features. While the implementation of assets is minimal, the systems are designed for future scalability and content expansion.  
