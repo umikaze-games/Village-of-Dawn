@@ -32,10 +32,11 @@ Inherit your uncle's farm in Dawn Village and embark on a new journey. With hard
 ---
 
 ## Main Characters  
-- **Player**:![Boy01-5](https://github.com/user-attachments/assets/594de52d-34d1-4a4a-9fe6-0b83c3d1bfc8) As the protagonist, you arrive in Dawn Village with hopes of starting a new life. 
+- **Player**:![Boy01-5](https://github.com/user-attachments/assets/594de52d-34d1-4a4a-9fe6-0b83c3d1bfc8)
+- As the protagonist, you arrive in Dawn Village with hopes of starting a new life. 
  
 - **Alice**:![Girl01-5](https://github.com/user-attachments/assets/dfcc404a-63ab-4e13-9899-dafa439febdb)
-  A kind and helpful girl who offers guidance and support during your journey. 
+- A kind and helpful girl who offers guidance and support during your journey. 
  
 
 ---
