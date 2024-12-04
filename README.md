@@ -1,6 +1,6 @@
 # Village of Dawn  
 
-https://github.com/user-attachments/assets/98297031-82cc-4b5e-842a-bd7d052049e1)
+![Game Logo](https://github.com/user-attachments/assets/98297031-82cc-4b5e-842a-bd7d052049e1)
 
 ## Table of Contents  
 - [Overview](#overview)  
