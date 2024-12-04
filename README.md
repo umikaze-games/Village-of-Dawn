@@ -1,6 +1,6 @@
 # Village of Dawn  
 
-![Game Logo]![zAQbV-7y_400x400](https://github.com/user-attachments/assets/98297031-82cc-4b5e-842a-bd7d052049e1)(images/logo.png) <!-- 添加游戏Logo的占位符 -->
+https://github.com/user-attachments/assets/98297031-82cc-4b5e-842a-bd7d052049e1)
 
 ## Table of Contents  
 - [Overview](#overview)  
