@@ -50,4 +50,5 @@ Discover the joys of farming, crafting, and exploration in this dynamic and imme
 
 ### Notes  
 This game is a demo project showcasing core gameplay systems and features.
-While the implementation of assets is minimal, the systems are designed for future scalability and content expansion.  
+While the implementation of assets is minimal, 
+the systems are designed for future scalability and content expansion.  
