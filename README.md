@@ -13,7 +13,7 @@
 ---
 
 ## Overview  
-*"Dawn Village"* is a 2D farming simulation game where players inherit a piece of farmland. Expand your territory through crop cultivation, mining, crafting, and interactions with village residents.  
+*"Village of Dawn "* is a 2D farming simulation game where players inherit a piece of farmland. Expand your territory through crop cultivation, mining, crafting, and interactions with village residents.  
 
 ---
 
@@ -32,8 +32,10 @@ Inherit your uncle's farm in Dawn Village and embark on a new journey. With hard
 ---
 
 ## Main Characters  
-- **Player**: As the protagonist, you arrive in Dawn Village with hopes of starting a new life.  
-- **Alice**: A kind and helpful girl who offers guidance and support during your journey.  
+- **Player**: As the protagonist, you arrive in Dawn Village with hopes of starting a new life. ![Boy01-5](https://github.com/user-attachments/assets/594de52d-34d1-4a4a-9fe6-0b83c3d1bfc8)
+ 
+- **Alice**: A kind and helpful girl who offers guidance and support during your journey. ![Girl01-5](https://github.com/user-attachments/assets/dfcc404a-63ab-4e13-9899-dafa439febdb)
+ 
 
 ---
 
