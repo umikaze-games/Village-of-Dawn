@@ -48,7 +48,7 @@ Inherit your uncle's farm in Dawn Village and embark on a new journey. With hard
 
 Discover the joys of farming, crafting, and exploration in this dynamic and immersive 2D simulation game.  
 
-### Notes  
+## Notes  
 This game is a demo project showcasing core gameplay systems and features.
 While the implementation of assets is minimal, 
 the systems are designed for future scalability and content expansion.  
