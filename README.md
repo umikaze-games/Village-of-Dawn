@@ -53,6 +53,11 @@ Inherit your uncle's farm in Dawn Village and embark on a new journey. With hard
 
 ## Gameplay Preview  
 ![df9ab1972611bdc3c4263d0be766e645](https://github.com/user-attachments/assets/b034927e-94fb-4848-9a90-20c334c28acd)
+![6f8812a13f7e2d14301b661cc0068f8a](https://github.com/user-attachments/assets/95577878-dbd7-402e-a19b-9cbd13294f8a)
+![29cf9abe449da87ec5391764cf1105c8](https://github.com/user-attachments/assets/a43cae8b-2771-4714-8de5-c3b9055ae647)
+![aad1f37a2412ae57d31ca006f5fa0ca6](https://github.com/user-attachments/assets/e8524545-7585-43de-9e90-998408d419eb)
+![0071e19eec034450cb1214a175ca6447](https://github.com/user-attachments/assets/bda5a725-c516-455b-a28a-2c03bce8ba8b)
+![81475a60efda5130177893b61fd708dd](https://github.com/user-attachments/assets/56865a69-1eb8-46bd-b448-825492383370)
 
 
 Discover the joys of farming, crafting, and exploration in this dynamic and immersive 2D simulation game.  
