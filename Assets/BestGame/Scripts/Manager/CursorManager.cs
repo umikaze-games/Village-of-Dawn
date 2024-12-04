@@ -202,6 +202,20 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 					break;
 			}
 		}
+		else if (currentItem.itemType==ItemType.ReapTool)
+		{
+			if (GridMapManager.Instance.HaveReapableItemInRadius(mouseWorldPosition, currentItem))
+			{
+				ShowGridHighlight(mouseWorldPosition);
+				SetCursorValid();
+			}
+
+			else
+			{
+				HideGridHighlight(mouseWorldPosition);
+				SetCursorInValid();
+			}
+		}
 		else
 		{
 			HideGridHighlight(mouseWorldPosition);

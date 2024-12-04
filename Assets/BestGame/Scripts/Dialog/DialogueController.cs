@@ -40,7 +40,7 @@ public class DialogueController : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (!nPCAction.isMoving && collision.gameObject.CompareTag("Player"))
+		if (collision.gameObject.CompareTag("Player"))
 		{
 			interactiveButton.SetActive(true);
 			canShowDialogue = true;

@@ -126,7 +126,6 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>,ISaveable
 	public TileDetails GetTileDetailsOnMousePosition(Vector3Int mouseGridPosition)
 	{
 		string key = mouseGridPosition.x + "x" + mouseGridPosition.y + "y" + SceneManager.GetActiveScene().name;
-		//Debug.Log($"{key}");
 
 		return GetTileDetails(key);
 	}
@@ -218,6 +217,16 @@ public class GridMapManager : SingletonMonoBehaviour<GridMapManager>,ISaveable
 
 			}
 			UpdateTileDetails(currentTile);
+		}
+		else if (itemDetails.itemType== ItemType.ReapTool)
+		{
+			for (int i = 0; i < itemInRadius.Count; i++)
+			{
+				EventHandler.CallParticleEffectEvent(ParticleEffectType.ReapableScenery, itemInRadius[i].transform.position + Vector3.up);
+				EventHandler.CallPlaySEEvent("Scythe", AudioType.ToolSE);
+				itemInRadius[i].SpawnHarvestItems();
+				Destroy(itemInRadius[i].gameObject);
+			}
 		}
     }
 
