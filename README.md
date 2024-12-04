@@ -24,11 +24,11 @@
 Inherit your uncle's farm in Dawn Village and embark on a new journey. With hard work and dedication, turn this small piece of land into a thriving farm and discover the secrets of the village.  
 
 ## Main Characters  
-- **Player**:![Boy01-5](https://github.com/user-attachments/assets/594de52d-34d1-4a4a-9fe6-0b83c3d1bfc8)
-- As the protagonist, you arrive in Dawn Village with hopes of starting a new life. 
- 
-- **Alice**:![Girl01-5](https://github.com/user-attachments/assets/dfcc404a-63ab-4e13-9899-dafa439febdb)
-- A kind and helpful girl who offers guidance and support during your journey. 
+- **Player**: <img src="https://github.com/user-attachments/assets/594de52d-34d1-4a4a-9fe6-0b83c3d1bfc8" alt="Player" width="100"/>
+- As the protagonist, you arrive in Dawn Village with hopes of starting a new life.
+
+- **Alice**: <img src="https://github.com/user-attachments/assets/dfcc404a-63ab-4e13-9899-dafa439febdb" alt="Alice" width="100"/>
+- A kind and helpful girl who offers guidance and support during your journey.
 
 ## Controls  
 | Key                  | Action                    |
