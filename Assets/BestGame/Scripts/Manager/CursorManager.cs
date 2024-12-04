@@ -14,17 +14,19 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 
 	public Transform playerTransform;
 
-	private bool cursorEnable=true;
+	private bool cursorEnable = true;
 	private bool cursorPositionValid;
 
 	public Image buildImage;
 
 	public GameObject gridHightlight;
+
 	private void Start()
 	{
-		currentGrid = FindAnyObjectByType<Grid>();
-		buildImage.gameObject.SetActive(false);
+		currentGrid = FindAnyObjectByType<Grid>(); // Find and assign the Grid component
+		buildImage.gameObject.SetActive(false); // Hide the build image initially
 	}
+
 	private void OnEnable()
 	{
 		EventHandler.ItemSelectedEvent += OnItemSelectedEvent;
@@ -32,32 +34,32 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 		EventHandler.AfterSceneLoadEvent += OnAfterSceneLoadEvent;
 	}
 
-	
 	private void OnDisable()
 	{
 		EventHandler.ItemSelectedEvent -= OnItemSelectedEvent;
 		EventHandler.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
 		EventHandler.AfterSceneLoadEvent -= OnAfterSceneLoadEvent;
 	}
+
 	private void Update()
 	{
-		if (currentGrid!=null)
+		if (currentGrid != null)
 		{
-			CheckCursorValid();
-			CheckPlayerInput();
+			CheckCursorValid(); // Check if the cursor is in a valid position
+			CheckPlayerInput(); // Handle player input for mouse actions
 		}
 		else
 		{
-			buildImage.gameObject.SetActive(false);
+			buildImage.gameObject.SetActive(false); // Hide the build image if grid is not available
 		}
-
 	}
 
 	public void SetMouseUI(bool boolValue)
 	{
-		cursorEnable=boolValue;
+		cursorEnable = boolValue; // Enable or disable the mouse UI
 	}
 
+	// Check if the cursor is in a valid position based on item type and player position
 	private void CheckCursorValid()
 	{
 		mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
@@ -72,7 +74,8 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 			HideGridHighlight(mouseWorldPosition);
 			return;
 		}
-	
+
+		// Check if the cursor is within the item's use radius
 		if (Mathf.Abs(mouseGridPosition.x - playerGridPos.x) > currentItem.itemUseRadius || Mathf.Abs(mouseGridPosition.y - playerGridPos.y) > currentItem.itemUseRadius)
 		{
 			HideGridHighlight(mouseWorldPosition);
@@ -87,6 +90,7 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 			CropDetails currentCrop = CropManager.Instance.GetCropDetails(currentTile.seedItemID);
 			Crop crop = GridMapManager.Instance.GetCrop(mouseWorldPosition);
 
+			// Determine cursor validity based on item type and tile properties
 			switch (currentItem.itemType)
 			{
 				case ItemType.Seed:
@@ -94,8 +98,8 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 					{
 						ShowGridHighlight(mouseWorldPosition);
 						SetCursorValid();
-					} 
-					else 
+					}
+					else
 					{
 						HideGridHighlight(mouseWorldPosition);
 						SetCursorInValid();
@@ -106,12 +110,12 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 					{
 						ShowGridHighlight(mouseWorldPosition);
 						SetCursorValid();
-					} 
+					}
 					else
 					{
 						HideGridHighlight(mouseWorldPosition);
 						SetCursorInValid();
-					} 
+					}
 					break;
 				case ItemType.HoeTool:
 					if (currentTile.canDig)
@@ -122,8 +126,8 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 					else
 					{
 						HideGridHighlight(mouseWorldPosition);
-						SetCursorInValid();	
-					} 
+						SetCursorInValid();
+					}
 					break;
 				case ItemType.WaterTool:
 					if (currentTile.daySinceDug > -1 && currentTile.daysSinceWatered == -1)
@@ -136,11 +140,10 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 						HideGridHighlight(mouseWorldPosition);
 						SetCursorInValid();
 					}
-					
+
 					break;
 				case ItemType.BreakTool:
 				case ItemType.ChopTool:
-				
 					if (crop != null && crop.CanHarvest && crop.cropDetails.CheckToolAvaliable(currentItem.itemID))
 					{
 						ShowGridHighlight(mouseWorldPosition);
@@ -161,11 +164,11 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 								ShowGridHighlight(mouseWorldPosition);
 								SetCursorValid();
 							}
-							else 
+							else
 							{
 								HideGridHighlight(mouseWorldPosition);
 								SetCursorInValid();
-							} 
+							}
 					}
 					else
 						SetCursorInValid();
@@ -176,40 +179,36 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 						ShowGridHighlight(mouseWorldPosition);
 						SetCursorValid();
 					}
-
 					else
 					{
 						HideGridHighlight(mouseWorldPosition);
 						SetCursorInValid();
-					} 
+					}
 					break;
-
 				case ItemType.Furniture:
 					buildImage.gameObject.SetActive(true);
 					var bluePrintDetails = InventoryManager.Instance.bluePrintSO.GetBluePrintDetails(currentItem.itemID);
 
 					if (currentTile.canPlaceFurniture && InventoryManager.Instance.CheckStock(currentItem.itemID))
 					{
-
 						ShowGridHighlight(mouseWorldPosition);
 						SetCursorValid();
 					}
 					else
 					{
 						HideGridHighlight(mouseWorldPosition);
-						SetCursorInValid();	
-					} 
+						SetCursorInValid();
+					}
 					break;
 			}
 		}
-		else if (currentItem.itemType==ItemType.ReapTool)
+		else if (currentItem.itemType == ItemType.ReapTool)
 		{
 			if (GridMapManager.Instance.HaveReapableItemInRadius(mouseWorldPosition, currentItem))
 			{
 				ShowGridHighlight(mouseWorldPosition);
 				SetCursorValid();
 			}
-
 			else
 			{
 				HideGridHighlight(mouseWorldPosition);
@@ -222,6 +221,8 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 			SetCursorInValid();
 		}
 	}
+
+	// Show the grid highlight at the specified position
 	private void ShowGridHighlight(Vector3 mouseWorldPosition)
 	{
 		Vector3Int gridPosition = currentGrid.WorldToCell(mouseWorldPosition);
@@ -230,6 +231,7 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 		gridHightlight.transform.position = cellCenterPosition;
 	}
 
+	// Hide the grid highlight
 	private void HideGridHighlight(Vector3 mouseWorldPosition)
 	{
 		Vector3Int gridPosition = currentGrid.WorldToCell(mouseWorldPosition);
@@ -238,16 +240,18 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 		gridHightlight.transform.position = cellCenterPosition;
 	}
 
+	// Check for player input to trigger item use
 	private void CheckPlayerInput()
 	{
-		if (Input.GetMouseButtonDown(0)&& cursorPositionValid)
+		if (Input.GetMouseButtonDown(0) && cursorPositionValid)
 		{
 			EventHandler.CallMouseClickedEvent(mouseWorldPosition, currentItem);
-		}	
+		}
 	}
+
+	// Handle item selection event
 	private void OnItemSelectedEvent(ItemDetails itemDetails, bool isSelected)
 	{
-
 		if (!isSelected)
 		{
 			currentItem = null;
@@ -267,24 +271,27 @@ public class CursorManager : SingletonMonoBehaviour<CursorManager>
 		}
 	}
 
+	// Handle scene unload event to disable cursor
 	private void OnBeforeSceneUnloadEvent()
 	{
 		cursorEnable = false;
 	}
 
+	// Handle scene load event to initialize grid
 	private void OnAfterSceneLoadEvent()
 	{
 		currentGrid = FindAnyObjectByType<Grid>();
 	}
 
+	// Set cursor to a valid state
 	private void SetCursorValid()
 	{
 		cursorPositionValid = true;
 	}
 
+	// Set cursor to an invalid state
 	private void SetCursorInValid()
 	{
 		cursorPositionValid = false;
 	}
-
 }

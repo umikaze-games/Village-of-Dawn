@@ -15,28 +15,30 @@ public class DialogueUI : MonoBehaviour
 	private Image dialogueRightImage;
 	public GameObject dialogueLeftName;
 	public GameObject dialoguerRightName;
+
 	private void Awake()
 	{
-		continuneBox.gameObject.SetActive(false);
+		continuneBox.gameObject.SetActive(false); // Hide the continue box on awake
 	}
 
 	private void Update()
 	{
-
+		// Empty update method, can be used for future logic if needed
 	}
+
 	private void OnEnable()
 	{
 		EventHandler.ShowDialogueEvent += OnShowDialogueEvent;
 		EventHandler.EndDialogueEvent += OnEndDialogueEvent;
 	}
 
-	
 	private void OnDisable()
 	{
 		EventHandler.ShowDialogueEvent -= OnShowDialogueEvent;
 		EventHandler.EndDialogueEvent -= OnEndDialogueEvent;
 	}
 
+	// Handles ending the dialogue
 	private void OnEndDialogueEvent()
 	{
 		dialogueLeftName.SetActive(false);
@@ -46,39 +48,41 @@ public class DialogueUI : MonoBehaviour
 		dialogueRightImage.enabled = false;
 	}
 
+	// Handles showing the dialogue
 	private void OnShowDialogueEvent(Dialogue dialogue)
 	{
 		dialoguePanel.SetActive(true);
 		if (dialogue.onLeft)
 		{
-			UpdateLeftDialogue(dialogue);
-
+			UpdateLeftDialogue(dialogue); // Update the dialogue UI for NPC (left side)
 		}
 		else
 		{
-			UpdateRightDialogue(dialogue);
+			UpdateRightDialogue(dialogue); // Update the dialogue UI for player (right side)
 		}
 
 		dialogueText.text = dialogue.dialogueText;
 
-		//if (dialogue.needSpaceContinue)
-		//{
-		//	continuneBox.SetActive(true);
-		//}
-		dialogue.isDone = true;
-		
+		// Uncomment if need to show continue prompt
+		// if (dialogue.needSpaceContinue)
+		// {
+		//     continuneBox.SetActive(true);
+		// }
+
+		dialogue.isDone = true; // Mark the dialogue as done
 	}
 
-	private void UpdateLeftDialogue(Dialogue dialogue) 
+	// Updates the left side dialogue (NPC side)
+	private void UpdateLeftDialogue(Dialogue dialogue)
 	{
 		dialogueLeftImage = nPCFaceGameObject.GetComponentInChildren<Image>();
 		dialogueLeftImage.sprite = dialogue.faceImage;
 		dialogueLeftName.SetActive(true);
 		dialogueLeftName.GetComponentInChildren<TextMeshProUGUI>().text = dialogue.characterName;
 		dialogueLeftImage.enabled = true;
-
 	}
 
+	// Updates the right side dialogue (Player side)
 	private void UpdateRightDialogue(Dialogue dialogue)
 	{
 		dialogueRightImage = playerFaceGameObject.GetComponent<Image>();

@@ -19,7 +19,7 @@ public class GridMap : MonoBehaviour
 
 			if (mapData != null)
 			{
-				mapData.tileProperties.Clear();
+				mapData.tileProperties.Clear(); // Clear existing tile properties when enabled in edit mode
 			}
 		}
 	}
@@ -30,29 +30,30 @@ public class GridMap : MonoBehaviour
 		{
 			currentTilemap = GetComponent<Tilemap>();
 
-			UpdateTileProperties();
+			UpdateTileProperties(); // Update the tile properties when disabling in edit mode
+
 #if UNITY_EDITOR
 			if (mapData != null)
 			{
-				EditorUtility.SetDirty(mapData);
+				EditorUtility.SetDirty(mapData); // Mark the map data as dirty to save changes
 			}
 #endif
 		}
 	}
 
+	// Updates the properties of all tiles in the current tilemap
 	private void UpdateTileProperties()
 	{
-		currentTilemap.CompressBounds();
+		currentTilemap.CompressBounds(); // Compress bounds to remove empty space
 
 		if (!Application.IsPlaying(this))
 		{
 			if (mapData != null)
 			{
-
 				Vector3Int startPos = currentTilemap.cellBounds.min;
-
 				Vector3 endPos = currentTilemap.cellBounds.max;
 
+				// Iterate through all the tiles in the tilemap bounds
 				for (int x = startPos.x; x < endPos.x; x++)
 				{
 					for (int y = startPos.y; y < endPos.y; y++)
@@ -68,14 +69,11 @@ public class GridMap : MonoBehaviour
 								boolTypeValue = true
 							};
 
-							mapData.tileProperties.Add(newTile);
+							mapData.tileProperties.Add(newTile); // Add new tile property to map data
 						}
 					}
 				}
 			}
 		}
 	}
-
-
-
 }
