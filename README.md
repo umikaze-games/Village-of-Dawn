@@ -39,6 +39,10 @@ Inherit your uncle's farm in Dawn Village and embark on a new journey. With hard
 | **T Key**            | Fast forward time         |
 
 ## Gameplay Preview  
+
+👉 **[Click here to watch the gameplay](https://www.youtube.com/watch?v=HPMNkCzz3bk)**
+<br/>
+
 <img src="https://github.com/user-attachments/assets/b034927e-94fb-4848-9a90-20c334c28acd" alt="Image 1" width="600"/>
 <br/>
 <img src="https://github.com/user-attachments/assets/95577878-dbd7-402e-a19b-9cbd13294f8a" alt="Image 2" width="600"/>
@@ -51,8 +55,6 @@ Inherit your uncle's farm in Dawn Village and embark on a new journey. With hard
 <br/>
 <img src="https://github.com/user-attachments/assets/56865a69-1eb8-46bd-b448-825492383370" alt="Image 6" width="600"/>
 <br/>
-
-👉 **[Click here to watch the gameplay](https://www.youtube.com/watch?v=HPMNkCzz3bk)**
 
 ## Notes  
 This game is a demo project showcasing core gameplay systems and features.
