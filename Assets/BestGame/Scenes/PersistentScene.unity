@@ -279,8 +279,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 2025.01.01
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: db259420febe2134d86b517760ac6940, type: 2}
-  m_sharedMaterial: {fileID: -8735567409857138899, guid: db259420febe2134d86b517760ac6940, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1d0a135742ca84c44acd0601831a8fb3, type: 2}
+  m_sharedMaterial: {fileID: -4361856290859847567, guid: 1d0a135742ca84c44acd0601831a8fb3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3809,7 +3809,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8577,7 +8577,7 @@ GameObject:
   - component: {fileID: 546925813}
   - component: {fileID: 546925814}
   m_Layer: 0
-  m_Name: NPC_Allice
+  m_Name: NPC_Alice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8808,13 +8808,13 @@ MonoBehaviour:
     isDone: 0
   - faceImage: {fileID: 21300000, guid: bcb4accdbcb044b98bc839a4ab34d0f6, type: 3}
     onLeft: 1
-    characterName: Allice
+    characterName: Alice
     dialogueText: Oh, you must be the new face around here!
     needSpaceContinue: 1
     isDone: 0
   - faceImage: {fileID: 21300000, guid: bcb4accdbcb044b98bc839a4ab34d0f6, type: 3}
     onLeft: 1
-    characterName: Allice
+    characterName: Alice
     dialogueText: Take your time and enjoy yourself!
     needSpaceContinue: 1
     isDone: 0
@@ -10437,7 +10437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9094baf259f927242acb55944065856d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuCavans: {fileID: 1865124411}
+  menuCanvas: {fileID: 1865124411}
   menuPanel: {fileID: 2099700353}
   gamePauseBtn: {fileID: 1403407675}
   gamePausePanel: {fileID: 2087625569}
@@ -13417,7 +13417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1199751057812066313, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.12800026
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1793148163471522440, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13471,9 +13471,29 @@ PrefabInstance:
       propertyPath: guid
       value: de2c03e2-0866-49ba-88fd-1fb20d717124
       objectReference: {fileID: 0}
+    - target: {fileID: 2821329526175061525, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3022142358733994587, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.12800026
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022142358733994587, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022142358733994587, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3022142358733994587, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766147576507507902, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4151322012430475298, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_PlayOnAwake
@@ -13485,7 +13505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4644058539274607612, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.12800026
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4739132500059549543, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_IsActive
@@ -13493,11 +13513,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5417986648415400886, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.128
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6264276134218645622, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.12800026
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7012358825512220060, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_Enabled
@@ -13505,7 +13525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8053869567266219095, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4219997
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9031913216769820091, guid: 3a3dcd8653993a040854eb160cf67c65, type: 3}
       propertyPath: m_SpriteSortPoint
@@ -21962,7 +21982,7 @@ MonoBehaviour:
   dialogueList:
   - faceImage: {fileID: 21300000, guid: 954616e3c701f4e22bd74bbccd87ccc2, type: 3}
     onLeft: 1
-    characterName: Allice
+    characterName: Alice
     dialogueText: Hello! Welcome to Village! This is your new home!
     needSpaceContinue: 1
     isDone: 0
@@ -21974,14 +21994,14 @@ MonoBehaviour:
     isDone: 0
   - faceImage: {fileID: 21300000, guid: bcb4accdbcb044b98bc839a4ab34d0f6, type: 3}
     onLeft: 1
-    characterName: Allice
+    characterName: Alice
     dialogueText: 'Oh, there''s so much! You can farm or even explore the area and
       make friends with the villagers. '
     needSpaceContinue: 1
     isDone: 0
   - faceImage: {fileID: 21300000, guid: bcb4accdbcb044b98bc839a4ab34d0f6, type: 3}
     onLeft: 1
-    characterName: Allice
+    characterName: Alice
     dialogueText: I'm sure you'll have a great time!
     needSpaceContinue: 1
     isDone: 0
@@ -24220,7 +24240,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 693832308}
         m_TargetAssemblyTypeName: MenuUIManager, Assembly-CSharp
-        m_MethodName: ReturnMenuCavans
+        m_MethodName: ReturnMenuCanvas
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

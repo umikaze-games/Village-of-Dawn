@@ -68,10 +68,11 @@ public class NPCAction : MonoBehaviour
 			}
 		}
 
-		if (isMoving)
+		if (isMoving && canMove)
 		{
 			MoveTowardsTarget();
 		}
+		else animator.SetBool("isMoving",false);
 	}
 	private void OnEnable()
 	{

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
+public class TimeManager : SingletonMonoBehaviour<TimeManager>, ISaveable
 {
 	private int gameSecond;
 	private int gameMinute;
@@ -22,11 +22,11 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 		get { return gameSeason; }
 	}
 
-	public string GUID =>GetComponent<DataGUID>().guid;
+	public string GUID => GetComponent<DataGUID>().guid;
 
 	private void Start()
 	{
-	
+		// Initialize the clock UI and register this script as saveable
 		timeUI.UpdateClockUI(gameHour);
 		EventHandler.CallUpdateLightEvent();
 
@@ -34,7 +34,6 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 		saveable.RegisterSaveable();
 		gamePause = true;
 	}
-
 
 	private void OnEnable()
 	{
@@ -52,16 +51,17 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 		EventHandler.StartNewGameEvent -= OnStartNewGameEvent;
 		EventHandler.EndGameEvent -= OnEndGameEvent;
 		EventHandler.NewDayEvent -= OnNewDayEvent;
-
 	}
 
 	private void OnEndGameEvent()
 	{
+		// Pause the game when it ends
 		gamePause = true;
 	}
 
 	private void OnStartNewGameEvent(int obj)
 	{
+		// Initialize the game time and resume game
 		InitialTime();
 		gamePause = false;
 		timeUI.UpdateDayNight();
@@ -72,19 +72,23 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 
 	private void OnBeforeSceneUnloadEvent()
 	{
+		// Pause the game when unloading a scene
 		gamePause = true;
 	}
 
 	private void OnAfterSceneLoadEvent()
 	{
+		// Resume the game after loading a scene
 		gamePause = false;
 		timeUI.UpdateDayNight();
 		timeUI.UpdateTimeUI(gameMinute, gameHour);
 		timeUI.UpdateClockUI(gameHour);
 		timeUI.UpdateDayMonthYearUI(gameYear, gameMonth, gameDay);
 	}
+
 	private void Update()
 	{
+		// Update the in-game time if the game is not paused
 		if (!gamePause)
 		{
 			tikTime += Time.deltaTime;
@@ -94,24 +98,26 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 				gameSecond++;
 				UpdateGameTime();
 			}
-
 		}
+
+		// Fast-forward time when the T key is held down
 		if (Input.GetKey(KeyCode.T))
 		{
 			for (int i = 0; i < 100; i++)
 			{
 				UpdateGameTime();
 			}
-			
 		}
 	}
+
 	public int GetGameHour()
-	{ 
+	{
 		return gameHour;
 	}
+
 	public void InitialTime()
 	{
-
+		// Set the initial game time values
 		gameSecond = 0;
 		gameMinute = 0;
 		gameHour = 6;
@@ -121,8 +127,10 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 		gameSeason = 0;
 		gamePause = false;
 	}
+
 	private void UpdateGameTime()
 	{
+		// Increment game time and handle changes for minutes, hours, days, etc.
 		gameSecond++;
 
 		if (gameSecond > Settings.secondHold)
@@ -171,14 +179,12 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 								gameYear++;
 								timeUI.UpdateDayMonthYearUI(gameYear, gameMonth, gameDay);
 
-								if (gameYear>9999)
+								if (gameYear > 9999)
 								{
 									gameYear = 2025;
 									timeUI.UpdateDayMonthYearUI(gameYear, gameMonth, gameDay);
-
 								}
 							}
-
 						}
 					}
 				}
@@ -188,6 +194,7 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 
 	public GameSaveData GenerateSaveData()
 	{
+		// Generate save data for the current game time
 		GameSaveData saveData = new GameSaveData();
 		saveData.timeDict = new Dictionary<string, int>();
 		saveData.timeDict.Add("gameYear", gameYear);
@@ -203,6 +210,7 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 
 	public void RestoreData(GameSaveData saveData)
 	{
+		// Restore game time from saved data
 		gameYear = saveData.timeDict["gameYear"];
 		gameSeason = saveData.timeDict["gameSeason"];
 		gameMonth = saveData.timeDict["gameMonth"];
@@ -214,10 +222,11 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 
 	public void OnNewDayEvent()
 	{
+		// Advance the game to a new day
 		gameDay++;
 		gameHour = 6;
-		gameMinute=0;
-		gameSecond=0;
+		gameMinute = 0;
+		gameSecond = 0;
 		EventHandler.CallGameDayEvent(gameDay, gameSeason);
 		if (gameDay > Settings.dayHold)
 		{
@@ -245,10 +254,8 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 					{
 						gameYear = 2025;
 						timeUI.UpdateDayMonthYearUI(gameYear, gameMonth, gameDay);
-
 					}
 				}
-
 			}
 		}
 		timeUI.UpdateDayMonthYearUI(gameYear, gameMonth, gameDay);
@@ -257,4 +264,3 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>,ISaveable
 		timeUI.UpdateClockUI(gameHour);
 	}
 }
-

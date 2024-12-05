@@ -26,21 +26,25 @@ public class AnimatorOverride : MonoBehaviour
 		EventHandler.ItemSelectedEvent += OnItemSelectedEvent;
 		EventHandler.HarvestAtPlayerPosition += OnHarvestAtPlayerPosition;
 	}
+
 	private void OnDisable()
 	{
 		EventHandler.ItemSelectedEvent -= OnItemSelectedEvent;
 		EventHandler.HarvestAtPlayerPosition -= OnHarvestAtPlayerPosition;
 	}
 
+	// Handles harvesting at the player position and shows the item sprite
 	private void OnHarvestAtPlayerPosition(int ID)
 	{
-		Sprite itemSprite=InventoryManager.Instance.GetItemDetails(ID).itemOnWorldSprite;
-		if (holdItem.enabled==false)
+		Sprite itemSprite = InventoryManager.Instance.GetItemDetails(ID).itemOnWorldSprite;
+
+		if (holdItem.enabled == false)
 		{
 			StartCoroutine(ShowItem(itemSprite));
 		}
 	}
 
+	// Coroutine to display the item sprite briefly
 	private IEnumerator ShowItem(Sprite itemSprite)
 	{
 		holdItem.enabled = true;
@@ -49,6 +53,7 @@ public class AnimatorOverride : MonoBehaviour
 		holdItem.enabled = false;
 	}
 
+	// Handles the event when an item is selected or deselected
 	private void OnItemSelectedEvent(ItemDetails itemDetails, bool isSelected)
 	{
 		PartType currentType = itemDetails.itemType switch
@@ -57,9 +62,9 @@ public class AnimatorOverride : MonoBehaviour
 			ItemType.Product => PartType.Carry,
 			ItemType.HoeTool => PartType.Hoe,
 			ItemType.CollectTool => PartType.Collect,
-			ItemType.WaterTool=> PartType.Water,
+			ItemType.WaterTool => PartType.Water,
 			ItemType.ChopTool => PartType.Chop,
-			ItemType.BreakTool=>PartType.Broken	,
+			ItemType.BreakTool => PartType.Broken,
 			ItemType.ReapTool => PartType.Reap,
 			_ => PartType.None
 		};
@@ -69,7 +74,7 @@ public class AnimatorOverride : MonoBehaviour
 			currentType = PartType.None;
 			holdItem.enabled = false;
 		}
-		else 
+		else
 		{
 			if (currentType == PartType.Carry)
 			{
@@ -80,11 +85,12 @@ public class AnimatorOverride : MonoBehaviour
 			{
 				holdItem.enabled = false;
 			}
-
 		}
+
 		SwitchAnimator(currentType);
 	}
 
+	// Switches the animator controller to match the selected part type
 	private void SwitchAnimator(PartType partType)
 	{
 		foreach (var item in animatorTypes)
@@ -95,5 +101,4 @@ public class AnimatorOverride : MonoBehaviour
 			}
 		}
 	}
-
 }
