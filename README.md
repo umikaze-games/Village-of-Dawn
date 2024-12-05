@@ -42,7 +42,8 @@ Inherit your uncle's farm in Dawn Village and embark on a new journey. With hard
 <img src="https://github.com/user-attachments/assets/b034927e-94fb-4848-9a90-20c334c28acd" alt="Image 1" width="600"/>
 <br/>
 
-![chucao](https://github.com/user-attachments/assets/ddfcc5d6-fd50-4790-b7a8-9fe67f3e42fe)
+<img src="https://github.com/user-attachments/assets/ddfcc5d6-fd50-4790-b7a8-9fe67f3e42fe" width="400px" />
+<br/>
 
 <img src="https://github.com/user-attachments/assets/95577878-dbd7-402e-a19b-9cbd13294f8a" alt="Image 2" width="600"/>
 <br/>
