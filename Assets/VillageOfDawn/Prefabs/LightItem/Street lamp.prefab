@@ -130,7 +130,7 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
+  m_PointLightInnerRadius: 0.08067298
   m_PointLightOuterRadius: 8
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
@@ -189,15 +189,15 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.009557247, y: -1.8266346}
+  m_Offset: {x: -0.01852107, y: 0.24396157}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 2.8, y: 4}
     newSize: {x: 0.5, y: 0.7}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.0506029, y: 1.5317492}
+  m_Size: {x: 0.7279124, y: 0.6533141}
   m_EdgeRadius: 0
