@@ -57,3 +57,8 @@ Inherit your uncle's farm in Dawn Village and embark on a new journey. With hard
 
 ## Notes  
 This game is a demo project showcasing core gameplay systems and features.
+
+## Contact
+If you have any questions, suggestions, or feedback, please feel free to contact us at:  
+**c463384962@gmail.com**
+
